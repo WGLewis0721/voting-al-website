@@ -198,7 +198,13 @@
 
   <script>
     // Utility: debounce for smooth filter/nav updates
-    const debounce = (fn, delay = 160) => { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); }; };
+    const debounce = (fn, delay = 160) => {
+      let timeoutId;
+      return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => fn(...args), delay);
+      };
+    };
 
     // Hero depth/parallax-like motion
     const setDepth = () => document.documentElement.style.setProperty('--scroll', String(window.scrollY));
@@ -223,7 +229,7 @@
     county.addEventListener('change', () => {
       const base = 'https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots';
       const value = county.value;
-      ballotLink.href = value ? `${base}#${value.toLowerCase()}-county` : base;
+      ballotLink.href = value ? `${base}?county=${encodeURIComponent(value)}` : base;
       ballotLink.textContent = value ? `Open ${value} Sample Ballot` : 'Open Sample Ballots';
     });
 
@@ -234,7 +240,11 @@
       const exp = card.querySelector('.expand');
       btn.addEventListener('click', () => {
         const open = card.classList.contains('open');
-        cards.forEach(c => { c.classList.remove('open'); c.querySelector('.toggle').setAttribute('aria-expanded', 'false'); c.querySelector('.expand').style.maxHeight = '0px'; });
+        cards.forEach(c => {
+          c.classList.remove('open');
+          c.querySelector('.toggle').setAttribute('aria-expanded', 'false');
+          c.querySelector('.expand').style.maxHeight = '0px';
+        });
         if (!open) { card.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); exp.style.maxHeight = `${exp.scrollHeight + 18}px`; }
       });
     });
@@ -266,7 +276,12 @@
       e.preventDefault();
       const data = new FormData(quizForm);
       const tally = { conservative: 0, progressive: 0, mixed: 0 };
-      ['q1', 'q2', 'q3'].forEach(k => tally[data.get(k)]++);
+      const answers = ['q1', 'q2', 'q3'].map(k => data.get(k));
+      if (answers.some(a => !a || !(a in tally))) {
+        quizResult.innerHTML = '<h3>Almost there</h3><p>Please answer all three questions to see your alignment.</p>';
+        return;
+      }
+      answers.forEach(answer => { tally[answer]++; });
       let winner = 'mixed';
       if (tally.conservative > tally.progressive && tally.conservative >= tally.mixed) winner = 'conservative';
       if (tally.progressive > tally.conservative && tally.progressive >= tally.mixed) winner = 'progressive';
