@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alabama Votes 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   TOKENS — JAXXON × NETFLIX × CIVIC
+══════════════════════════════════════ */
+:root {
+  --black:    #0A0A0A;
+  --rich:     #111111;
+  --surface:  #181818;
+  --raised:   #222222;
+  --stroke:   #2E2E2E;
+  --stroke-lt:#3A3A3A;
+
+  --gold:     #C9A84C;
+  --gold-lt:  #E2C97E;
+  --gold-dk:  #9A7A30;
+  --gold-glow:rgba(201,168,76,.18);
+
+  --white:    #FFFFFF;
+  --white-80: rgba(255,255,255,.8);
+  --white-55: rgba(255,255,255,.55);
+  --white-30: rgba(255,255,255,.3);
+  --white-10: rgba(255,255,255,.1);
+  --white-06: rgba(255,255,255,.06);
+
+  --r-pill: 40px;
+  --r-card: 10px;
+  --r-sm:   6px;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Outfit', sans-serif;
+
+  --ease-out: cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:var(--font-body); background:var(--black); color:var(--white); line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+a { color:inherit; text-decoration:none; }
+button { font-family:var(--font-body); cursor:pointer; border:none; background:none; }
+img { display:block; max-width:100%; }
+
+/* ══ SKIP ══ */
+.skip { position:absolute; top:-999px; left:16px; background:var(--gold); color:var(--black); padding:8px 16px; border-radius:var(--r-sm); font-weight:700; z-index:9999; }
+.skip:focus { top:8px; }
+
+/* ══ TICKER BAR ══ */
+.ticker-bar {
+  background:var(--gold);
+  color:var(--black);
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  text-align:center;
+  padding:9px 20px;
+  overflow:hidden;
+  position:relative;
+}
+.ticker-inner {
+  display:flex; gap:80px; align-items:center; justify-content:center; flex-wrap:wrap;
+}
+.ticker-item { white-space:nowrap; display:flex; gap:8px; align-items:center; }
+.ticker-dot { width:5px; height:5px; border-radius:50%; background:var(--black); opacity:.4; }
+.ticker-link { opacity:.7; text-decoration:underline; margin-left:6px; }
+
+/* ══ HEADER ══ */
+.site-header {
+  position:sticky; top:0; z-index:200;
+  background:rgba(10,10,10,.95);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--stroke);
+}
+.header-inner {
+  max-width:1340px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 24px; height:64px; gap:24px;
+}
+.site-logo {
+  display:flex; flex-direction:column; line-height:1;
+  font-family:var(--font-display);
+}
+.logo-main { font-size:1.35rem; font-weight:700; letter-spacing:.04em; color:var(--white); }
+.logo-sub  { font-size:.6rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-top:1px; }
+.site-nav { display:flex; gap:2px; }
+.site-nav a {
+  font-size:.75rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--white-55); padding:7px 14px; border-radius:var(--r-sm);
+  transition:color .2s, background .2s;
+}
+.site-nav a:hover  { color:var(--white); background:var(--white-06); }
+.site-nav a.active { color:var(--gold); }
+.header-cta {
+  background:var(--gold); color:var(--black);
+  font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  padding:9px 20px; border-radius:var(--r-pill);
+  transition:background .2s, transform .15s;
+  white-space:nowrap;
+}
+.header-cta:hover { background:var(--gold-lt); transform:translateY(-1px); }
+
+/* ══ HERO ══ */
+.hero {
+  min-height:92vh;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  position:relative; overflow:hidden;
+  padding:0 0 72px;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 10% 80%, rgba(201,168,76,.04) 0%, transparent 60%),
+    linear-gradient(180deg, #0A0A0A 0%, #111111 40%, #0D0D0D 100%);
+}
+.hero-grid {
+  position:absolute; inset:0; opacity:.04;
+  background-image:
+    linear-gradient(var(--white-10) 1px, transparent 1px),
+    linear-gradient(90deg, var(--white-10) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.hero-badge {
+  position:absolute; top:40px; right:40px;
+  width:110px; height:110px; border-radius:50%;
+  border:1px solid var(--gold);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center;
+  animation:spin-ring 20s linear infinite;
+}
+.hero-badge-text {
+  font-size:.55rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold); line-height:1.5;
+}
+@keyframes spin-ring {
+  from { transform:rotate(0deg); }
+  to   { transform:rotate(360deg); }
+}
+.hero-content {
+  position:relative; max-width:1340px; margin:0 auto; padding:0 24px; width:100%;
+}
+.hero-eyebrow {
+  font-size:.7rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:20px;
+  display:flex; align-items:center; gap:12px;
+}
+.hero-eyebrow::before {
+  content:''; display:block; width:32px; height:1px; background:var(--gold);
+}
+.hero-h1 {
+  font-family:var(--font-display);
+  font-size:clamp(3.5rem,8vw,7rem);
+  font-weight:700; line-height:1.0; letter-spacing:-.01em;
+  color:var(--white); margin-bottom:10px; max-width:780px;
+}
+.hero-h1 em { color:var(--gold); font-style:italic; }
+.hero-sub {
+  font-size:1rem; color:var(--white-55); font-weight:300;
+  max-width:500px; margin-bottom:40px; line-height:1.65;
+}
+.hero-actions { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+.btn-gold {
+  background:var(--gold); color:var(--black);
+  font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  padding:15px 32px; border-radius:var(--r-pill);
+  transition:background .2s, transform .15s, box-shadow .2s;
+  display:inline-flex; align-items:center; gap:9px;
+}
+.btn-gold:hover { background:var(--gold-lt); transform:translateY(-2px); box-shadow:0 12px 40px rgba(201,168,76,.3); }
+.btn-outline {
+  background:transparent; color:var(--white);
+  font-size:.78rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+  padding:14px 30px; border-radius:var(--r-pill);
+  border:1px solid var(--stroke-lt);
+  transition:border-color .2s, background .2s, transform .15s;
+  display:inline-flex; align-items:center; gap:9px;
+}
+.btn-outline:hover { border-color:var(--white-30); background:var(--white-06); transform:translateY(-2px); }
+
+/* Dates strip */
+.dates-strip {
+  display:flex; gap:0; margin-top:48px;
+  border-top:1px solid var(--stroke); border-bottom:1px solid var(--stroke);
+}
+.date-item {
+  flex:1; padding:18px 24px;
+  border-right:1px solid var(--stroke);
+}
+.date-item:last-child { border-right:none; }
+.di-label { font-size:.6rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--white-30); margin-bottom:4px; }
+.di-date  { font-size:1rem; font-weight:700; color:var(--white); }
+.di-note  { font-size:.7rem; color:var(--white-30); margin-top:2px; }
+.date-item.hot { background:var(--gold-glow); }
+.date-item.hot .di-date { color:var(--gold); }
+.date-item.hot .di-label { color:var(--gold); opacity:.7; }
+
+/* ══ SECTION WRAPPER ══ */
+.wrap { max-width:1340px; margin:0 auto; padding:0 24px; }
+
+/* ══ ROW HEADER (Netflix style) ══ */
+.row-header {
+  display:flex; align-items:baseline; justify-content:space-between;
+  margin-bottom:20px;
+}
+.row-title {
+  font-size:1.3rem; font-weight:700; color:var(--white); letter-spacing:-.01em;
+}
+.row-all {
+  font-size:.72rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--gold); opacity:.8;
+  transition:opacity .2s;
+}
+.row-all:hover { opacity:1; }
+
+/* ══ SECTION SPACING ══ */
+.section { padding:80px 0; }
+.section-dark { background:var(--rich); }
+.section-darker { background:var(--black); }
+
+/* ══ FILTER BAR ══ */
+.filter-bar {
+  padding:32px 0 0;
+  position:sticky; top:64px; z-index:100;
+  background:rgba(10,10,10,.97);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--stroke);
+}
+.filter-inner { max-width:1340px; margin:0 auto; padding:0 24px; }
+.filter-label {
+  font-size:.6rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--white-30); margin-bottom:14px;
+}
+.filter-row {
+  display:flex; gap:8px; flex-wrap:wrap; padding-bottom:20px;
+  overflow-x:auto; scrollbar-width:none;
+}
+.filter-row::-webkit-scrollbar { display:none; }
+.filter-pill {
+  font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  padding:8px 18px; border-radius:var(--r-pill);
+  border:1px solid var(--stroke-lt); color:var(--white-55);
+  cursor:pointer; white-space:nowrap;
+  transition:all .2s var(--ease-out);
+  background:transparent;
+}
+.filter-pill:hover { border-color:var(--gold); color:var(--gold); }
+.filter-pill.active {
+  background:var(--gold); color:var(--black);
+  border-color:var(--gold); font-weight:700;
+}
+
+/* ══ GUIDE ME — QUIZ ══ */
+.guide-section { padding:80px 0; background:var(--surface); }
+.guide-title {
+  font-family:var(--font-display);
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:700; color:var(--white); margin-bottom:8px; line-height:1.15;
+}
+.guide-title em { color:var(--gold); font-style:italic; }
+.guide-sub { font-size:.95rem; color:var(--white-55); margin-bottom:36px; }
+.guide-cards {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px;
+}
+.guide-card {
+  background:var(--raised); border:1px solid var(--stroke);
+  border-radius:var(--r-card); padding:20px;
+  cursor:pointer; text-decoration:none;
+  transition:border-color .25s, background .25s, transform .2s var(--ease-out);
+  display:flex; flex-direction:column; gap:12px;
+}
+.guide-card:hover { border-color:var(--gold); background:rgba(201,168,76,.06); transform:translateY(-3px); }
+.guide-card .gc-icon { font-size:1.5rem; }
+.guide-card .gc-q { font-size:.9rem; font-weight:600; color:var(--white); line-height:1.4; }
+.guide-card .gc-arrow { font-size:.8rem; color:var(--gold); margin-top:auto; }
+
+/* ══ CANDIDATE CARDS — Product grid ══ */
+.cand-shelf { padding:80px 0; }
+.cand-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+  gap:16px;
+}
+.cand-card {
+  background:var(--surface); border:1px solid var(--stroke);
+  border-radius:var(--r-card); overflow:hidden;
+  cursor:pointer; position:relative;
+  transition:border-color .25s, transform .25s var(--ease-out), box-shadow .25s;
+}
+.cand-card:hover {
+  border-color:var(--gold);
+  transform:translateY(-4px);
+  box-shadow:0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(201,168,76,.2);
+}
+/* hidden by default for filter */
+.cand-card.hidden { display:none; }
+
+.cc-visual {
+  height:160px; position:relative;
+  display:flex; align-items:flex-end; padding:16px;
+  overflow:hidden;
+}
+.cc-bg-pattern {
+  position:absolute; inset:0;
+  opacity:.06;
+  background-image:repeating-linear-gradient(
+    45deg, var(--white) 0, var(--white) 1px, transparent 0, transparent 50%
+  );
+  background-size:12px 12px;
+}
+.cc-gradient {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg, var(--color-a,#1a2a4a) 0%, var(--color-b,#0d1a30) 100%);
+}
+.cc-initial {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-size:4rem; font-weight:700;
+  color:var(--white); opacity:.12; letter-spacing:-.02em; user-select:none;
+}
+.cc-tags { position:relative; display:flex; gap:6px; flex-wrap:wrap; }
+.cc-tag {
+  font-size:.58rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  padding:3px 9px; border-radius:20px;
+}
+.tag-r   { background:rgba(220,50,50,.25); color:#FF8080; border:1px solid rgba(220,50,50,.35); }
+.tag-d   { background:rgba(50,100,220,.25); color:#80AAFF; border:1px solid rgba(50,100,220,.35); }
+.tag-hot { background:rgba(201,168,76,.2);  color:var(--gold); border:1px solid rgba(201,168,76,.3); }
+
+.cc-body { padding:18px 20px; }
+.cc-race {
+  font-size:.6rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--white-30); margin-bottom:6px;
+}
+.cc-name {
+  font-family:var(--font-display);
+  font-size:1.45rem; font-weight:700; color:var(--white);
+  line-height:1.15; margin-bottom:4px;
+}
+.cc-bg { font-size:.78rem; color:var(--white-55); font-style:italic; margin-bottom:14px; line-height:1.4; }
+.cc-positions { list-style:none; border-top:1px solid var(--stroke); padding-top:12px; }
+.cc-positions li {
+  font-size:.8rem; color:var(--white-55); padding:5px 0;
+  border-bottom:1px solid var(--stroke);
+  display:flex; align-items:flex-start; gap:8px; line-height:1.4;
+}
+.cc-positions li:last-child { border-bottom:none; }
+.cc-positions li::before { content:'→'; color:var(--gold); font-size:.7rem; flex-shrink:0; margin-top:2px; }
+.cc-footer {
+  padding:12px 20px 16px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.cc-expand {
+  font-size:.68rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--gold); display:flex; align-items:center; gap:5px;
+  transition:gap .2s;
+}
+.cand-card:hover .cc-expand { gap:9px; }
+
+/* Expanded panel */
+.cc-expanded-panel {
+  display:none; border-top:1px solid var(--stroke);
+  background:var(--raised); padding:20px;
+}
+.cand-card.open .cc-expanded-panel { display:block; }
+.exp-label {
+  font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:8px;
+}
+.exp-box {
+  background:var(--black); border:1px solid var(--stroke);
+  border-radius:var(--r-sm); padding:14px 16px; margin-bottom:12px;
+}
+.exp-box p { font-size:.83rem; color:var(--white-80); line-height:1.6; }
+.exp-outcomes { display:flex; flex-direction:column; gap:6px; }
+.exp-outcome {
+  background:var(--black); border:1px solid var(--stroke);
+  border-radius:var(--r-sm); padding:11px 14px;
+  font-size:.8rem; color:var(--white-55); line-height:1.5;
+  display:flex; gap:8px; align-items:flex-start;
+}
+.exp-outcome .dot { width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:5px; }
+.exp-outcome.watch .dot { background:#FBBF24; }
+.exp-outcome.neutral .dot { background:var(--white-30); }
+
+/* ══ BALLOT MEASURE CARDS — Featured Products ══ */
+.measure-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:20px;
+}
+.measure-card {
+  border:1px solid var(--stroke); border-radius:var(--r-card); overflow:hidden;
+  background:var(--surface);
+  transition:border-color .25s, box-shadow .25s;
+}
+.measure-card:hover { border-color:var(--gold); box-shadow:0 20px 60px rgba(0,0,0,.4); }
+.mc-visual {
+  height:140px; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.mc-vis-bg {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg, var(--mc-color-a,#1a1a2e) 0%, var(--mc-color-b,#16213e) 100%);
+}
+.mc-vis-text {
+  position:relative; font-family:var(--font-display);
+  font-size:5rem; font-weight:700; color:var(--white); opacity:.07;
+  letter-spacing:-.05em; user-select:none;
+}
+.mc-badge {
+  position:absolute; top:14px; left:14px;
+  font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  padding:4px 10px; border-radius:20px;
+}
+.mc-badge-may { background:rgba(201,168,76,.2); color:var(--gold); border:1px solid rgba(201,168,76,.3); }
+.mc-badge-nov { background:rgba(60,80,200,.2); color:#80AAFF; border:1px solid rgba(60,80,200,.3); }
+.mc-badge-local { background:rgba(30,180,100,.2); color:#5DEBB0; border:1px solid rgba(30,180,100,.3); }
+.mc-body { padding:22px 24px; }
+.mc-title {
+  font-family:var(--font-display);
+  font-size:1.35rem; font-weight:700; color:var(--white); line-height:1.2; margin-bottom:8px;
+}
+.mc-preview { font-size:.85rem; color:var(--white-55); line-height:1.6; margin-bottom:18px; }
+.mc-vote-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:0; }
+.mc-vote {
+  border-radius:var(--r-sm); padding:12px 14px; border:1px solid;
+}
+.mc-vote .mv-lbl { font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:4px; }
+.mc-vote .mv-txt { font-size:.78rem; line-height:1.4; }
+.mv-yes { background:rgba(30,180,80,.08); border-color:rgba(30,180,80,.25); }
+.mv-yes .mv-lbl { color:#5DEBB0; }
+.mv-yes .mv-txt { color:rgba(93,235,176,.7); }
+.mv-no  { background:rgba(220,60,60,.08); border-color:rgba(220,60,60,.25); }
+.mv-no  .mv-lbl { color:#FF8080; }
+.mv-no  .mv-txt { color:rgba(255,128,128,.7); }
+.mc-expand-btn {
+  width:100%; text-align:center; padding:14px;
+  font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--white-30); border-top:1px solid var(--stroke);
+  cursor:pointer; background:none; transition:color .2s, background .2s;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+}
+.mc-expand-btn:hover { color:var(--gold); background:var(--gold-glow); }
+.mc-arrow { transition:transform .25s; display:inline-block; }
+.measure-card.open .mc-arrow { transform:rotate(180deg); }
+.mc-detail {
+  display:none; border-top:1px solid var(--stroke);
+  padding:20px 24px; background:var(--raised);
+}
+.measure-card.open .mc-detail { display:block; }
+.mc-detail-label {
+  font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:8px;
+}
+.mc-detail p { font-size:.85rem; color:var(--white-80); line-height:1.65; }
+.mc-detail + .mc-detail { margin-top:14px; border-top:1px solid var(--stroke); padding-top:14px; }
+
+/* ══ OUTCOMES / WHAT IF THEY WIN ══ */
+.outcomes-section { padding:80px 0; background:var(--rich); }
+.outcome-shelf { display:flex; flex-direction:column; gap:14px; }
+.outcome-row {
+  background:var(--surface); border:1px solid var(--stroke);
+  border-radius:var(--r-card); overflow:hidden;
+}
+.outcome-trigger {
+  width:100%; padding:22px 28px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  cursor:pointer; background:none; text-align:left;
+  transition:background .2s;
+}
+.outcome-trigger:hover { background:var(--white-06); }
+.ot-left { display:flex; align-items:center; gap:20px; }
+.ot-num {
+  font-family:var(--font-display); font-size:2.5rem; font-weight:700;
+  color:var(--gold); opacity:.35; line-height:1; flex-shrink:0; width:44px; text-align:right;
+}
+.ot-title { font-size:1.05rem; font-weight:700; color:var(--white); margin-bottom:3px; }
+.ot-sub   { font-size:.78rem; color:var(--white-30); }
+.ot-chev  { font-size:1rem; color:var(--white-30); transition:transform .25s; flex-shrink:0; }
+.outcome-row.expanded .ot-chev { transform:rotate(180deg); }
+.outcome-body { display:none; border-top:1px solid var(--stroke); padding:28px; }
+.outcome-row.expanded .outcome-body { display:block; }
+.outcome-scenarios { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; margin-bottom:14px; }
+.os-card {
+  background:var(--raised); border:1px solid var(--stroke);
+  border-radius:var(--r-sm); padding:18px;
+}
+.os-who {
+  font-size:.62rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  padding:3px 9px; border-radius:20px; margin-bottom:8px; display:inline-block;
+}
+.os-r   { background:rgba(220,50,50,.2); color:#FF8080; border:1px solid rgba(220,50,50,.3); }
+.os-d   { background:rgba(50,100,220,.2); color:#80AAFF; border:1px solid rgba(50,100,220,.3); }
+.os-run { background:rgba(201,168,76,.15); color:var(--gold); border:1px solid rgba(201,168,76,.25); }
+.os-yes { background:rgba(30,180,80,.15); color:#5DEBB0; border:1px solid rgba(30,180,80,.25); }
+.os-no  { background:rgba(220,60,60,.15); color:#FF8080; border:1px solid rgba(220,60,60,.25); }
+.os-name { font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:var(--white); margin-bottom:10px; line-height:1.2; }
+.os-list { list-style:none; }
+.os-list li {
+  font-size:.8rem; color:var(--white-55); padding:5px 0;
+  border-bottom:1px solid var(--stroke);
+  display:flex; gap:8px; align-items:flex-start; line-height:1.4;
+}
+.os-list li:last-child { border-bottom:none; }
+.os-bullet { font-size:.6rem; flex-shrink:0; margin-top:3px; }
+.bi { color:#60A5FA; }
+.bw { color:#FBBF24; }
+.bg { color:#4ADE80; }
+.context-box {
+  background:rgba(201,168,76,.05); border:1px solid rgba(201,168,76,.15);
+  border-radius:var(--r-sm); padding:14px 18px; margin-top:14px;
+  font-size:.82rem; color:var(--white-55); line-height:1.6;
+}
+.context-box strong { color:var(--gold); }
+
+/* ══ YOUR QUESTIONS ══ */
+.qa-section { padding:80px 0; background:var(--black); }
+.qa-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; }
+.qa-card {
+  background:var(--surface); border:1px solid var(--stroke);
+  border-radius:var(--r-card); padding:24px;
+}
+.qa-q {
+  font-size:.88rem; font-style:italic; color:var(--white-55);
+  margin-bottom:12px; line-height:1.45;
+}
+.qa-q::before { content:'\201C'; color:var(--gold); font-size:1.1rem; font-style:normal; }
+.qa-q::after  { content:'\201D'; color:var(--gold); font-size:1.1rem; font-style:normal; }
+.qa-a { font-size:.85rem; color:var(--white-80); line-height:1.65; }
+
+/* ══ HOW TO VOTE ══ */
+.vote-section { padding:80px 0; background:var(--surface); }
+.vote-steps { display:flex; flex-direction:column; gap:0; max-width:800px; }
+.vote-step {
+  display:flex; gap:24px; padding:28px 0;
+  border-bottom:1px solid var(--stroke);
+}
+.vote-step:last-child { border-bottom:none; }
+.vs-num {
+  font-family:var(--font-display); font-size:2.5rem; font-weight:700;
+  color:var(--stroke-lt); flex-shrink:0; width:44px; text-align:right; line-height:1; padding-top:4px;
+}
+.vs-body h4 { font-size:1rem; font-weight:700; color:var(--white); margin-bottom:5px; }
+.vs-body p  { font-size:.88rem; color:var(--white-55); line-height:1.6; }
+.vs-body p+p { margin-top:8px; }
+.vs-cta {
+  display:inline-flex; align-items:center; gap:7px;
+  margin-top:12px; background:var(--gold); color:var(--black);
+  font-size:.72rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  padding:9px 20px; border-radius:var(--r-pill);
+  transition:background .2s, transform .15s;
+}
+.vs-cta:hover { background:var(--gold-lt); transform:translateY(-1px); }
+.id-chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.id-chip {
+  background:var(--raised); border:1px solid var(--stroke);
+  border-radius:var(--r-pill); padding:5px 13px;
+  font-size:.74rem; color:var(--white-55); font-weight:500;
+}
+
+/* ══ FOOTER ══ */
+.site-footer {
+  background:var(--rich); border-top:1px solid var(--stroke);
+  padding:48px 0 32px;
+}
+.footer-inner { max-width:1340px; margin:0 auto; padding:0 24px; }
+.footer-top {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  gap:32px; flex-wrap:wrap;
+  padding-bottom:32px; margin-bottom:32px;
+  border-bottom:1px solid var(--stroke);
+}
+.footer-logo { font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:var(--white); margin-bottom:4px; }
+.footer-tag  { font-size:.72rem; color:var(--white-30); letter-spacing:.04em; }
+.footer-badge {
+  background:var(--gold-glow); border:1px solid rgba(201,168,76,.3);
+  border-radius:var(--r-pill); padding:8px 18px;
+  font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--gold);
+}
+.footer-sources { font-size:.75rem; color:var(--white-30); margin-bottom:14px; }
+.footer-sources a { color:var(--white-30); transition:color .15s; }
+.footer-sources a:hover { color:var(--gold); }
+.footer-legal { font-size:.72rem; color:var(--white-30); line-height:1.6; max-width:640px; }
+.footer-legal a { color:var(--white-30); }
+
+/* ══ SCROLL ANCHOR ══ */
+.anchor { scroll-margin-top:128px; }
+
+/* ══ SECTION HEADING ══ */
+.section-eyebrow {
+  font-size:.68rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:10px; display:flex; align-items:center; gap:10px;
+}
+.section-eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--gold); }
+.section-title {
+  font-family:var(--font-display);
+  font-size:clamp(2rem,4vw,3rem); font-weight:700;
+  color:var(--white); letter-spacing:-.01em; line-height:1.15; margin-bottom:8px;
+}
+.section-title em { color:var(--gold); font-style:italic; }
+.section-deck { font-size:.9rem; color:var(--white-55); margin-bottom:36px; max-width:580px; line-height:1.65; }
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:900px) {
+  .hero-badge { display:none; }
+  .dates-strip { flex-wrap:wrap; }
+  .date-item { flex:1 1 45%; }
+  .header-cta { display:none; }
+  .site-nav { gap:0; }
+  .site-nav a { padding:7px 10px; font-size:.72rem; }
+}
+@media(max-width:640px) {
+  html { font-size:15px; }
+  .hero { min-height:auto; padding:80px 0 48px; }
+  .hero-h1 { font-size:clamp(2.8rem,10vw,4rem); }
+  .header-inner { padding:0 16px; }
+  .site-nav { display:none; }
+  .wrap { padding:0 16px; }
+  .section { padding:56px 0; }
+  .date-item { flex:1 1 100%; border-right:none; border-bottom:1px solid var(--stroke); }
+  .measure-grid { grid-template-columns:1fr; }
+  .cand-grid { grid-template-columns:1fr; }
+  .guide-cards { grid-template-columns:1fr 1fr; }
+  .footer-top { flex-direction:column; gap:16px; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to main content</a>
+
+<!-- TICKER -->
+<div class="ticker-bar" role="banner">
+  <div class="ticker-inner">
+    <span class="ticker-item">⚡ Primary: May 19, 2026</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item">Register by May 4</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item">General: Nov 3, 2026</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><a href="https://myinfo.alabamavotes.gov/VoterView" class="ticker-link" target="_blank" rel="noopener">Check Registration →</a></span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="site-logo">
+      <span class="logo-main">Alabama Votes</span>
+      <span class="logo-sub">2026 Voter Guide</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#ballot"   >Ballot</a>
+      <a href="#candidates">Candidates</a>
+      <a href="#outcomes" >Outcomes</a>
+      <a href="#questions">Your Questions</a>
+      <a href="#vote"     >How to Vote</a>
+    </nav>
+    <a href="https://myinfo.alabamavotes.gov/VoterView" class="header-cta" target="_blank" rel="noopener">Check Registration</a>
+  </div>
+</header>
+
+<!-- ════════════ HERO ════════════ -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-badge" aria-hidden="true">
+    <span class="hero-badge-text">NONPARTISAN<br>NO SPIN<br>PLAIN ENGLISH</span>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Alabama 2026 Elections</p>
+    <h1 class="hero-h1">Know before<br>you <em>vote.</em></h1>
+    <p class="hero-sub">No noise. No spin. Clear answers to the questions real Alabama voters are asking — in plain English.</p>
+    <div class="hero-actions">
+      <a href="#ballot" class="btn-gold">Browse the Ballot ↓</a>
+      <a href="#candidates" class="btn-outline">See the Candidates</a>
+    </div>
+    <div class="dates-strip" role="list" aria-label="Key election dates">
+      <div class="date-item hot" role="listitem">
+        <div class="di-label">Register by</div>
+        <div class="di-date">May 4, 2026</div>
+        <div class="di-note">Primary deadline</div>
+      </div>
+      <div class="date-item" role="listitem">
+        <div class="di-label">Primary</div>
+        <div class="di-date">May 19, 2026</div>
+        <div class="di-note">Polls: 7am – 7pm</div>
+      </div>
+      <div class="date-item" role="listitem">
+        <div class="di-label">Runoff (if needed)</div>
+        <div class="di-date">June 16, 2026</div>
+        <div class="di-note">Top 2 if no majority</div>
+      </div>
+      <div class="date-item" role="listitem">
+        <div class="di-label">General Election</div>
+        <div class="di-date">Nov 3, 2026</div>
+        <div class="di-note">Register by Oct 19</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ GUIDE ME ════════════ -->
+<section class="guide-section" id="start">
+  <div class="wrap">
+    <h2 class="guide-title">Where do you<br><em>want to start?</em></h2>
+    <p class="guide-sub">Jump straight to what you actually want to know.</p>
+    <div class="guide-cards">
+      <a class="guide-card" href="#ballot">
+        <div class="gc-icon">🗳️</div>
+        <div class="gc-q">What is actually on the ballot?</div>
+        <div class="gc-arrow">Browse Measures →</div>
+      </a>
+      <a class="guide-card" href="#candidates">
+        <div class="gc-icon">👤</div>
+        <div class="gc-q">Who is running and what do they stand for?</div>
+        <div class="gc-arrow">See Candidates →</div>
+      </a>
+      <a class="guide-card" href="#outcomes">
+        <div class="gc-icon">🏁</div>
+        <div class="gc-q">What does it actually mean if they win?</div>
+        <div class="gc-arrow">See Outcomes →</div>
+      </a>
+      <a class="guide-card" href="#questions">
+        <div class="gc-icon">💡</div>
+        <div class="gc-q">Why does any of this matter to me?</div>
+        <div class="gc-arrow">Get Answers →</div>
+      </a>
+      <a class="guide-card" href="#vote">
+        <div class="gc-icon">📋</div>
+        <div class="gc-q">How do I actually vote? Step by step.</div>
+        <div class="gc-arrow">How to Vote →</div>
+      </a>
+      <a class="guide-card" href="#questions">
+        <div class="gc-icon">🤔</div>
+        <div class="gc-q">Is this all just political power games?</div>
+        <div class="gc-arrow">Honest Answer →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+
+<!-- ════════════ FILTER BAR ════════════ -->
+<div class="filter-bar" id="filter-bar" role="search" aria-label="Filter candidates by issue">
+  <div class="filter-inner">
+    <div class="filter-label">Filter by issue that matters to you</div>
+    <div class="filter-row" role="group" aria-label="Issue filters">
+      <button class="filter-pill active" data-filter="all"       onclick="filterCands(this,'all')">All Candidates</button>
+      <button class="filter-pill"        data-filter="economy"   onclick="filterCands(this,'economy')">💰 Economy &amp; Jobs</button>
+      <button class="filter-pill"        data-filter="safety"    onclick="filterCands(this,'safety')">🛡️ Public Safety</button>
+      <button class="filter-pill"        data-filter="education" onclick="filterCands(this,'education')">🏫 Education</button>
+      <button class="filter-pill"        data-filter="healthcare"onclick="filterCands(this,'healthcare')">🏥 Healthcare</button>
+      <button class="filter-pill"        data-filter="immigration"onclick="filterCands(this,'immigration')">🌐 Immigration</button>
+      <button class="filter-pill"        data-filter="governor"  onclick="filterCands(this,'governor')">🏛️ Governor Race</button>
+      <button class="filter-pill"        data-filter="senate"    onclick="filterCands(this,'senate')">⚖️ Senate Race</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ BALLOT MEASURES ════════════ -->
+<div class="anchor" id="ballot"></div>
+<section class="section section-darker">
+  <div class="wrap">
+    <div class="section-eyebrow">What's On the Ballot</div>
+    <h2 class="section-title">Statewide ballot measures — <em>plain English</em></h2>
+    <p class="section-deck">Alabama voters don't put things on the ballot — the legislature does. A simple majority decides each one. Here's every certified statewide measure for 2026.</p>
+
+    <div class="measure-grid">
+
+      <!-- A1 -->
+      <div class="measure-card" id="m-a1">
+        <div class="mc-visual">
+          <div class="mc-vis-bg" style="--mc-color-a:#1a1a2e;--mc-color-b:#2d1b1b;"></div>
+          <div class="mc-vis-text">A1</div>
+          <span class="mc-badge mc-badge-may">May 19 Primary</span>
+        </div>
+        <div class="mc-body">
+          <div class="mc-title">Expanding When Judges Can Deny Bail</div>
+          <p class="mc-preview">Adds two new crime categories — shooting in an occupied space and murder conspiracy — to the list where judges can hold someone in jail before trial.</p>
+          <div class="mc-vote-row">
+            <div class="mc-vote mv-yes">
+              <div class="mv-lbl">YES means</div>
+              <div class="mv-txt">Judges gain new power to deny bail for these crimes before any conviction</div>
+            </div>
+            <div class="mc-vote mv-no">
+              <div class="mv-lbl">NO means</div>
+              <div class="mv-txt">Bail rules stay as they are — no new restrictions</div>
+            </div>
+          </div>
+        </div>
+        <button class="mc-expand-btn" onclick="toggleMeasure('m-a1')" aria-expanded="false">
+          <span>Why this matters to your family</span> <span class="mc-arrow">▾</span>
+        </button>
+        <div class="mc-detail">
+          <div class="mc-detail-label">In Plain English</div>
+          <p>Right now, judges can deny bail only for specific serious crimes like capital murder. This amendment adds firing a gun inside an occupied building or vehicle, and planning, attempting, or hiring someone to commit murder, to that list.</p>
+        </div>
+        <div class="mc-detail" style="border-top:1px solid var(--stroke);padding-top:14px;margin:0 24px 20px;">
+          <div class="mc-detail-label">Why It Affects Alabama Families</div>
+          <p>Bail determines whether an accused person goes home or stays in jail until trial. Expanding no-bail crimes may reduce reoffending while awaiting trial — but it also means more people held before being convicted of anything. County jails (funded locally) may see more population pressure. Alabama already passed "Aniah's Law" in 2020 for similar reasons; this extends that approach.</p>
+        </div>
+      </div>
+
+      <!-- A2 -->
+      <div class="measure-card" id="m-a2">
+        <div class="mc-visual">
+          <div class="mc-vis-bg" style="--mc-color-a:#1a2e1a;--mc-color-b:#1b2d1b;"></div>
+          <div class="mc-vis-text">A2</div>
+          <span class="mc-badge mc-badge-may">May 19 Primary</span>
+        </div>
+        <div class="mc-body">
+          <div class="mc-title">Protecting District Attorney Pay</div>
+          <p class="mc-preview">Makes it unconstitutional to cut a district attorney's salary while they're serving their elected term in office.</p>
+          <div class="mc-vote-row">
+            <div class="mc-vote mv-yes">
+              <div class="mv-lbl">YES means</div>
+              <div class="mv-txt">DA pay is protected — they can prosecute without fear of budget retaliation</div>
+            </div>
+            <div class="mc-vote mv-no">
+              <div class="mv-lbl">NO means</div>
+              <div class="mv-txt">Legislature keeps ability to adjust DA pay — some accountability is maintained</div>
+            </div>
+          </div>
+        </div>
+        <button class="mc-expand-btn" onclick="toggleMeasure('m-a2')" aria-expanded="false">
+          <span>Why this matters to your family</span> <span class="mc-arrow">▾</span>
+        </button>
+        <div class="mc-detail">
+          <div class="mc-detail-label">In Plain English</div>
+          <p>District attorneys decide which crimes get prosecuted — from drug offenses to violent crime. Alabama judges already have this pay protection. This gives DAs the same guarantee.</p>
+        </div>
+        <div class="mc-detail" style="border-top:1px solid var(--stroke);padding-top:14px;margin:0 24px 20px;">
+          <div class="mc-detail-label">Why It Affects Alabama Families</div>
+          <p>Pay protection means a DA can make prosecution decisions based on evidence — not fear of political retaliation. Supporters say it ensures independent justice. Critics say it reduces accountability. Either way, it shapes how aggressively crime is prosecuted in your county.</p>
+        </div>
+      </div>
+
+      <!-- Walker County -->
+      <div class="measure-card" id="m-wc">
+        <div class="mc-visual">
+          <div class="mc-vis-bg" style="--mc-color-a:#1a2a1a;--mc-color-b:#0d1a1a;"></div>
+          <div class="mc-vis-text">WC</div>
+          <span class="mc-badge mc-badge-local">Walker County Only</span>
+        </div>
+        <div class="mc-body">
+          <div class="mc-title">Probate Judge Retirement Age: 70 → 75</div>
+          <p class="mc-preview">Walker County voters only. Allows the probate judge to serve five additional years before mandatory retirement.</p>
+          <div class="mc-vote-row">
+            <div class="mc-vote mv-yes">
+              <div class="mv-lbl">YES means</div>
+              <div class="mv-txt">Experienced judges can serve until 75 instead of retiring at 70</div>
+            </div>
+            <div class="mc-vote mv-no">
+              <div class="mv-lbl">NO means</div>
+              <div class="mv-txt">Mandatory retirement stays at age 70 as it is today</div>
+            </div>
+          </div>
+        </div>
+        <button class="mc-expand-btn" onclick="toggleMeasure('m-wc')" aria-expanded="false">
+          <span>Why this matters (Walker County)</span> <span class="mc-arrow">▾</span>
+        </button>
+        <div class="mc-detail">
+          <div class="mc-detail-label">In Plain English — Walker County Voters Only</div>
+          <p>The probate judge oversees wills, estates, mental health commitment hearings, and county government administration. This simply raises the mandatory retirement age from 70 to 75 for that role. If you don't live in Walker County, this measure doesn't appear on your ballot.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CANDIDATE CARDS ════════════ -->
+<div class="anchor" id="candidates"></div>
+<section class="section section-dark cand-shelf">
+  <div class="wrap">
+    <div class="section-eyebrow">The Candidates</div>
+    <h2 class="section-title">Browse the races.<br><em>Filter by what matters to you.</em></h2>
+    <p class="section-deck">Use the filter bar above to narrow by the issues you care about. Click any candidate card to see what changes if they win.</p>
+
+    <!-- GOVERNOR ROW -->
+    <div style="margin-bottom:48px;">
+      <div class="row-header">
+        <div class="row-title">Governor of Alabama</div>
+        <span style="font-size:.72rem;color:var(--white-30);font-style:italic;">Incumbent Kay Ivey term-limited · Primary May 19</span>
+      </div>
+      <div style="background:var(--raised);border:1px solid var(--stroke);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:16px;font-size:.8rem;color:var(--white-55);">
+        <strong style="color:var(--white);">What does the Governor do?</strong> — Signs or vetoes all laws, controls Alabama's ~$14B budget, appoints judges and agency heads. Shapes education, roads, Medicaid, and prisons for 4 years.
+      </div>
+      <div class="cand-grid">
+
+        <div class="cand-card" data-issues="safety,immigration,governor" id="cc-tuberville">
+          <div class="cc-visual">
+            <div class="cc-gradient" style="--color-a:#1a1a2e;--color-b:#0d0d1a;"></div>
+            <div class="cc-bg-pattern"></div>
+            <div class="cc-initial">T</div>
+            <div class="cc-tags">
+              <span class="cc-tag tag-r">Republican</span>
+              <span class="cc-tag tag-hot">Frontrunner</span>
+            </div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-race">Governor · Republican Primary</div>
+            <div class="cc-name">Tommy Tuberville</div>
+            <div class="cc-bg">U.S. Senator (2021–present) · Former Auburn head football coach · Left Senate seat to run</div>
+            <ul class="cc-positions">
+              <li>Secure the border; enforce immigration law</li>
+              <li>Align Alabama with Trump's America First agenda</li>
+              <li>Support law enforcement; oppose crime</li>
+              <li>Protect conservative social values</li>
+            </ul>
+          </div>
+          <div class="cc-footer">
+            <button class="cc-expand" onclick="toggleCand('cc-tuberville')" aria-expanded="false">If he wins → <span class="cc-arr">▾</span></button>
+          </div>
+          <div class="cc-expanded-panel">
+            <div class="exp-label">What changes if Tuberville wins</div>
+            <div class="exp-box"><p>Alabama's conservative direction continues — school choice, limited Medicaid expansion, stricter immigration enforcement cooperation with federal agencies. As a former senator close to Trump, expect fast implementation of federal policy changes at the state level.</p></div>
+            <div class="exp-label" style="margin-top:12px;">Key outcomes</div>
+            <div class="exp-outcomes">
+              <div class="exp-outcome"><div class="dot"></div><span>State budget priorities favor tax relief and business development over expanded social programs</span></div>
+              <div class="exp-outcome watch"><div class="dot"></div><span>Rural hospital funding and Medicaid expansion remain unresolved — 13 Alabama rural hospitals are at financial risk</span></div>
+              <div class="exp-outcome"><div class="dot"></div><span>Conservative judicial appointments shape Alabama courts for a decade or more</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cand-card" data-issues="healthcare,education,economy,governor" id="cc-jones">
+          <div class="cc-visual">
+            <div class="cc-gradient" style="--color-a:#0d1a30;--color-b:#0a1520;"></div>
+            <div class="cc-bg-pattern"></div>
+            <div class="cc-initial">J</div>
+            <div class="cc-tags">
+              <span class="cc-tag tag-d">Democrat</span>
+            </div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-race">Governor · Democratic Primary</div>
+            <div class="cc-name">Doug Jones</div>
+            <div class="cc-bg">U.S. Senator (2018–2021) · Former U.S. Attorney for Northern Alabama · Last Democrat to hold statewide office</div>
+            <ul class="cc-positions">
+              <li>Expand Medicaid; protect rural hospitals</li>
+              <li>Increase investment in public schools and teacher pay</li>
+              <li>Economic development and workforce training</li>
+              <li>Criminal justice reform</li>
+            </ul>
+          </div>
+          <div class="cc-footer">
+            <button class="cc-expand" onclick="toggleCand('cc-jones')" aria-expanded="false">If he wins → <span class="cc-arr">▾</span></button>
+          </div>
+          <div class="cc-expanded-panel">
+            <div class="exp-label">What changes if Jones wins</div>
+            <div class="exp-box"><p>Would be Alabama's first Democratic governor since 1998 — requiring historic turnout shifts. Would face a Republican legislative supermajority, significantly limiting unilateral action.</p></div>
+            <div class="exp-outcomes">
+              <div class="exp-outcome"><div class="dot"></div><span>Push to expand Medicaid — potentially covering ~300,000 additional Alabamians</span></div>
+              <div class="exp-outcome"><div class="dot"></div><span>Increased state investment in education and rural infrastructure</span></div>
+              <div class="exp-outcome watch"><div class="dot"></div><span>Republican supermajority in both chambers could override vetoes and block major legislation</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SENATE ROW -->
+    <div>
+      <div class="row-header">
+        <div class="row-title">U.S. Senate — Open Seat</div>
+        <span style="font-size:.72rem;color:var(--white-30);font-style:italic;">Sen. Tuberville left for Governor · Runoff likely June 16</span>
+      </div>
+      <div style="background:var(--raised);border:1px solid var(--stroke);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:16px;font-size:.8rem;color:var(--white-55);">
+        <strong style="color:var(--white);">What does a U.S. Senator do?</strong> — Votes on all federal laws (healthcare, taxes, immigration, defense). Approves or blocks presidential nominees for federal judges who serve for life. 6-year term. April 2026 poll: Moore 28% · Marshall 27% · Hudson 24% — a runoff is widely expected.
+      </div>
+      <div class="cand-grid">
+
+        <div class="cand-card" data-issues="safety,immigration,economy,senate" id="cc-moore">
+          <div class="cc-visual">
+            <div class="cc-gradient" style="--color-a:#2a1a0a;--color-b:#1a0d00;"></div>
+            <div class="cc-bg-pattern"></div>
+            <div class="cc-initial">M</div>
+            <div class="cc-tags">
+              <span class="cc-tag tag-r">Republican</span>
+              <span class="cc-tag tag-hot">Trump Endorsed</span>
+            </div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-race">U.S. Senate · Republican Primary</div>
+            <div class="cc-name">Barry Moore</div>
+            <div class="cc-bg">U.S. Rep. AL-1 (2021–present) · Auburn grad · National Guard veteran · Business owner</div>
+            <ul class="cc-positions">
+              <li>Advance Trump's legislative agenda in the Senate</li>
+              <li>Strengthen border security and immigration enforcement</li>
+              <li>Protect 2nd Amendment gun rights</li>
+              <li>Support law enforcement; prosecute violent crime</li>
+            </ul>
+          </div>
+          <div class="cc-footer">
+            <button class="cc-expand" onclick="toggleCand('cc-moore')" aria-expanded="false">If he wins → <span class="cc-arr">▾</span></button>
+          </div>
+          <div class="cc-expanded-panel">
+            <div class="exp-label">What changes if Moore wins</div>
+            <div class="exp-box"><p>Close alignment with Trump White House — reliable vote for the President's agenda. Leaves AL-1 Congressional seat open, triggering a new election.</p></div>
+            <div class="exp-outcomes">
+              <div class="exp-outcome"><div class="dot"></div><span>Strong 2nd Amendment stance; likely opposition to any federal gun restrictions</span></div>
+              <div class="exp-outcome"><div class="dot"></div><span>Rated "most conservative member in Alabama" by CPAC — consistent conservative Senate voting record expected</span></div>
+              <div class="exp-outcome watch"><div class="dot"></div><span>AL-1 House seat vacancy creates another race and period of no representation for that district</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cand-card" data-issues="safety,healthcare,economy,senate" id="cc-marshall">
+          <div class="cc-visual">
+            <div class="cc-gradient" style="--color-a:#1a1a0d;--color-b:#111108;"></div>
+            <div class="cc-bg-pattern"></div>
+            <div class="cc-initial">M</div>
+            <div class="cc-tags">
+              <span class="cc-tag tag-r">Republican</span>
+            </div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-race">U.S. Senate · Republican Primary</div>
+            <div class="cc-name">Steve Marshall</div>
+            <div class="cc-bg">Alabama Attorney General (2017–present) · Term-limited from AG office · Running on legal record</div>
+            <ul class="cc-positions">
+              <li>Track record fighting federal overreach as AG</li>
+              <li>Support abortion restrictions and pro-life policy</li>
+              <li>Lower healthcare costs for Alabama families</li>
+              <li>States' rights; reduce federal government size</li>
+            </ul>
+          </div>
+          <div class="cc-footer">
+            <button class="cc-expand" onclick="toggleCand('cc-marshall')" aria-expanded="false">If he wins → <span class="cc-arr">▾</span></button>
+          </div>
+          <div class="cc-expanded-panel">
+            <div class="exp-label">What changes if Marshall wins</div>
+            <div class="exp-box"><p>Deep legal background — likely focus on judiciary oversight, states' rights battles, and prosecutorial independence. Leaves Alabama AG seat vacant, requiring a gubernatorial appointment.</p></div>
+            <div class="exp-outcomes">
+              <div class="exp-outcome"><div class="dot"></div><span>AG-style combative approach to federal agencies carried into Senate role</span></div>
+              <div class="exp-outcome"><div class="dot"></div><span>Pro-life platform — would support federal abortion restrictions if they come before the Senate</span></div>
+              <div class="exp-outcome watch"><div class="dot"></div><span>Alabama AG office becomes vacant — governor would appoint a replacement</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cand-card" data-issues="safety,economy,immigration,senate" id="cc-hudson">
+          <div class="cc-visual">
+            <div class="cc-gradient" style="--color-a:#0d1a2a;--color-b:#060d1a;"></div>
+            <div class="cc-bg-pattern"></div>
+            <div class="cc-initial">H</div>
+            <div class="cc-tags">
+              <span class="cc-tag tag-r">Republican</span>
+            </div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-race">U.S. Senate · Republican Primary</div>
+            <div class="cc-name">Jared Hudson</div>
+            <div class="cc-bg">U.S. Navy SEAL veteran · Political newcomer · Surged to 24% in late polling</div>
+            <ul class="cc-positions">
+              <li>Put Alabama workers and domestic manufacturing first</li>
+              <li>Strict immigration enforcement; end sanctuary cities</li>
+              <li>Oppose gender ideology in schools and military</li>
+              <li>Reduce federal spending and government size</li>
+            </ul>
+          </div>
+          <div class="cc-footer">
+            <button class="cc-expand" onclick="toggleCand('cc-hudson')" aria-expanded="false">If he wins → <span class="cc-arr">▾</span></button>
+          </div>
+          <div class="cc-expanded-panel">
+            <div class="exp-label">What changes if Hudson wins</div>
+            <div class="exp-box"><p>Military and national security lens — likely focus on defense spending and veterans' issues. As a political newcomer, would enter the Senate's lowest-seniority tier with less committee power initially.</p></div>
+            <div class="exp-outcomes">
+              <div class="exp-outcome"><div class="dot"></div><span>Hard-line immigration enforcement; strong support for federal deportation policies</span></div>
+              <div class="exp-outcome"><div class="dot"></div><span>Fiscal conservative — likely to support cuts to federal spending and the national debt</span></div>
+              <div class="exp-outcome neutral"><div class="dot" style="background:var(--white-30);"></div><span>No legislative track record to evaluate — largest unknown of the three frontrunners</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ OUTCOMES ════════════ -->
+<div class="anchor" id="outcomes"></div>
+<section class="outcomes-section">
+  <div class="wrap">
+    <div class="section-eyebrow">Election Outcomes</div>
+    <h2 class="section-title">What does it mean<br><em>if they win?</em></h2>
+    <p class="section-deck">Winning an election isn't just about a person — it's about what changes in your life. Here's every major outcome explained. Primary results post at sos.alabama.gov after 7pm CT on May 19.</p>
+
+    <div class="outcome-shelf">
+
+      <div class="outcome-row" id="or-gov">
+        <button class="outcome-trigger" onclick="toggleOutcome('or-gov')" aria-expanded="false">
+          <div class="ot-left">
+            <div class="ot-num">01</div>
+            <div>
+              <div class="ot-title">Governor Race Outcomes</div>
+              <div class="ot-sub">Controls ~$14B state budget · Signs/vetoes all laws · Appoints judges · Takes office January 2027</div>
+            </div>
+          </div>
+          <span class="ot-chev">▾</span>
+        </button>
+        <div class="outcome-body">
+          <div class="outcome-scenarios">
+            <div class="os-card">
+              <span class="os-who os-r">Republican Wins (Most Likely)</span>
+              <div class="os-name">Tuberville or another Republican</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Alabama's conservative direction continues — school choice, strict immigration enforcement, limited state Medicaid expansion</li>
+                <li><span class="os-bullet bi">→</span>Close alignment with Trump's federal agenda; fast implementation of federal policy shifts at state level</li>
+                <li><span class="os-bullet bi">→</span>State budget priorities favor tax relief and business development</li>
+                <li><span class="os-bullet bw">⚑</span>Rural hospital funding remains uncertain — 13 Alabama hospitals at financial risk</li>
+                <li><span class="os-bullet bi">→</span>Conservative judicial appointments shape Alabama courts for a decade</li>
+              </ul>
+            </div>
+            <div class="os-card">
+              <span class="os-who os-d">Democrat Wins (Rare — not since 1998)</span>
+              <div class="os-name">Doug Jones or another Democrat</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Historic upset — would require unprecedented turnout shift</li>
+                <li><span class="os-bullet bi">→</span>Push to expand Medicaid — potentially ~300,000 more Alabamians covered</li>
+                <li><span class="os-bullet bi">→</span>Increased investment in public education and teacher pay</li>
+                <li><span class="os-bullet bw">⚑</span>Faces Republican supermajority in both chambers — major legislation requires legislative buy-in</li>
+                <li><span class="os-bullet bi">→</span>Different judicial appointment direction affecting every level of Alabama courts</li>
+              </ul>
+            </div>
+          </div>
+          <div class="context-box"><strong>What doesn't change either way:</strong> The Alabama Legislature (Republican supermajority in both chambers) still writes and passes laws. The governor directs, proposes, and appoints — but cannot govern alone. Most tax structure and criminal law changes require legislative action.</div>
+        </div>
+      </div>
+
+      <div class="outcome-row" id="or-sen">
+        <button class="outcome-trigger" onclick="toggleOutcome('or-sen')" aria-expanded="false">
+          <div class="ot-left">
+            <div class="ot-num">02</div>
+            <div>
+              <div class="ot-title">U.S. Senate Race Outcomes</div>
+              <div class="ot-sub">6-year term · Votes on federal law · Confirms lifetime-appointment judges · 1 of 100 Senate votes</div>
+            </div>
+          </div>
+          <span class="ot-chev">▾</span>
+        </button>
+        <div class="outcome-body">
+          <div class="outcome-scenarios">
+            <div class="os-card">
+              <span class="os-who os-r">Barry Moore Wins</span>
+              <div class="os-name">Trump-endorsed · Current U.S. Rep.</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Close alignment with Trump White House — reliable vote for the President's agenda</li>
+                <li><span class="os-bullet bi">→</span>Strong 2nd Amendment stance; expected opposition to federal gun restrictions</li>
+                <li><span class="os-bullet bw">⚑</span>Leaves AL-1 Congressional seat open, triggering a special election</li>
+                <li><span class="os-bullet bi">→</span>Rated most conservative Alabama member by CPAC — consistent conservative record expected</li>
+              </ul>
+            </div>
+            <div class="os-card">
+              <span class="os-who os-r">Steve Marshall Wins</span>
+              <div class="os-name">Current AG · Legal record focus</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Legal background — focus on judiciary, states' rights, AG-style federal agency oversight</li>
+                <li><span class="os-bullet bi">→</span>Pro-life platform would support federal abortion restrictions if they come before the Senate</li>
+                <li><span class="os-bullet bw">⚑</span>Alabama AG office becomes vacant — governor appoints a replacement</li>
+                <li><span class="os-bullet bi">→</span>Combative approach to federal agencies carried from AG role into Senate</li>
+              </ul>
+            </div>
+            <div class="os-card">
+              <span class="os-who os-r">Jared Hudson Wins</span>
+              <div class="os-name">Navy SEAL · Political outsider</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Military/national security lens — likely focus on defense spending and veterans</li>
+                <li><span class="os-bullet bi">→</span>Hard-line immigration enforcement; strong support for federal deportation policies</li>
+                <li><span class="os-bullet bw">⚑</span>No legislative track record — enters Senate at lowest seniority tier with less initial committee power</li>
+                <li><span class="os-bullet bi">→</span>Fiscal conservative — likely to push for federal spending cuts</li>
+              </ul>
+            </div>
+          </div>
+          <div class="context-box"><strong>What stays the same regardless:</strong> One senator is 1 of 100 votes. Alabama's senator matters most in closely divided votes, in securing federal funding for Alabama projects, and in exercising oversight over federal agencies affecting Alabama. The Senate seat stays Republican — the question is which kind of Republican.</div>
+        </div>
+      </div>
+
+      <div class="outcome-row" id="or-amend">
+        <button class="outcome-trigger" onclick="toggleOutcome('or-amend')" aria-expanded="false">
+          <div class="ot-left">
+            <div class="ot-num">03</div>
+            <div>
+              <div class="ot-title">Ballot Amendment Outcomes</div>
+              <div class="ot-sub">Amendment 1 (Bail) · Amendment 2 (DA Pay) · Simple majority decides · Takes effect immediately if passed</div>
+            </div>
+          </div>
+          <span class="ot-chev">▾</span>
+        </button>
+        <div class="outcome-body">
+          <div class="outcome-scenarios">
+            <div class="os-card">
+              <span class="os-who os-yes">Amendment 1 Passes</span>
+              <div class="os-name">Bail expanded for gun/murder charges</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Judges gain immediate authority to deny bail for these two new crime categories</li>
+                <li><span class="os-bullet bi">→</span>Accused individuals could be held in county jails until trial — potentially months or years</li>
+                <li><span class="os-bullet bw">⚑</span>May increase pressure on county jails, which Alabama counties fund themselves</li>
+                <li><span class="os-bullet bi">→</span>Extends Alabama's existing "Aniah's Law" approach to pre-trial detention</li>
+              </ul>
+            </div>
+            <div class="os-card">
+              <span class="os-who os-no">Amendment 1 Fails</span>
+              <div class="os-name">Bail rules unchanged</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Current bail law unchanged — judges retain existing authority only</li>
+                <li><span class="os-bullet bi">→</span>Accused in these categories remain eligible for bail hearings before trial</li>
+              </ul>
+            </div>
+            <div class="os-card">
+              <span class="os-who os-yes">Amendment 2 Passes</span>
+              <div class="os-name">DA salaries constitutionally protected</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Becomes part of Alabama Constitution immediately — applies to all current and future DAs</li>
+                <li><span class="os-bullet bi">→</span>DAs can make prosecution decisions without legislators using budget cuts as political pressure</li>
+                <li><span class="os-bullet bw">⚑</span>Legislature loses one formal lever of mid-term accountability over DAs</li>
+              </ul>
+            </div>
+            <div class="os-card">
+              <span class="os-who os-no">Amendment 2 Fails</span>
+              <div class="os-name">DA pay remains adjustable</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Legislature retains ability to adjust DA compensation including potential reductions</li>
+                <li><span class="os-bullet bi">→</span>Could be brought back to voters in a future election cycle</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="outcome-row" id="or-runoff">
+        <button class="outcome-trigger" onclick="toggleOutcome('or-runoff')" aria-expanded="false">
+          <div class="ot-left">
+            <div class="ot-num">04</div>
+            <div>
+              <div class="ot-title">What happens if there's a Runoff?</div>
+              <div class="ot-sub">Alabama requires 50%+ to win outright — Senate runoff between top 2 on June 16 if no one hits majority</div>
+            </div>
+          </div>
+          <span class="ot-chev">▾</span>
+        </button>
+        <div class="outcome-body">
+          <div class="outcome-scenarios">
+            <div class="os-card">
+              <span class="os-who os-run">Runoff Scenario: Moore vs. Marshall</span>
+              <div class="os-name">If Hudson finishes third</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Trump-endorsed congressman vs. sitting AG — both strong fundraisers with high name recognition</li>
+                <li><span class="os-bullet bw">⚑</span>Hudson supporters become the swing vote — who they back in the runoff likely decides the winner</li>
+                <li><span class="os-bullet bi">→</span>Runoff turnout is much lower — a few thousand motivated voters can shift the result</li>
+              </ul>
+            </div>
+            <div class="os-card">
+              <span class="os-who os-run">Runoff Scenario: Moore vs. Hudson</span>
+              <div class="os-name">If Marshall finishes third</div>
+              <ul class="os-list">
+                <li><span class="os-bullet bi">→</span>Trump-endorsed incumbent vs. military outsider — institutional support vs. grassroots</li>
+                <li><span class="os-bullet bw">⚑</span>Marshall's more establishment-leaning voters become the swing group</li>
+                <li><span class="os-bullet bi">→</span>Outside PAC spending could be decisive — the race has already seen $5M+ in advertising</li>
+              </ul>
+            </div>
+          </div>
+          <div class="context-box"><strong>If there's a runoff, your registration still counts.</strong> Vote June 16 using the same party ballot you chose May 19. Confirm your polling place hasn't changed at <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" style="color:var(--gold);">myinfo.alabamavotes.gov →</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ YOUR QUESTIONS ════════════ -->
+<div class="anchor" id="questions"></div>
+<section class="qa-section">
+  <div class="wrap">
+    <div class="section-eyebrow">Your Questions</div>
+    <h2 class="section-title">Straight answers.<br><em>No cheerleading.</em></h2>
+    <p class="section-deck">These aren't complaints — they're the real questions voters are asking. Here's our honest take.</p>
+    <div class="qa-grid">
+      <div class="qa-card"><p class="qa-q">Is this just about political power and positioning — not really for the people?</p><p class="qa-a">Sometimes, yes. Political ambition is real. That's exactly why we show you what candidates have actually done in office — not what their party says. Voting records and legal actions are public. You can judge for yourself.</p></div>
+      <div class="qa-card"><p class="qa-q">I don't know who to vote for.</p><p class="qa-a">Start with one issue that affects your daily life — school quality, healthcare costs, crime, jobs, taxes. Use the filter bar above to see which candidates focus on that issue. You don't need to agree on everything. Vote on what matters most to you.</p></div>
+      <div class="qa-card"><p class="qa-q">My vote doesn't change anything.</p><p class="qa-a">Alabama's 2017 U.S. Senate race was decided by about 21,000 votes statewide. School board and county races are decided by hundreds. Your vote is most powerful in primaries — fewer people show up, so each one counts more.</p></div>
+      <div class="qa-card"><p class="qa-q">I don't know what's going on.</p><p class="qa-a">That's what this page is for. You don't need to follow politics daily. Find one issue affecting your life, see where candidates stand on it, and go vote. That's all it takes for an informed ballot.</p></div>
+      <div class="qa-card"><p class="qa-q">Why does the governor or senator matter to me personally?</p><p class="qa-a">The governor controls Alabama's ~$14 billion budget — your school's funding, road repairs, Medicaid, prison policy. Your senator votes on healthcare, student loans, military spending, and who joins the Supreme Court for life.</p></div>
+      <div class="qa-card"><p class="qa-q">Why does the primary matter if the general is already decided?</p><p class="qa-a">In deep-red Alabama, the Republican primary winner often becomes the officeholder. A smaller group of primary voters effectively decides who governs everyone. Your vote also shapes local races and state resources flowing to your county.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ HOW TO VOTE ════════════ -->
+<div class="anchor" id="vote"></div>
+<section class="vote-section">
+  <div class="wrap">
+    <div class="section-eyebrow">How to Vote</div>
+    <h2 class="section-title">Five steps.<br><em>No jargon.</em></h2>
+    <p class="section-deck">Everything you need to vote in Alabama's 2026 elections.</p>
+    <div class="vote-steps">
+      <div class="vote-step">
+        <div class="vs-num">1</div>
+        <div class="vs-body">
+          <h4>Check if you're registered</h4>
+          <p>You must register at least <strong>14 days before any election</strong>. For May 19, the deadline is <strong>May 4, 2026</strong>. Moved recently — even within the same county? Update your registration or you'll be redirected to the wrong polling place.</p>
+          <a class="vs-cta" href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener">Check or Update Registration →</a>
+        </div>
+      </div>
+      <div class="vote-step">
+        <div class="vs-num">2</div>
+        <div class="vs-body">
+          <h4>Bring a valid photo ID — required by Alabama law</h4>
+          <p>You must show one of these at the polls:</p>
+          <div class="id-chips">
+            <span class="id-chip">Alabama Driver's License</span>
+            <span class="id-chip">Alabama Non-Driver ID</span>
+            <span class="id-chip">U.S. Passport</span>
+            <span class="id-chip">U.S. Military ID</span>
+            <span class="id-chip">State / Federal Employee ID</span>
+            <span class="id-chip">Valid Tribal ID</span>
+          </div>
+          <p style="margin-top:12px;"><strong style="color:var(--white);">No ID?</strong> Get a free Alabama Photo Voter ID at your county Board of Registrars, or call <strong>1-800-274-8683</strong> for a home visit. You can also vote provisionally and show ID by the Friday after election day.</p>
+        </div>
+      </div>
+      <div class="vote-step">
+        <div class="vs-num">3</div>
+        <div class="vs-body">
+          <h4>Find your polling place before Election Day</h4>
+          <p>Your assigned polling location is based on your registered address and can change. Don't assume it's the same place as last time. Polls are open <strong>7:00 AM – 7:00 PM</strong>.</p>
+          <a class="vs-cta" href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener">Find My Polling Place →</a>
+        </div>
+      </div>
+      <div class="vote-step">
+        <div class="vs-num">4</div>
+        <div class="vs-body">
+          <h4>Early voting and absentee options</h4>
+          <p><strong style="color:var(--white);">Early in-person:</strong> Available starting 27 days before Election Day through the Friday before. No excuse needed — just bring your ID to an early voting location.</p>
+          <p><strong style="color:var(--white);">Absentee by mail:</strong> Only if you qualify — out of county, illness or disability, or work during all polling hours. Apply first. Return to your county Absentee Election Manager by the day before the election. Alabama has no ballot drop boxes.</p>
+        </div>
+      </div>
+      <div class="vote-step">
+        <div class="vs-num">5</div>
+        <div class="vs-body">
+          <h4>Know which ballot you'll receive</h4>
+          <p>In the <strong style="color:var(--white);">primary</strong>, you choose one party's ballot — Republican or Democratic. You can't vote both. In any runoff, you must vote the same party as the primary. In the <strong style="color:var(--white);">Nov 3 general election</strong>, all voters get the same ballot regardless of party.</p>
+          <a class="vs-cta" href="https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots" target="_blank" rel="noopener">Preview My Sample Ballot →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Alabama Votes 2026</div>
+        <div class="footer-tag">No spin. Just facts. What's on your ballot and why it matters.</div>
+      </div>
+      <div class="footer-badge">⚖️ &nbsp;Nonpartisan — No Endorsements</div>
+    </div>
+    <p class="footer-sources" style="margin-bottom:10px;">
+      <strong>Sources:</strong> &nbsp;
+      <a href="https://www.sos.alabama.gov/alabama-votes" target="_blank" rel="noopener">Alabama Secretary of State</a> ·
+      <a href="https://ballotpedia.org/Alabama_elections,_2026" target="_blank" rel="noopener">Ballotpedia</a> ·
+      <a href="https://alabamareflector.com" target="_blank" rel="noopener">Alabama Reflector</a> ·
+      <a href="https://aldailynews.com" target="_blank" rel="noopener">Alabama Daily News</a> ·
+      <a href="https://www.ballotready.org/us/alabama" target="_blank" rel="noopener">BallotReady</a>
+    </p>
+    <p class="footer-legal">This is a nonpartisan educational resource. It does not endorse any candidate, party, or ballot position. Always verify with official sources at <a href="https://www.sos.alabama.gov" target="_blank" rel="noopener">sos.alabama.gov</a>. Last updated May 2026.</p>
+  </div>
+</footer>
+
+<script>
+// ── FILTER CANDIDATES ──
+function filterCands(btn, filter) {
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cand-card').forEach(card => {
+    if (filter === 'all') {
+      card.classList.remove('hidden');
+    } else {
+      const issues = card.getAttribute('data-issues') || '';
+      card.classList.toggle('hidden', !issues.includes(filter));
+    }
+  });
+}
+
+// ── CANDIDATE CARD EXPAND ──
+function toggleCand(id) {
+  const card = document.getElementById(id);
+  const isOpen = card.classList.contains('open');
+  // close all
+  document.querySelectorAll('.cand-card.open').forEach(c => {
+    c.classList.remove('open');
+    const b = c.querySelector('.cc-expand');
+    if (b) b.setAttribute('aria-expanded','false');
+  });
+  if (!isOpen) {
+    card.classList.add('open');
+    card.querySelector('.cc-expand').setAttribute('aria-expanded','true');
+    setTimeout(() => card.querySelector('.cc-expanded-panel').scrollIntoView({behavior:'smooth',block:'nearest'}), 60);
+  }
+}
+
+// ── BALLOT MEASURE EXPAND ──
+function toggleMeasure(id) {
+  const card = document.getElementById(id);
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.measure-card.open').forEach(c => {
+    c.classList.remove('open');
+    const b = c.querySelector('.mc-expand-btn');
+    if (b) b.setAttribute('aria-expanded','false');
+    const t = c.querySelector('.mc-expand-btn span:first-child');
+  });
+  if (!isOpen) {
+    card.classList.add('open');
+    card.querySelector('.mc-expand-btn').setAttribute('aria-expanded','true');
+    setTimeout(() => card.querySelector('.mc-detail').scrollIntoView({behavior:'smooth',block:'nearest'}), 60);
+  }
+}
+
+// ── OUTCOME ROW EXPAND ──
+function toggleOutcome(id) {
+  const row = document.getElementById(id);
+  const isOpen = row.classList.contains('expanded');
+  document.querySelectorAll('.outcome-row.expanded').forEach(r => {
+    r.classList.remove('expanded');
+    r.querySelector('.outcome-trigger').setAttribute('aria-expanded','false');
+  });
+  if (!isOpen) {
+    row.classList.add('expanded');
+    row.querySelector('.outcome-trigger').setAttribute('aria-expanded','true');
+    setTimeout(() => row.querySelector('.outcome-body').scrollIntoView({behavior:'smooth',block:'nearest'}), 60);
+  }
+}
+
+// ── ACTIVE NAV ──
+const navLinks = document.querySelectorAll('.site-nav a');
+const secs = ['ballot','candidates','outcomes','questions','vote'];
+function updateNav() {
+  let cur = '';
+  secs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 160) cur = id;
+  });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+</script>
+</body>
+</html>
