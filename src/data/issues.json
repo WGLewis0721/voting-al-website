@@ -1,0 +1,27 @@
+[
+  {
+    "id": "economy",
+    "title": "Economy & Cost of Living",
+    "summary": "Alabama families are weighing wages, taxes, inflation pressure, and local job growth."
+  },
+  {
+    "id": "healthcare",
+    "title": "Healthcare Access",
+    "summary": "Hospital closures, insurance affordability, and Medicaid policy continue to shape family outcomes."
+  },
+  {
+    "id": "education",
+    "title": "Education",
+    "summary": "Public school quality, teacher pay, and workforce readiness remain central to long-term growth."
+  },
+  {
+    "id": "safety",
+    "title": "Public Safety",
+    "summary": "Voters are balancing crime prevention priorities with accountability and justice system costs."
+  },
+  {
+    "id": "immigration",
+    "title": "Immigration",
+    "summary": "State-federal cooperation and enforcement approaches affect labor markets and local communities."
+  }
+]

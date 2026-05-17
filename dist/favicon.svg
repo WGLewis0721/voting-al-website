@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Alabama Votes">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f1d899"/>
+      <stop offset="100%" stop-color="#c7a24f"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="#0d0d0d"/>
+  <path d="M12 48L32 12l20 36h-8l-4-7H24l-4 7h-8zm16-14h8l-4-7-4 7z" fill="url(#g)"/>
+</svg>
