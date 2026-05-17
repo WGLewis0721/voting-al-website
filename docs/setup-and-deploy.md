@@ -55,7 +55,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - run: npm ci
       - run: npm run build
@@ -87,3 +87,7 @@ Because `astro.config.mjs` already sets:
 - `base: /voting-al-website`
 
 the deployed URLs will resolve correctly for repository pages.
+
+## Node runtime requirement
+
+Astro 6 requires Node `>=22.12.0` for local development and CI builds.

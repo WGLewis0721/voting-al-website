@@ -4,7 +4,7 @@ Premium, nonpartisan Alabama voter education site built with Astro + Tailwind an
 
 ## Stack
 
-- Astro 6 (compatible with Astro 5+ requirement)
+- Astro 6
 - Tailwind CSS (CDN runtime configuration)
 - Client-side vanilla JavaScript for interactions
 - JSON data sources for candidates, issues, amendments, dates, and counties
@@ -50,6 +50,7 @@ Premium, nonpartisan Alabama voter education site built with Astro + Tailwind an
 ## Local Development
 
 ```bash
+# Use Node 22.12+ (required by Astro 6)
 npm install
 npm run dev
 ```
@@ -71,13 +72,23 @@ This project is configured for repository pages at:
 Deployment options:
 
 1. **GitHub Actions** (recommended)
-   - Use Astro official action or standard Node workflow:
-     - `npm ci`
-     - `npm run build`
-     - Publish `dist/` to Pages
+   - Included workflow: `.github/workflows/deploy.yml`
+   - Uses Node 22, `npm ci`, and `npm run build`, then publishes `dist/`
+   - Configure repository **Settings → Pages → Source = GitHub Actions**
 2. **Manual**
    - Run `npm run build`
    - Deploy `dist/` contents to Pages source branch
+
+## Node Version Requirement
+
+Astro 6 requires Node `>=22.12.0`.
+
+If your local machine is on Node 20, switch before running build/dev:
+
+```bash
+nvm install 22
+nvm use 22
+```
 
 See:
 
