@@ -277,7 +277,7 @@
       const data = new FormData(quizForm);
       const tally = { conservative: 0, progressive: 0, mixed: 0 };
       const answers = ['q1', 'q2', 'q3'].map(k => data.get(k));
-      if (answers.some(a => !a || !(a in tally))) {
+      if (answers.some(a => a === null || !(a in tally))) {
         quizResult.innerHTML = '<h3>Almost there</h3><p>Please answer all three questions to see your alignment.</p>';
         return;
       }
