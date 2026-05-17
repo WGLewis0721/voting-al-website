@@ -5,7 +5,7 @@ Premium, nonpartisan Alabama voter education site built with Astro + Tailwind an
 ## Stack
 
 - Astro 6
-- Tailwind CSS (CDN runtime configuration)
+- Tailwind CSS via `@tailwindcss/vite`
 - Client-side vanilla JavaScript for interactions
 - JSON data sources for candidates, issues, amendments, dates, and counties
 
