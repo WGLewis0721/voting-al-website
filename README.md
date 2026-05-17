@@ -1,62 +1,96 @@
-# Voting AL Intelligence
+# Alabama Votes 2026 (Astro V2)
 
-Modern nonpartisan Alabama civic education platform built with **Next.js + TypeScript + Tailwind CSS + Framer Motion + Recharts** and configured for static deployment to GitHub Pages.
-
-## Platform Goals
-
-- Help voters understand what's on the ballot
-- Explain issues in plain English
-- Provide neutral candidate comparisons
-- Show transparent sourcing and methodology
-- Keep mobile UX and accessibility first
+Premium, nonpartisan Alabama voter education site built with Astro + Tailwind and deployable to GitHub Pages.
 
 ## Stack
 
-- Next.js App Router (static export)
-- TypeScript
-- Tailwind CSS v4
-- Framer Motion
-- Lucide icons
-- Recharts
-- shadcn-style reusable UI primitives
+- Astro 6
+- Tailwind CSS (CDN runtime configuration)
+- Client-side vanilla JavaScript for interactions
+- JSON data sources for candidates, issues, amendments, dates, and counties
 
-## Pages
+## Project Structure
 
-- Home
-- Ballot Explorer
-- Issues
-- Candidates
-- Civic Education
-- Alabama Map
-- FAQ
-- About
-- Sources & Methodology
+```text
+.
+├── astro.config.mjs
+├── package.json
+├── tsconfig.json
+├── docs/
+│   └── architecture.md
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── components/
+│   │   ├── AlignmentQuiz.astro
+│   │   ├── Amendments.astro
+│   │   ├── BallotSelector.astro
+│   │   ├── CandidateCard.astro
+│   │   ├── CandidateExplorer.astro
+│   │   ├── Hero.astro
+│   │   ├── JourneyCards.astro
+│   │   ├── KeyIssues.astro
+│   │   ├── SiteFooter.astro
+│   │   └── TrustBanner.astro
+│   ├── data/
+│   │   ├── amendments.json
+│   │   ├── candidates.json
+│   │   ├── counties.json
+│   │   ├── dates.json
+│   │   └── issues.json
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   └── index.astro
+│   └── styles/
+│       └── global.css
+└── alabama-voter-guide.html (legacy single-file version)
+```
 
 ## Local Development
 
 ```bash
+# Use Node 22.12+ (required by Astro 6)
 npm install
 npm run dev
 ```
 
-## Build
+## Production Build
 
 ```bash
 npm run build
+npm run preview
 ```
 
-Build output is generated in `out/` for GitHub Pages.
+## GitHub Pages Deployment
 
-## Deployment
+This project is configured for repository pages at:
 
-GitHub Actions workflow: `.github/workflows/deploy.yml`
+- `site`: `https://wglewis0721.github.io`
+- `base`: `/voting-al-website`
 
-- Installs dependencies
-- Runs `npm run build`
-- Publishes `out/` to GitHub Pages
+Deployment options:
 
-## Data and Schema
+1. **GitHub Actions** (recommended)
+   - Included workflow: `.github/workflows/deploy.yml`
+   - Uses Node 22, `npm ci`, and `npm run build`, then publishes `dist/`
+   - Configure repository **Settings → Pages → Source = GitHub Actions**
+2. **Manual**
+   - Run `npm run build`
+   - Deploy `dist/` contents to Pages source branch
 
-- Mock data and typed schemas live in:
-  - `src/lib/types.ts`
-  - `src/data/mock-data.ts`
+## Node Version Requirement
+
+Astro 6 requires Node `>=22.12.0`.
+
+If your local machine is on Node 20, switch before running build/dev:
+
+```bash
+nvm install 22
+nvm use 22
+```
+
+See:
+
+- `docs/architecture.md` for component/data architecture
+- `docs/setup-and-deploy.md` for exact migration and GitHub Pages deployment steps

@@ -1,0 +1,27 @@
+---
+import amendments from '../data/amendments.json';
+---
+
+<section id="amendments" class="py-16 md:py-20">
+  <div class="section-wrap">
+    <p class="section-eyebrow">Constitutional Amendments</p>
+    <h2 class="section-title">Plain language explainers.</h2>
+    <p class="section-deck">Neutral framing with direct impact context for Alabama households and communities.</p>
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      {amendments.map((amendment) => (
+        <article class="glass-panel p-5">
+          <p class="text-xs uppercase tracking-[0.14em] text-gold-soft">{amendment.election}</p>
+          <h3 class="mt-2 font-display text-3xl leading-tight">{amendment.title}</h3>
+          <p class="mt-2 text-sm text-white/75">{amendment.plainEnglish}</p>
+          <div class="mt-4 grid gap-2">
+            <div class="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 text-sm"><strong class="text-emerald-300">YES means:</strong> {amendment.yesMeans}</div>
+            <div class="rounded-lg border border-rose-500/30 bg-rose-500/10 p-3 text-sm"><strong class="text-rose-300">NO means:</strong> {amendment.noMeans}</div>
+          </div>
+          <div class="mt-4 rounded-lg border border-gold/30 bg-gold/10 p-3 text-sm text-white/80">
+            <strong class="text-gold-soft">Why this matters:</strong> {amendment.whyItMatters}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
