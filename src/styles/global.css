@@ -1,3 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #c7a24f;
+  --color-gold-soft: #e4c77f;
+  --color-gold-glow: #f1d899;
+  --color-graphite-950: #090909;
+  --color-graphite-900: #111111;
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: Outfit, system-ui, sans-serif;
+  --shadow-cinematic: 0 20px 80px rgba(0,0,0,.45);
+}
+
 :root { color-scheme: dark; }
 
 html { scroll-behavior: smooth; }
