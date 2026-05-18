@@ -6,14 +6,11 @@ import Hero from '../components/Hero.astro';
 import JourneyCards from '../components/JourneyCards.astro';
 import BallotSelector from '../components/BallotSelector.astro';
 import AmendmentCard from '../components/AmendmentCard.astro';
+import CandidateExplorer from '../components/CandidateExplorer.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import amendments from '../data/amendments.json';
-import candidates from '../data/candidates.json';
 
 const base = import.meta.env.BASE_URL;
-
-const demTotal = candidates.filter((c) => c.party === 'Democratic').length;
-const repTotal = candidates.filter((c) => c.party === 'Republican').length;
 ---
 
 <Layout>
@@ -39,33 +36,7 @@ const repTotal = candidates.filter((c) => c.party === 'Republican').length;
     <div class="reveal-item"><JourneyCards /></div>
 
     <!-- 2. Who's Running? -->
-    <div class="reveal-item" id="who-is-running">
-      <section class="py-16 md:py-20">
-        <div class="section-wrap">
-          <p class="section-eyebrow">Who's Running?</p>
-          <h2 class="section-title">2026 Primary Candidates.</h2>
-          <p class="section-deck">Democratic and Republican primaries feature candidates for U.S. Senate, Governor, Lieutenant Governor, statewide offices, and all seven U.S. House districts.</p>
-          <div class="mt-6 grid gap-3 sm:grid-cols-3">
-            <div class="glass-panel p-4 text-center">
-              <p class="font-display text-5xl">{demTotal}</p>
-              <p class="mt-1 text-sm text-white/65">Democratic candidates</p>
-            </div>
-            <div class="glass-panel p-4 text-center">
-              <p class="font-display text-5xl">{repTotal}</p>
-              <p class="mt-1 text-sm text-white/65">Republican candidates</p>
-            </div>
-            <div class="glass-panel p-4 text-center">
-              <p class="font-display text-5xl">{demTotal + repTotal}</p>
-              <p class="mt-1 text-sm text-white/65">Total candidates</p>
-            </div>
-          </div>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a href={`${base}candidates`} class="btn gold">View All Candidates</a>
-            <a href={`${base}primary-2026`} class="btn ghost">Election Overview</a>
-          </div>
-        </div>
-      </section>
-    </div>
+    <div class="reveal-item" id="who-is-running"><CandidateExplorer /></div>
 
     <!-- 3. What's On My Ballot? -->
     <div class="reveal-item" id="ballot">
