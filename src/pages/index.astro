@@ -1,42 +1,178 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TrustBanner from '../components/TrustBanner.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 import Hero from '../components/Hero.astro';
 import JourneyCards from '../components/JourneyCards.astro';
 import BallotSelector from '../components/BallotSelector.astro';
-import CandidateExplorer from '../components/CandidateExplorer.astro';
-import AlignmentQuiz from '../components/AlignmentQuiz.astro';
-import Amendments from '../components/Amendments.astro';
-import KeyIssues from '../components/KeyIssues.astro';
+import AmendmentCard from '../components/AmendmentCard.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import amendments from '../data/amendments.json';
+import candidates from '../data/candidates.json';
+
+const base = import.meta.env.BASE_URL;
+
+const demTotal = candidates.filter((c) => c.party === 'Democratic').length;
+const repTotal = candidates.filter((c) => c.party === 'Republican').length;
 ---
 
 <Layout>
   <TrustBanner />
-
-  <header class="sticky top-0 z-50 border-b border-white/10 bg-black/75 backdrop-blur-lg">
-    <div class="section-wrap flex min-h-[68px] items-center justify-between gap-4">
-      <a href="#top" class="font-display text-3xl leading-none">Alabama Votes <span class="block font-sans text-[10px] uppercase tracking-[0.18em] text-gold-soft">2026 Voter Guide</span></a>
-      <nav class="hidden flex-wrap gap-1 text-xs uppercase tracking-[0.1em] text-white/65 md:flex">
-        <a class="rounded-full px-3 py-2 transition hover:bg-white/10 hover:text-white" href="#journey">Start</a>
-        <a class="rounded-full px-3 py-2 transition hover:bg-white/10 hover:text-white" href="#ballot">My Ballot</a>
-        <a class="rounded-full px-3 py-2 transition hover:bg-white/10 hover:text-white" href="#candidates">Candidates</a>
-        <a class="rounded-full px-3 py-2 transition hover:bg-white/10 hover:text-white" href="#quiz">Quiz</a>
-        <a class="rounded-full px-3 py-2 transition hover:bg-white/10 hover:text-white" href="#resources">Resources</a>
-      </nav>
-      <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn gold">Check Registration</a>
-    </div>
-  </header>
+  <SiteHeader />
 
   <main id="main">
     <div id="top"></div>
+
+    <!-- 1. Alabama 2026 Primary Election -->
     <div class="reveal-item"><Hero /></div>
+
+    <!-- Warning copy -->
+    <div class="reveal-item">
+      <div class="section-wrap py-4">
+        <div class="rounded-xl border border-gold/30 bg-gold/8 px-5 py-4 text-sm text-white/75">
+          <strong class="text-gold-soft">⚠ Important:</strong> Candidate lists and ballot content can vary by county and district. Always verify your final ballot using the official Alabama Secretary of State sample ballot for your county.
+        </div>
+      </div>
+    </div>
+
+    <!-- Journey / start here cards -->
     <div class="reveal-item"><JourneyCards /></div>
-    <div class="reveal-item"><BallotSelector /></div>
-    <div class="reveal-item"><CandidateExplorer /></div>
-    <div class="reveal-item"><AlignmentQuiz /></div>
-    <div class="reveal-item"><Amendments /></div>
-    <div class="reveal-item"><KeyIssues /></div>
+
+    <!-- 2. Who's Running? -->
+    <div class="reveal-item" id="who-is-running">
+      <section class="py-16 md:py-20">
+        <div class="section-wrap">
+          <p class="section-eyebrow">Who's Running?</p>
+          <h2 class="section-title">2026 Primary Candidates.</h2>
+          <p class="section-deck">Democratic and Republican primaries feature candidates for U.S. Senate, Governor, Lieutenant Governor, statewide offices, and all seven U.S. House districts.</p>
+          <div class="mt-6 grid gap-3 sm:grid-cols-3">
+            <div class="glass-panel p-4 text-center">
+              <p class="font-display text-5xl">{demTotal}</p>
+              <p class="mt-1 text-sm text-white/65">Democratic candidates</p>
+            </div>
+            <div class="glass-panel p-4 text-center">
+              <p class="font-display text-5xl">{repTotal}</p>
+              <p class="mt-1 text-sm text-white/65">Republican candidates</p>
+            </div>
+            <div class="glass-panel p-4 text-center">
+              <p class="font-display text-5xl">{demTotal + repTotal}</p>
+              <p class="mt-1 text-sm text-white/65">Total candidates</p>
+            </div>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href={`${base}candidates`} class="btn gold">View All Candidates</a>
+            <a href={`${base}primary-2026`} class="btn ghost">Election Overview</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 3. What's On My Ballot? -->
+    <div class="reveal-item" id="ballot">
+      <section class="py-16 md:py-20">
+        <div class="section-wrap">
+          <p class="section-eyebrow">What's On My Ballot?</p>
+          <h2 class="section-title">Your May 19 ballot explained.</h2>
+          <p class="section-deck">The 2026 Alabama primary includes a Democratic primary, a Republican primary, and a statewide constitutional amendment election open to all registered voters.</p>
+          <div class="mt-6 grid gap-4 md:grid-cols-3">
+            <div class="glass-panel p-4">
+              <p class="text-2xl">🗳️</p>
+              <h3 class="mt-2 font-semibold">Party Primary</h3>
+              <p class="mt-1 text-sm text-white/65">Vote in one party primary: Democratic or Republican. Primaries with more than two candidates may proceed to a June 16 runoff.</p>
+            </div>
+            <div class="glass-panel p-4">
+              <p class="text-2xl">📜</p>
+              <h3 class="mt-2 font-semibold">Constitutional Amendments</h3>
+              <p class="mt-1 text-sm text-white/65">Two statewide amendments appear on the ballot for all registered voters — no party primary required to vote on these.</p>
+            </div>
+            <div class="glass-panel p-4">
+              <p class="text-2xl">📍</p>
+              <h3 class="mt-2 font-semibold">Local Races</h3>
+              <p class="mt-1 text-sm text-white/65">Your county ballot may include local offices not listed here. Check the official SOS sample ballot for your county.</p>
+            </div>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href={`${base}counties`} class="btn gold">Find My County Sample Ballot</a>
+            <a href={`${base}amendments`} class="btn ghost">View Amendments</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 4. Statewide Amendments -->
+    <div class="reveal-item" id="amendments">
+      <section class="py-16 md:py-20">
+        <div class="section-wrap">
+          <p class="section-eyebrow">Statewide Amendments</p>
+          <h2 class="section-title">Plain-language explainers.</h2>
+          <p class="section-deck">Both amendments affect the Alabama Constitution. Every registered voter may vote on them regardless of party primary participation.</p>
+          <div class="mt-8 grid gap-4 md:grid-cols-2">
+            {amendments.map((a) => (
+              <AmendmentCard
+                number={a.number}
+                title={a.title}
+                election={a.election}
+                officialSummary={a.officialSummary}
+                plainEnglish={a.plainEnglish}
+                yesMeans={a.yesMeans}
+                noMeans={a.noMeans}
+                costTaxImpact={a.costTaxImpact}
+                sourceUrl={a.sourceUrl}
+              />
+            ))}
+          </div>
+          <div class="mt-4 text-right">
+            <a href={`${base}amendments`} class="text-sm text-gold-soft hover:underline">View full amendment details →</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 5. Find Your County Sample Ballot -->
+    <div class="reveal-item">
+      <BallotSelector />
+    </div>
+
+    <!-- 6. Why the Primary Matters -->
+    <div class="reveal-item" id="why-it-matters">
+      <section class="py-16 md:py-20">
+        <div class="section-wrap">
+          <p class="section-eyebrow">Why the Primary Matters</p>
+          <h2 class="section-title">Your primary vote shapes November.</h2>
+          <p class="section-deck">In many Alabama races, the primary is the decisive election. Understanding who advances from the primary helps you anticipate the policy direction of state government.</p>
+          <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="glass-panel p-4">
+              <h3 class="font-display text-2xl leading-none">Low turnout, high impact</h3>
+              <p class="mt-2 text-sm text-white/70">Primary elections typically see lower turnout, meaning each vote carries more weight in determining who makes it to the general election.</p>
+            </div>
+            <div class="glass-panel p-4">
+              <h3 class="font-display text-2xl leading-none">Runoff rule</h3>
+              <p class="mt-2 text-sm text-white/70">If no candidate receives a majority of votes in a race with three or more candidates, the top two advance to a June 16, 2026 runoff election.</p>
+            </div>
+            <div class="glass-panel p-4">
+              <h3 class="font-display text-2xl leading-none">Amendments are for everyone</h3>
+              <p class="mt-2 text-sm text-white/70">Constitutional amendments appear on the ballot for all registered voters — you do not need to vote in a party primary to weigh in on Amendments 1 and 2.</p>
+            </div>
+            <div class="glass-panel p-4">
+              <h3 class="font-display text-2xl leading-none">Key dates</h3>
+              <p class="mt-2 text-sm text-white/70">Primary: May 19, 2026. Runoff (if needed): June 16, 2026. General Election: November 3, 2026.</p>
+            </div>
+            <div class="glass-panel p-4">
+              <h3 class="font-display text-2xl leading-none">Verify your registration</h3>
+              <p class="mt-2 text-sm text-white/70">Registration deadline for the primary was May 4, 2026. Check your status at VoterView before Election Day.</p>
+            </div>
+            <div class="glass-panel p-4">
+              <h3 class="font-display text-2xl leading-none">Absentee voting</h3>
+              <p class="mt-2 text-sm text-white/70">Alabama allows absentee voting for qualifying reasons. Contact the Alabama Secretary of State for absentee ballot guidance and deadlines.</p>
+            </div>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href={`${base}voter-guide`} class="btn gold">Full Voter Guide</a>
+            <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn ghost">Check Registration</a>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
   <div class="reveal-item"><SiteFooter /></div>
@@ -50,7 +186,7 @@ import SiteFooter from '../components/SiteFooter.astro';
         entry.target.classList.add('is-visible');
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08 });
 
   revealItems.forEach((item) => observer.observe(item));
 

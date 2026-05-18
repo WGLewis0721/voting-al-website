@@ -1,13 +1,17 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
 <section id="journey" class="py-16 md:py-20">
   <div class="section-wrap">
     <p class="section-eyebrow">Start Your Voter Journey</p>
     <h2 class="section-title">Choose your next step.</h2>
-    <p class="section-deck">Built around real voter frustration points: registration, ballot visibility, candidate comparison, and issue clarity.</p>
+    <p class="section-deck">Check registration, find your ballot, review candidates, and understand what's at stake before Election Day.</p>
     <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener"><p class="text-2xl">🪪</p><h3 class="mt-2 text-lg font-semibold">Check Registration</h3><p class="mt-1 text-sm text-white/65">Verify status, polling place, and registration details.</p></a>
-      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href="#ballot"><p class="text-2xl">🗳️</p><h3 class="mt-2 text-lg font-semibold">See My Ballot</h3><p class="mt-1 text-sm text-white/65">Use county selector and official SOS ballot links.</p></a>
-      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href="#candidates"><p class="text-2xl">⚖️</p><h3 class="mt-2 text-lg font-semibold">Compare Candidates</h3><p class="mt-1 text-sm text-white/65">Filter and review positions with plain-language context.</p></a>
-      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href="#quiz"><p class="text-2xl">✨</p><h3 class="mt-2 text-lg font-semibold">Key Issues Quiz</h3><p class="mt-1 text-sm text-white/65">Take a lightweight alignment quiz for decision support.</p></a>
+      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}counties`}><p class="text-2xl">🗳️</p><h3 class="mt-2 text-lg font-semibold">Find My Sample Ballot</h3><p class="mt-1 text-sm text-white/65">Select your county and get official SOS ballot links.</p></a>
+      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}candidates`}><p class="text-2xl">⚖️</p><h3 class="mt-2 text-lg font-semibold">See Who's Running</h3><p class="mt-1 text-sm text-white/65">Browse all 2026 primary candidates by race and party.</p></a>
+      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}amendments`}><p class="text-2xl">📜</p><h3 class="mt-2 text-lg font-semibold">Review Amendments</h3><p class="mt-1 text-sm text-white/65">Plain-language explainers for the two statewide amendments.</p></a>
     </div>
   </div>
 </section>

@@ -1,0 +1,72 @@
+---
+interface Props {
+  number: number;
+  title: string;
+  election: string;
+  officialSummary: string;
+  plainEnglish: string;
+  yesMeans: string;
+  noMeans: string;
+  costTaxImpact: string;
+  sourceUrl: string;
+}
+
+const {
+  number,
+  title,
+  election,
+  officialSummary,
+  plainEnglish,
+  yesMeans,
+  noMeans,
+  costTaxImpact,
+  sourceUrl,
+} = Astro.props;
+---
+
+<article class="glass-panel overflow-hidden">
+  <div class="border-b border-white/10 px-5 py-4">
+    <p class="text-xs uppercase tracking-[0.14em] text-gold-soft">{election} · Amendment {number}</p>
+    <h3 class="mt-1.5 font-display text-3xl leading-tight">{title}</h3>
+  </div>
+
+  <div class="p-5">
+    <div class="mb-4">
+      <p class="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45">Plain-English Summary</p>
+      <p class="text-sm text-white/85">{plainEnglish}</p>
+    </div>
+
+    <div class="mb-4 rounded-lg border border-white/10 bg-white/5 p-3">
+      <p class="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">Official Summary</p>
+      <p class="text-sm text-white/65">{officialSummary}</p>
+    </div>
+
+    <div class="mb-3 grid gap-2 sm:grid-cols-2">
+      <div class="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 text-sm">
+        <strong class="text-emerald-300">YES means:</strong>
+        <span class="ml-1 text-white/80">{yesMeans}</span>
+      </div>
+      <div class="rounded-lg border border-white/20 bg-white/5 p-3 text-sm">
+        <strong class="text-white/70">NO means:</strong>
+        <span class="ml-1 text-white/80">{noMeans}</span>
+      </div>
+    </div>
+
+    <div class="mb-4 rounded-lg border border-gold/25 bg-gold/8 p-3 text-sm text-white/75">
+      <strong class="text-gold-soft">Cost / Tax Impact:</strong>
+      <span class="ml-1">{costTaxImpact}</span>
+    </div>
+
+    <a
+      href={sourceUrl}
+      target="_blank"
+      rel="noopener"
+      class="inline-flex items-center gap-1 text-[11px] text-white/40 transition hover:text-gold-soft"
+    >
+      Source: Alabama Secretary of State — Statewide Ballot Measures
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+      </svg>
+    </a>
+  </div>
+</article>

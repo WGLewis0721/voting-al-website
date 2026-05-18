@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrustBanner from '../components/TrustBanner.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import counties from '../data/counties.json';
+
+const base = import.meta.env.BASE_URL;
+const sosBallotsUrl = 'https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots';
+---
+
+<Layout
+  title="County Sample Ballots — Alabama Votes"
+  description="Find your county's 2026 Alabama primary election sample ballot. Official links to the Alabama Secretary of State sample ballots for all 67 Alabama counties."
+>
+  <TrustBanner />
+  <SiteHeader currentPage="Counties" />
+
+  <main id="main">
+    <section class="relative overflow-hidden pb-10 pt-20 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,rgba(199,162,79,0.15),transparent_55%)]"></div>
+      <div class="section-wrap relative">
+        <p class="section-eyebrow">County Sample Ballots</p>
+        <h1 class="font-display text-5xl leading-[0.9] tracking-tight md:text-7xl">Find Your<br /><em class="text-gold-soft">County Ballot.</em></h1>
+        <p class="mt-4 max-w-2xl text-white/75">Select your county to access the official Alabama Secretary of State sample ballot. Sample ballots show the exact races and candidates that will appear on your local ballot on May 19, 2026.</p>
+      </div>
+    </section>
+
+    <section class="py-6">
+      <div class="section-wrap">
+        <div class="rounded-xl border border-gold/30 bg-gold/8 px-5 py-4 text-sm text-white/75">
+          <strong class="text-gold-soft">⚠ Important:</strong> Candidate lists and ballot content can vary by county and district. Always verify your final ballot using the official Alabama Secretary of State sample ballot for your county.
+        </div>
+      </div>
+    </section>
+
+    <!-- County Selector -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">Sample Ballot Finder</p>
+        <h2 class="section-title">Select your county.</h2>
+
+        <div class="glass-panel mt-6 p-5 md:p-6">
+          <div class="grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
+            <div>
+              <label for="countySelect" class="mb-2 block text-sm font-medium text-white/80">Your county</label>
+              <select id="countySelect" class="w-full rounded-lg border border-white/20 bg-black/60 px-3 py-3 text-base">
+                <option value="">— Choose your county —</option>
+                {counties.map((county) => <option value={county}>{county} County</option>)}
+              </select>
+            </div>
+            <a
+              id="ballotLinkBtn"
+              href={sosBallotsUrl}
+              target="_blank"
+              rel="noopener"
+              class="btn gold justify-center py-3 text-sm"
+            >
+              Open Official Sample Ballot
+            </a>
+          </div>
+
+          <div id="ballotInfo" class="mt-4 hidden rounded-lg border border-white/10 bg-white/5 p-4">
+            <p class="text-sm text-white/60">
+              <span class="text-white/80">Use official Alabama Secretary of State sample ballot for your county.</span>
+              Sample ballots are available in Democratic and Republican primary versions. Review both if you are undecided which primary to vote in.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- All 67 Counties Grid -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">All 67 Alabama Counties</p>
+        <h2 class="section-title">Every county. Official ballots.</h2>
+        <p class="section-deck">Click any county to go directly to the Alabama Secretary of State sample ballot page. Sample ballots include county-specific races that may not appear on this site.</p>
+
+        <div class="mt-6 grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {counties.map((county) => (
+            <a
+              href={`${sosBallotsUrl}?county=${encodeURIComponent(county)}`}
+              target="_blank"
+              rel="noopener"
+              class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white/75 transition hover:border-gold/50 hover:bg-gold/8 hover:text-white"
+            >
+              <span>{county} County</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-gold-soft/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          ))}
+        </div>
+
+        <p class="mt-4 text-xs text-white/45">
+          67 counties listed. All links open the official Alabama Secretary of State 2026 primary sample ballot page.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <div class="glass-panel p-5">
+          <p class="section-eyebrow">About Sample Ballots</p>
+          <div class="mt-4 grid gap-4 md:grid-cols-2 text-sm text-white/70">
+            <div>
+              <h3 class="font-semibold text-white">What is a sample ballot?</h3>
+              <p class="mt-1">A sample ballot shows you the exact races, candidates, and questions that will appear on your official ballot before you arrive at the polls. It helps you research and prepare.</p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white">Where can I find mine?</h3>
+              <p class="mt-1">The Alabama Secretary of State publishes official sample ballots for each county. Democratic and Republican versions are available separately since each party holds its own primary.</p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white">Why does it vary by county?</h3>
+              <p class="mt-1">Local races — school boards, county commissions, circuit courts, and other offices — differ by county. Your sample ballot shows what is specific to your area.</p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white">Official source</h3>
+              <a href={sosBallotsUrl} target="_blank" rel="noopener" class="mt-1 flex items-center gap-1 text-gold-soft hover:underline">
+                Alabama SOS 2026 Primary Sample Ballots
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<script is:inline>
+  const countySelect = document.getElementById('countySelect');
+  const ballotLinkBtn = document.getElementById('ballotLinkBtn');
+  const ballotInfo = document.getElementById('ballotInfo');
+  const base = 'https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots';
+
+  countySelect?.addEventListener('change', () => {
+    const county = countySelect.value;
+    if (county) {
+      ballotLinkBtn.href = `${base}?county=${encodeURIComponent(county)}`;
+      ballotLinkBtn.textContent = `Open ${county} County Sample Ballot`;
+      ballotInfo?.classList.remove('hidden');
+    } else {
+      ballotLinkBtn.href = base;
+      ballotLinkBtn.textContent = 'Open Official Sample Ballot';
+      ballotInfo?.classList.add('hidden');
+    }
+  });
+</script>
