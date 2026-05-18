@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrustBanner from '../components/TrustBanner.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import AmendmentCard from '../components/AmendmentCard.astro';
+import amendments from '../data/amendments.json';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="2026 Statewide Amendments — Alabama Votes"
+  description="Plain-English explanations of the two Alabama constitutional amendments on the May 19, 2026 primary ballot. Amendment 1: Bail Denial Expansion. Amendment 2: District Attorney Salary Protection."
+>
+  <TrustBanner />
+  <SiteHeader currentPage="Amendments" />
+
+  <main id="main">
+    <section class="relative overflow-hidden pb-10 pt-20 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,rgba(199,162,79,0.15),transparent_55%)]"></div>
+      <div class="section-wrap relative">
+        <p class="section-eyebrow">Statewide Amendments</p>
+        <h1 class="font-display text-5xl leading-[0.9] tracking-tight md:text-7xl">2026 Constitutional<br /><em class="text-gold-soft">Amendments.</em></h1>
+        <p class="mt-4 max-w-2xl text-white/75">Two amendments to the Alabama Constitution of 2022 appear on the May 19, 2026 primary ballot. Every registered Alabama voter may vote on these — you do not need to vote in a party primary to participate.</p>
+
+        <div class="mt-6 rounded-xl border border-white/15 bg-white/5 px-5 py-4">
+          <div class="grid gap-3 sm:grid-cols-3 text-sm text-white/70">
+            <div><span class="text-white/45 text-xs uppercase tracking-widest block mb-1">Election</span>May 19, 2026 Primary</div>
+            <div><span class="text-white/45 text-xs uppercase tracking-widest block mb-1">Amendments</span>2 statewide measures</div>
+            <div><span class="text-white/45 text-xs uppercase tracking-widest block mb-1">Who votes</span>All registered Alabama voters</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-6">
+      <div class="section-wrap">
+        <div class="rounded-xl border border-gold/30 bg-gold/8 px-5 py-4 text-sm text-white/75">
+          <strong class="text-gold-soft">⚠ Note:</strong> These are nonpartisan plain-English summaries for voter education purposes. This site does not endorse any position on these amendments. Always read the official ballot language before voting.
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 md:py-16">
+      <div class="section-wrap">
+        <div class="grid gap-6 md:grid-cols-2">
+          {amendments.map((a) => (
+            <AmendmentCard
+              number={a.number}
+              title={a.title}
+              election={a.election}
+              officialSummary={a.officialSummary}
+              plainEnglish={a.plainEnglish}
+              yesMeans={a.yesMeans}
+              noMeans={a.noMeans}
+              costTaxImpact={a.costTaxImpact}
+              sourceUrl={a.sourceUrl}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">How Amendments Work in Alabama</p>
+        <h2 class="section-title">What you need to know.</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          <div class="glass-panel p-5">
+            <h3 class="font-semibold">What is a constitutional amendment?</h3>
+            <p class="mt-2 text-sm text-white/70">A constitutional amendment changes the Alabama Constitution — the fundamental governing document of the state. Unlike regular laws, constitutional amendments are harder to change once passed and require voter approval.</p>
+          </div>
+          <div class="glass-panel p-5">
+            <h3 class="font-semibold">Who can vote on amendments?</h3>
+            <p class="mt-2 text-sm text-white/70">All registered Alabama voters can vote on constitutional amendments, regardless of party registration or whether they vote in a party primary. You may vote only on the amendments if you choose not to participate in a party primary.</p>
+          </div>
+          <div class="glass-panel p-5">
+            <h3 class="font-semibold">How does it pass?</h3>
+            <p class="mt-2 text-sm text-white/70">A constitutional amendment passes if it receives a majority of votes cast on that measure. If it passes, it becomes part of the Alabama Constitution. If it fails, the current constitutional text remains unchanged.</p>
+          </div>
+          <div class="glass-panel p-5">
+            <h3 class="font-semibold">Fair Ballot Commission</h3>
+            <p class="mt-2 text-sm text-white/70">The Alabama Fair Ballot Commission reviews constitutional amendments and produces plain-English summaries. Their official summaries are included with each amendment above.</p>
+            <a href="https://www.sos.alabama.gov/alabama-votes/statewide-ballot-measures" target="_blank" rel="noopener" class="mt-2 inline-flex items-center gap-1 text-sm text-gold-soft hover:underline">
+              Official ballot measures page →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <div class="glass-panel p-5">
+          <p class="section-eyebrow">Official Sources</p>
+          <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+            <li>
+              <a href="https://www.sos.alabama.gov/alabama-votes/statewide-ballot-measures" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-sm text-white/70 transition hover:text-gold-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                Alabama SOS — Statewide Ballot Measures
+              </a>
+            </li>
+            <li>
+              <a href="https://www.sos.alabama.gov/alabama-votes" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-sm text-white/70 transition hover:text-gold-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                Alabama Secretary of State — 2026 Election Information
+              </a>
+            </li>
+          </ul>
+          <p class="mt-4 text-xs text-white/45">Last updated: May 18, 2026. This site does not endorse any position on ballot measures.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>

@@ -1,0 +1,85 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = '' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const navLinks = [
+  { href: `${base}primary-2026`, label: 'Primary 2026' },
+  { href: `${base}candidates`, label: 'Candidates' },
+  { href: `${base}amendments`, label: 'Amendments' },
+  { href: `${base}counties`, label: 'Counties' },
+  { href: `${base}voter-guide`, label: 'Voter Guide' },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-lg">
+  <div class="section-wrap flex min-h-[68px] items-center justify-between gap-4">
+    <a href={base} class="font-display text-2xl leading-none md:text-3xl">
+      Alabama Votes
+      <span class="block font-sans text-[10px] uppercase tracking-[0.18em] text-gold-soft">2026 Voter Guide</span>
+    </a>
+
+    <nav class="hidden flex-wrap gap-1 text-xs uppercase tracking-[0.1em] text-white/65 md:flex" aria-label="Main navigation">
+      {navLinks.map((link) => (
+        <a
+          class={`rounded-full px-3 py-2 transition hover:bg-white/10 hover:text-white ${currentPage === link.label ? 'bg-white/10 text-white' : ''}`}
+          href={link.href}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <button
+        id="mobileMenuBtn"
+        type="button"
+        class="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:bg-white/10 md:hidden"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menuIconClose" xmlns="http://www.w3.org/2000/svg" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn gold text-[11px]">Check Registration</a>
+    </div>
+  </div>
+
+  <div
+    id="mobileMenu"
+    class="hidden border-t border-white/10 bg-black/90 px-4 pb-4 md:hidden"
+  >
+    <nav class="flex flex-col gap-1 pt-3" aria-label="Mobile navigation">
+      {navLinks.map((link) => (
+        <a
+          class={`rounded-lg px-3 py-2.5 text-sm uppercase tracking-[0.1em] transition hover:bg-white/10 hover:text-white ${currentPage === link.label ? 'bg-white/10 text-white' : 'text-white/70'}`}
+          href={link.href}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  const btn = document.getElementById('mobileMenuBtn');
+  const menu = document.getElementById('mobileMenu');
+  const iconOpen = document.getElementById('menuIconOpen');
+  const iconClose = document.getElementById('menuIconClose');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(isOpen));
+    iconOpen.classList.toggle('hidden', isOpen);
+    iconClose.classList.toggle('hidden', !isOpen);
+  });
+</script>

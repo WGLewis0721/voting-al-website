@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrustBanner from '../components/TrustBanner.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import dates from '../data/dates.json';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="Alabama 2026 Primary Election — Alabama Votes"
+  description="Official dates, election overview, and voter resources for the Alabama 2026 primary election on May 19, 2026."
+>
+  <TrustBanner />
+  <SiteHeader currentPage="Primary 2026" />
+
+  <main id="main">
+    <section class="relative overflow-hidden pb-16 pt-20 md:pb-20 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_60%_10%,rgba(199,162,79,0.2),transparent_55%)]"></div>
+      <div class="section-wrap relative">
+        <p class="section-eyebrow">Alabama 2026 Primary Election</p>
+        <h1 class="font-display text-5xl leading-[0.9] tracking-tight md:text-7xl">May 19, 2026<br /><em class="text-gold-soft">Primary Election</em></h1>
+        <p class="mt-4 max-w-2xl text-white/75">Alabama voters will choose Democratic and Republican nominees for statewide offices, U.S. Senate, and all seven U.S. House districts. All registered voters may also vote on two constitutional amendments.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={`${base}candidates`} class="btn gold">View All Candidates</a>
+          <a href={`${base}amendments`} class="btn ghost">Statewide Amendments</a>
+          <a href={`${base}counties`} class="btn ghost">County Sample Ballots</a>
+        </div>
+
+        <div class="glass-panel mt-8 grid grid-cols-2 gap-2 p-3 md:grid-cols-4">
+          {dates.map((d) => (
+            <article class="rounded-xl border border-white/10 bg-black/40 p-3">
+              <p class="text-[10px] uppercase tracking-[0.14em] text-white/60">{d.label}</p>
+              <p class="mt-1 text-sm font-semibold">{d.date}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-16">
+      <div class="section-wrap">
+        <div class="rounded-xl border border-gold/30 bg-gold/8 px-5 py-4 text-sm text-white/75">
+          <strong class="text-gold-soft">⚠ Important:</strong> Candidate lists and ballot content can vary by county and district. Always verify your final ballot using the official Alabama Secretary of State sample ballot for your county.
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-16">
+      <div class="section-wrap">
+        <p class="section-eyebrow">Election Overview</p>
+        <h2 class="section-title">What's on the ballot.</h2>
+        <div class="mt-8 grid gap-4 md:grid-cols-2">
+          <div class="glass-panel p-5">
+            <h3 class="font-display text-2xl">Democratic Primary</h3>
+            <p class="mt-2 text-sm text-white/75">Democratic voters choose nominees for Governor, Lieutenant Governor, U.S. Senate, Attorney General, Secretary of State, Treasurer, Auditor, Commissioner of Agriculture & Industries, Public Service Commission, and U.S. House districts.</p>
+            <a href={`${base}candidates`} class="mt-3 inline-flex items-center gap-1 text-sm text-gold-soft hover:underline">
+              Democratic candidates →
+            </a>
+          </div>
+          <div class="glass-panel p-5">
+            <h3 class="font-display text-2xl">Republican Primary</h3>
+            <p class="mt-2 text-sm text-white/75">Republican voters choose nominees for the same statewide and federal offices. The Republican primary includes significantly more contested races and candidates across all offices.</p>
+            <a href={`${base}candidates`} class="mt-3 inline-flex items-center gap-1 text-sm text-gold-soft hover:underline">
+              Republican candidates →
+            </a>
+          </div>
+          <div class="glass-panel p-5">
+            <h3 class="font-display text-2xl">Constitutional Amendments</h3>
+            <p class="mt-2 text-sm text-white/75">Two amendments to the Alabama Constitution of 2022 appear on the May 19 ballot. All registered voters may vote on these regardless of party primary participation.</p>
+            <ul class="mt-3 list-disc pl-5 text-sm text-white/65">
+              <li>Amendment 1 — Bail Denial Expansion</li>
+              <li>Amendment 2 — District Attorney Salary Protection</li>
+            </ul>
+            <a href={`${base}amendments`} class="mt-3 inline-flex items-center gap-1 text-sm text-gold-soft hover:underline">
+              Amendment details →
+            </a>
+          </div>
+          <div class="glass-panel p-5">
+            <h3 class="font-display text-2xl">Primary Runoff</h3>
+            <p class="mt-2 text-sm text-white/75">If no candidate in a multi-candidate primary race receives a majority of votes, the top two candidates advance to a runoff election on June 16, 2026.</p>
+            <p class="mt-2 text-sm text-white/55">The November 3, 2026 general election will follow.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-16">
+      <div class="section-wrap">
+        <p class="section-eyebrow">Offices on the Primary Ballot</p>
+        <h2 class="section-title">Statewide and federal races.</h2>
+        <div class="mt-6 grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            'U.S. Senate',
+            'Governor',
+            'Lieutenant Governor',
+            'Attorney General',
+            'Secretary of State',
+            'State Treasurer',
+            'State Auditor',
+            'Commissioner of Agriculture & Industries',
+            'Public Service Commission, Place 1',
+            'Public Service Commission, Place 2',
+            'U.S. House — District 1',
+            'U.S. House — District 2',
+            'U.S. House — District 3',
+            'U.S. House — District 4',
+            'U.S. House — District 5',
+            'U.S. House — District 6',
+            'U.S. House — District 7',
+          ].map((office) => (
+            <div class="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white/75">
+              <span class="text-gold-soft">—</span>
+              {office}
+            </div>
+          ))}
+        </div>
+        <div class="mt-4">
+          <a href={`${base}candidates`} class="btn gold">See All Candidates by Race</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-16">
+      <div class="section-wrap">
+        <p class="section-eyebrow">Official Resources</p>
+        <h2 class="section-title">Verify with primary sources.</h2>
+        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <a href="https://www.sos.alabama.gov/alabama-votes" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50 hover:text-gold-soft">
+            <p class="font-semibold">Alabama Secretary of State</p>
+            <p class="mt-1 text-sm text-white/60">2026 Election Information</p>
+            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov →</p>
+          </a>
+          <a href="https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50 hover:text-gold-soft">
+            <p class="font-semibold">2026 Primary Sample Ballots</p>
+            <p class="mt-1 text-sm text-white/60">Official county-by-county ballots</p>
+            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov →</p>
+          </a>
+          <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50 hover:text-gold-soft">
+            <p class="font-semibold">VoterView</p>
+            <p class="mt-1 text-sm text-white/60">Check registration & polling place</p>
+            <p class="mt-2 text-xs text-gold-soft/60">alabamavotes.gov →</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>

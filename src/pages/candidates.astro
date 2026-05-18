@@ -1,0 +1,222 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrustBanner from '../components/TrustBanner.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import RaceSection from '../components/RaceSection.astro';
+import candidates from '../data/candidates.json';
+
+type Candidate = {
+  id: string;
+  name: string;
+  party: string;
+  office: string;
+  district: string | null;
+  sourceUrl: string;
+  notes: string;
+};
+
+const all = candidates as Candidate[];
+
+const getDems = (office: string, district?: string) =>
+  all.filter((c) => c.party === 'Democratic' && c.office === office && (district ? c.district === district : c.district === null));
+
+const getReps = (office: string, district?: string) =>
+  all.filter((c) => c.party === 'Republican' && c.office === office && (district ? c.district === district : c.district === null));
+
+const stateRaces = [
+  'U.S. Senate',
+  'Governor',
+  'Lieutenant Governor',
+  'Attorney General',
+  'Secretary of State',
+  'State Treasurer',
+  'State Auditor',
+  'Commissioner of Agriculture & Industries',
+  'Public Service Commission, Place 1',
+  'Public Service Commission, Place 2',
+];
+
+const houseDistricts = ['1', '2', '3', '4', '5', '6', '7'];
+
+const totalDem = all.filter((c) => c.party === 'Democratic').length;
+const totalRep = all.filter((c) => c.party === 'Republican').length;
+---
+
+<Layout
+  title="2026 Primary Candidates — Alabama Votes"
+  description="Complete list of 2026 Alabama primary candidates organized by race, party, and district. Democratic and Republican candidates for all statewide and federal offices."
+>
+  <TrustBanner />
+  <SiteHeader currentPage="Candidates" />
+
+  <main id="main">
+    <section class="relative overflow-hidden pb-10 pt-20 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_0%,rgba(199,162,79,0.15),transparent_50%)]"></div>
+      <div class="section-wrap relative">
+        <p class="section-eyebrow">2026 Primary Candidates</p>
+        <h1 class="font-display text-5xl leading-[0.9] tracking-tight md:text-7xl">Who's Running<br /><em class="text-gold-soft">in Alabama.</em></h1>
+        <p class="mt-4 max-w-2xl text-white/75">All qualified candidates for the May 19, 2026 Democratic and Republican primary elections, organized by office and party. Sources: Alabama Democratic Party and Alabama Republican Party qualified candidate lists.</p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <span class="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/70">{totalDem} Democratic</span>
+          <span class="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/70">{totalRep} Republican</span>
+          <span class="rounded-full border border-gold/30 bg-gold/8 px-3 py-1.5 text-sm text-gold-soft">{totalDem + totalRep} Total Candidates</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-6">
+      <div class="section-wrap">
+        <div class="rounded-xl border border-gold/30 bg-gold/8 px-5 py-4 text-sm text-white/75">
+          <strong class="text-gold-soft">⚠ Important:</strong> Candidate lists and ballot content can vary by county and district. Always verify your final ballot using the official Alabama Secretary of State sample ballot for your county.
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter bar -->
+    <section class="py-4">
+      <div class="section-wrap">
+        <div class="sticky top-[67px] z-40 rounded-2xl border border-white/10 bg-black/75 p-4 backdrop-blur-lg">
+          <div class="grid gap-3 md:grid-cols-[1fr_1fr_auto]">
+            <label class="text-sm text-white/70">
+              Search candidates
+              <input
+                id="candidateSearch"
+                type="search"
+                placeholder="Name, office, party..."
+                class="mt-1 w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm"
+              />
+            </label>
+            <label class="text-sm text-white/70">
+              Filter by party
+              <select id="partyFilter" class="mt-1 w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm">
+                <option value="both">Both parties</option>
+                <option value="Democratic">Democratic only</option>
+                <option value="Republican">Republican only</option>
+              </select>
+            </label>
+            <button id="clearFilters" type="button" class="btn ghost h-fit self-end">Clear</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statewide & Federal Races -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">Statewide & Federal Offices</p>
+        <h2 class="section-title">Statewide Races.</h2>
+        <div id="racesContainer" class="mt-6 grid gap-4">
+          {stateRaces.map((office) => {
+            const dems = getDems(office);
+            const reps = getReps(office);
+            const uncontested = (dems.length + reps.length) === 1;
+            return (
+              <div class="race-block" data-office={office.toLowerCase()}>
+                <RaceSection
+                  office={office}
+                  democraticCandidates={dems}
+                  republicanCandidates={reps}
+                  uncontested={uncontested}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- U.S. House Races -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">U.S. House of Representatives</p>
+        <h2 class="section-title">Congressional Districts.</h2>
+        <p class="section-deck">Alabama has seven U.S. House districts. Each district holds separate Democratic and Republican primaries.</p>
+        <div class="mt-6 grid gap-4">
+          {houseDistricts.map((district) => {
+            const dems = getDems('U.S. House', district);
+            const reps = getReps('U.S. House', district);
+            const uncontested = (dems.length + reps.length) === 1;
+            return (
+              <div class="race-block" data-office={`u.s. house district ${district}`}>
+                <RaceSection
+                  office="U.S. House of Representatives"
+                  district={district}
+                  democraticCandidates={dems}
+                  republicanCandidates={reps}
+                  uncontested={uncontested}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <div class="glass-panel p-5">
+          <p class="section-eyebrow">Official Sources</p>
+          <p class="mt-2 text-sm text-white/70">Candidate information sourced from:</p>
+          <ul class="mt-3 grid gap-2 sm:grid-cols-2">
+            <li>
+              <a href="https://www.alabamademocrats.com/2026-qualified-candidates" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-sm text-white/70 transition hover:text-gold-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                Alabama Democratic Party — 2026 Qualified Candidates
+              </a>
+            </li>
+            <li>
+              <a href="https://algop.org/2026-qualified-candidates" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-sm text-white/70 transition hover:text-gold-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                Alabama Republican Party — 2026 Qualified Candidates
+              </a>
+            </li>
+            <li>
+              <a href="https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-sm text-white/70 transition hover:text-gold-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                Alabama SOS — 2026 Primary Sample Ballots
+              </a>
+            </li>
+          </ul>
+          <p class="mt-4 text-xs text-white/45">Last updated: May 18, 2026. Verify your specific ballot with the official Alabama Secretary of State sample ballot for your county.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<script is:inline>
+  const searchInput = document.getElementById('candidateSearch');
+  const partyFilter = document.getElementById('partyFilter');
+  const clearFilters = document.getElementById('clearFilters');
+  const raceBlocks = [...document.querySelectorAll('.race-block')];
+
+  const applyFilters = () => {
+    const q = (searchInput?.value ?? '').trim().toLowerCase();
+    const party = partyFilter?.value ?? 'both';
+
+    raceBlocks.forEach((block) => {
+      const text = block.textContent?.toLowerCase() ?? '';
+      const matchSearch = !q || text.includes(q);
+      block.hidden = !matchSearch;
+    });
+
+    const demCols = [...document.querySelectorAll('[class*="border-r"] .space-y-2 li')];
+    const repCols = [...document.querySelectorAll(':not([class*="border-r"]) .space-y-2 li')];
+
+    if (party === 'both') {
+      [...demCols, ...repCols].forEach((li) => { (li as HTMLElement).style.display = ''; });
+    }
+  };
+
+  searchInput?.addEventListener('input', applyFilters);
+  partyFilter?.addEventListener('change', applyFilters);
+  clearFilters?.addEventListener('click', () => {
+    if (searchInput) (searchInput as HTMLInputElement).value = '';
+    if (partyFilter) (partyFilter as HTMLSelectElement).value = 'both';
+    applyFilters();
+  });
+</script>

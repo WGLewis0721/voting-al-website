@@ -1,20 +1,26 @@
 [
   {
     "id": "a1",
-    "title": "Amendment 1: Expanded Judicial Authority on Bail",
+    "number": 1,
+    "title": "Bail Denial Expansion",
     "election": "May 19, 2026 Primary",
-    "plainEnglish": "Adds additional violent-crime categories where judges may deny bail before trial.",
-    "yesMeans": "Broader pre-trial detention authority for judges in specified cases.",
-    "noMeans": "Current bail framework remains unchanged.",
-    "whyItMatters": "This can affect public safety policy, jail capacity, and due-process debates in local communities."
+    "officialSummary": "Proposing an amendment to the Constitution of Alabama of 2022, relating to bail, to allow courts to deny bail for a defendant charged with solicitation, attempt, or conspiracy to commit murder, or the offense of shooting or discharging a firearm, explosive, or other weapon into an occupied dwelling, building, vehicle, aircraft, railroad car, or watercraft.",
+    "plainEnglish": "This amendment would allow judges to deny bail for additional serious offenses. It adds solicitation, attempt, or conspiracy to commit murder, and shooting or discharging a firearm, explosive, or other weapon into an occupied dwelling, building, vehicle, aircraft, train car, or watercraft.",
+    "yesMeans": "Changes the Alabama Constitution.",
+    "noMeans": "Leaves the Alabama Constitution unchanged.",
+    "costTaxImpact": "No costs or taxes associated.",
+    "sourceUrl": "https://www.sos.alabama.gov/alabama-votes/statewide-ballot-measures"
   },
   {
     "id": "a2",
-    "title": "Amendment 2: District Attorney Salary Protection",
+    "number": 2,
+    "title": "District Attorney Salary Protection",
     "election": "May 19, 2026 Primary",
-    "plainEnglish": "Prevents lowering a district attorney's salary during the elected term.",
-    "yesMeans": "Compensation is protected mid-term.",
-    "noMeans": "Legislature keeps existing flexibility.",
-    "whyItMatters": "This shapes independence versus accountability in prosecutorial leadership."
+    "officialSummary": "Proposing an amendment to the Constitution of Alabama of 2022, relating to the compensation of district attorneys, to provide that the salary of a district attorney may not be diminished during the term for which the district attorney was elected or appointed.",
+    "plainEnglish": "This amendment would prevent a district attorney's salary from being reduced during the term they were elected or appointed to serve.",
+    "yesMeans": "Changes the Alabama Constitution.",
+    "noMeans": "Leaves the Alabama Constitution unchanged.",
+    "costTaxImpact": "No costs or taxes associated.",
+    "sourceUrl": "https://www.sos.alabama.gov/alabama-votes/statewide-ballot-measures"
   }
 ]

@@ -1,0 +1,195 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrustBanner from '../components/TrustBanner.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import dates from '../data/dates.json';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="Voter Guide — Alabama Votes 2026"
+  description="Your complete nonpartisan voter guide for the 2026 Alabama primary election. Registration, polling, absentee voting, what to bring, and official resources."
+>
+  <TrustBanner />
+  <SiteHeader currentPage="Voter Guide" />
+
+  <main id="main">
+    <section class="relative overflow-hidden pb-10 pt-20 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_60%_0%,rgba(199,162,79,0.15),transparent_55%)]"></div>
+      <div class="section-wrap relative">
+        <p class="section-eyebrow">2026 Voter Guide</p>
+        <h1 class="font-display text-5xl leading-[0.9] tracking-tight md:text-7xl">Everything you<br /><em class="text-gold-soft">need to vote.</em></h1>
+        <p class="mt-4 max-w-2xl text-white/75">A nonpartisan guide to participating in the May 19, 2026 Alabama primary election. Registration, polling places, absentee voting, what to expect at the polls, and official resources.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn gold">Check My Registration</a>
+          <a href={`${base}counties`} class="btn ghost">Find My Sample Ballot</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Dates -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">Key Dates</p>
+        <h2 class="section-title">Mark your calendar.</h2>
+        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {dates.map((d) => (
+            <div class="glass-panel p-4">
+              <p class="text-[11px] uppercase tracking-[0.14em] text-white/50">{d.label}</p>
+              <p class="mt-1.5 font-display text-2xl">{d.date}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">Voter Registration</p>
+        <h2 class="section-title">Are you registered?</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          <div class="glass-panel p-5">
+            <h3 class="font-semibold text-white">Check your registration</h3>
+            <p class="mt-2 text-sm text-white/70">Use VoterView to confirm your registration status, find your polling place, and review your registration details before Election Day.</p>
+            <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn gold mt-3 inline-flex">Check at VoterView</a>
+          </div>
+          <div class="glass-panel p-5">
+            <h3 class="font-semibold text-white">Registration deadline</h3>
+            <p class="mt-2 text-sm text-white/70">The registration deadline for the May 19, 2026 primary was <strong class="text-white">May 4, 2026</strong>. If you missed this deadline, you will not be able to vote in the primary but may still register for future elections.</p>
+            <a href="https://www.sos.alabama.gov/alabama-votes/voter/register-vote" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-1 text-sm text-gold-soft hover:underline">
+              Registration information →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Vote -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">How to Vote</p>
+        <h2 class="section-title">Your voting options.</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          <div class="glass-panel p-5">
+            <p class="text-3xl">🏛️</p>
+            <h3 class="mt-3 font-semibold">Vote in person</h3>
+            <p class="mt-2 text-sm text-white/70">On May 19, 2026, visit your designated polling place. Bring a valid photo ID. Polls are open 7 a.m. to 7 p.m. local time. Check VoterView for your polling location.</p>
+            <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-1 text-sm text-gold-soft hover:underline">Find polling place →</a>
+          </div>
+          <div class="glass-panel p-5">
+            <p class="text-3xl">✉️</p>
+            <h3 class="mt-3 font-semibold">Absentee voting</h3>
+            <p class="mt-2 text-sm text-white/70">Alabama allows absentee voting for qualifying reasons. You must apply for an absentee ballot before the deadline. Contact the Alabama Secretary of State for current absentee deadlines and procedures.</p>
+            <a href="https://www.sos.alabama.gov/alabama-votes/voter/absentee-voting" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-1 text-sm text-gold-soft hover:underline">Absentee information →</a>
+          </div>
+          <div class="glass-panel p-5">
+            <p class="text-3xl">📜</p>
+            <h3 class="mt-3 font-semibold">Sample ballot</h3>
+            <p class="mt-2 text-sm text-white/70">Review your official sample ballot before you vote. Sample ballots show every race and question on your ballot, including local races specific to your county.</p>
+            <a href={`${base}counties`} class="mt-3 inline-flex items-center gap-1 text-sm text-gold-soft hover:underline">Find your sample ballot →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What to Bring -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">At the Polls</p>
+        <h2 class="section-title">What to bring and expect.</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          <div class="glass-panel p-5">
+            <h3 class="font-semibold text-white">Photo ID required</h3>
+            <p class="mt-2 text-sm text-white/70">Alabama requires a valid photo ID to vote. Acceptable forms include:</p>
+            <ul class="mt-3 list-disc pl-5 text-sm text-white/65 space-y-1">
+              <li>Alabama driver's license or non-driver ID</li>
+              <li>U.S. passport</li>
+              <li>U.S. military ID</li>
+              <li>Alabama voter ID card (free from the SOS office)</li>
+              <li>Any valid government-issued photo ID</li>
+            </ul>
+          </div>
+          <div class="glass-panel p-5">
+            <h3 class="font-semibold text-white">At the polling place</h3>
+            <ul class="mt-2 list-disc pl-5 text-sm text-white/65 space-y-1">
+              <li>Tell a poll worker you want to vote in the Democratic or Republican primary</li>
+              <li>You may only vote in one party's primary</li>
+              <li>All registered voters may vote on constitutional amendments regardless of party</li>
+              <li>Polls are open 7 a.m. – 7 p.m.</li>
+              <li>If you are in line when polls close at 7 p.m., you have the right to vote</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Primary Runoff Info -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">Runoff Election</p>
+        <h2 class="section-title">If no one wins the majority.</h2>
+        <div class="glass-panel mt-6 p-5">
+          <p class="text-sm text-white/75">In any primary race with three or more candidates, if no candidate receives a majority (more than 50%) of the vote, the two candidates with the most votes advance to a <strong class="text-white">runoff election on June 16, 2026.</strong></p>
+          <p class="mt-3 text-sm text-white/65">Runoff elections use the same polling places. Voters who participated in the original primary may vote in the runoff for the same party. Check back here and at the Alabama Secretary of State website for runoff election details after May 19.</p>
+          <a href="https://www.sos.alabama.gov/alabama-votes" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-1 text-sm text-gold-soft hover:underline">
+            Alabama SOS elections page →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Official Resources -->
+    <section class="py-10 md:py-14">
+      <div class="section-wrap">
+        <p class="section-eyebrow">Official Resources</p>
+        <h2 class="section-title">Go to the source.</h2>
+        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <a href="https://www.sos.alabama.gov/alabama-votes" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50">
+            <p class="font-semibold">Alabama Secretary of State</p>
+            <p class="mt-1 text-sm text-white/60">2026 Election Information</p>
+            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov →</p>
+          </a>
+          <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50">
+            <p class="font-semibold">VoterView</p>
+            <p class="mt-1 text-sm text-white/60">Registration & polling place lookup</p>
+            <p class="mt-2 text-xs text-gold-soft/60">alabamavotes.gov →</p>
+          </a>
+          <a href="https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50">
+            <p class="font-semibold">2026 Sample Ballots</p>
+            <p class="mt-1 text-sm text-white/60">County-by-county primary ballots</p>
+            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov →</p>
+          </a>
+          <a href="https://www.sos.alabama.gov/alabama-votes/voter/absentee-voting" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50">
+            <p class="font-semibold">Absentee Voting</p>
+            <p class="mt-1 text-sm text-white/60">Apply, deadlines, and instructions</p>
+            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov →</p>
+          </a>
+          <a href="https://www.sos.alabama.gov/alabama-votes/voter/register-vote" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50">
+            <p class="font-semibold">Voter Registration</p>
+            <p class="mt-1 text-sm text-white/60">Register or update your registration</p>
+            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov →</p>
+          </a>
+          <a href="https://www.sos.alabama.gov/alabama-votes/statewide-ballot-measures" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50">
+            <p class="font-semibold">Statewide Ballot Measures</p>
+            <p class="mt-1 text-sm text-white/60">Amendment 1 &amp; 2 official info</p>
+            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov →</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-6">
+      <div class="section-wrap">
+        <div class="rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-sm text-white/60">
+          This voter guide is for nonpartisan educational purposes. It does not endorse any candidate, party, or ballot position. Always verify your registration and ballot information with official Alabama state sources.
+          <span class="block mt-1">Last updated: May 18, 2026.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
