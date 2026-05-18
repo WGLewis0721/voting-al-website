@@ -1,0 +1,76 @@
+<section id="quiz" class="py-16 md:py-20">
+  <div class="section-wrap">
+    <p class="section-eyebrow">Candidate Alignment Quiz</p>
+    <h2 class="section-title">Fast, engaging, and practical.</h2>
+    <p class="section-deck">This tool is nonpartisan and informational. It helps you identify likely value alignment, not endorsements.</p>
+
+    <div class="mt-8 grid gap-4 lg:grid-cols-2">
+      <form id="quizForm" class="glass-panel p-5">
+        <fieldset class="mb-4 border-b border-white/10 pb-4">
+          <legend class="mb-2 font-semibold">1) Which policy priority is closest to yours?</legend>
+          <label class="mb-1 block text-sm"><input type="radio" name="q1" value="conservative" required /> Border enforcement and stricter controls</label>
+          <label class="mb-1 block text-sm"><input type="radio" name="q1" value="progressive" /> Expand healthcare and education investment</label>
+          <label class="block text-sm"><input type="radio" name="q1" value="mixed" /> Mix of restraint and targeted investment</label>
+        </fieldset>
+        <fieldset class="mb-4 border-b border-white/10 pb-4">
+          <legend class="mb-2 font-semibold">2) On spending, where do you lean?</legend>
+          <label class="mb-1 block text-sm"><input type="radio" name="q2" value="conservative" required /> Lower spending and tax relief</label>
+          <label class="mb-1 block text-sm"><input type="radio" name="q2" value="progressive" /> More public investment in services</label>
+          <label class="block text-sm"><input type="radio" name="q2" value="mixed" /> Evidence-based spending tradeoffs</label>
+        </fieldset>
+        <fieldset>
+          <legend class="mb-2 font-semibold">3) Leadership style you trust most?</legend>
+          <label class="mb-1 block text-sm"><input type="radio" name="q3" value="conservative" required /> Ideological consistency</label>
+          <label class="mb-1 block text-sm"><input type="radio" name="q3" value="progressive" /> Reform coalition building</label>
+          <label class="block text-sm"><input type="radio" name="q3" value="mixed" /> Pragmatic compromise</label>
+        </fieldset>
+        <button type="submit" class="btn gold mt-5">See My Alignment</button>
+      </form>
+
+      <aside id="quizResult" class="glass-panel p-5" aria-live="polite">
+        <h3 class="font-display text-4xl leading-none">Your match preview</h3>
+        <p class="mt-3 text-white/75">Answer all three questions to see your alignment profile and next-step guidance.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  const quizForm = document.getElementById('quizForm');
+  const quizResult = document.getElementById('quizResult');
+
+  quizForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(quizForm);
+    const tally = { conservative: 0, progressive: 0, mixed: 0 };
+    const answers = ['q1', 'q2', 'q3'].map((k) => data.get(k));
+
+    if (answers.some((a) => a === null || !(a in tally))) {
+      quizResult.innerHTML = '<h3 class="font-display text-4xl leading-none">Almost there</h3><p class="mt-3 text-white/75">Please answer all three questions.</p>';
+      return;
+    }
+
+    answers.forEach((answer) => { tally[answer]++; });
+
+    let winner = 'mixed';
+    if (tally.conservative > tally.progressive && tally.conservative >= tally.mixed) winner = 'conservative';
+    if (tally.progressive > tally.conservative && tally.progressive >= tally.mixed) winner = 'progressive';
+
+    const output = {
+      conservative: {
+        title: 'Conservative-leaning alignment',
+        body: 'You may align with lower-tax, stricter-enforcement, and conservative judicial priorities.'
+      },
+      progressive: {
+        title: 'Reform-oriented alignment',
+        body: 'You may align with healthcare expansion, education investment, and institutional reform themes.'
+      },
+      mixed: {
+        title: 'Pragmatic mixed alignment',
+        body: 'You appear to weigh tradeoffs over rigid ideology. Compare candidates issue by issue.'
+      }
+    };
+
+    quizResult.innerHTML = `<h3 class="font-display text-4xl leading-none">${output[winner].title}</h3><p class="mt-3 text-white/75">${output[winner].body}</p><p class="mt-3 text-sm text-gold-soft">Tip: use Candidate Explorer filters and side-by-side compare before finalizing your vote.</p>`;
+  });
+</script>

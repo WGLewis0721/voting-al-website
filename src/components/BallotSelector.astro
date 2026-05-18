@@ -1,0 +1,33 @@
+---
+import counties from '../data/counties.json';
+---
+
+<section id="ballot" class="py-16 md:py-20">
+  <div class="section-wrap">
+    <p class="section-eyebrow">My Ballot</p>
+    <h2 class="section-title">Find your county sample ballot.</h2>
+    <p class="section-deck">Select a county and jump to official Alabama Secretary of State sample ballot resources.</p>
+    <div class="glass-panel mt-8 grid gap-3 p-4 md:grid-cols-[1.4fr_auto] md:items-end">
+      <div>
+        <label for="county" class="mb-2 block text-sm text-white/80">Select county</label>
+        <select id="county" class="w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm">
+          <option value="">Choose your county...</option>
+          {counties.map((county) => <option value={county}>{county}</option>)}
+        </select>
+      </div>
+      <a id="ballotLink" href="https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots" target="_blank" rel="noopener" class="btn gold justify-center">Open Sample Ballots</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const county = document.getElementById('county');
+  const ballotLink = document.getElementById('ballotLink');
+
+  county?.addEventListener('change', () => {
+    const value = county.value;
+    const base = 'https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots';
+    ballotLink.href = value ? `${base}?county=${encodeURIComponent(value)}` : base;
+    ballotLink.textContent = value ? `Open ${value} Sample Ballot` : 'Open Sample Ballots';
+  });
+</script>
