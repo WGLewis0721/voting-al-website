@@ -170,7 +170,10 @@ import candidates from '../data/candidates.json';
 
     const details = document.createElement('div');
     details.className = 'mt-3 text-sm text-white/80';
-    details.textContent = card.querySelector('.candidate-expand > div')?.textContent?.trim() ?? '';
+    const detailsSource = card.querySelector('.candidate-expand > div');
+    if (detailsSource) {
+      details.append(detailsSource.cloneNode(true));
+    }
 
     article.append(heading, meta, details);
     return article;
