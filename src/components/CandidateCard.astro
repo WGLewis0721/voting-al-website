@@ -17,8 +17,8 @@ const partyClass = candidate.party === 'Democrat' ? 'bg-gradient-to-r from-blue-
 <article class="candidate glass-panel overflow-hidden" data-issues={candidate.issues.join(',')} data-race={candidate.race.toLowerCase()} data-party={candidate.party.toLowerCase()}>
   <div class:list={['h-1.5', partyClass]}></div>
   <div class="p-4">
-    <p class="text-[11px] uppercase tracking-[0.16em] text-white/55">{candidate.race} · {candidate.party}</p>
-    <h3 class="mt-1 font-display text-3xl leading-none">{candidate.name}</h3>
+    <p class="meta text-[11px] uppercase tracking-[0.16em] text-white/55">{candidate.race} · {candidate.party}</p>
+    <h3 class="name mt-1 font-display text-3xl leading-none">{candidate.name}</h3>
     <p class="mt-2 text-sm text-white/70">{candidate.tagline}</p>
     <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-white/75">
       {candidate.positions.map((p) => <li>{p}</li>)}
