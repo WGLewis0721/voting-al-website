@@ -24,7 +24,7 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
     <h2 class="section-title">2026 Primary Candidates.</h2>
     <p class="section-deck">Filter by party or office. For the full race-by-race breakdown, visit the <a href={`${base}candidates`} class="text-gold-soft underline hover:text-gold">Candidates page</a>.</p>
 
-    <div class="sticky top-[67px] z-40 mt-8 rounded-2xl border border-white/10 bg-black/70 p-4 backdrop-blur-lg">
+    <div class="z-40 mt-8 rounded-2xl border border-white/10 bg-black/70 p-4 backdrop-blur-lg md:sticky md:top-[67px]">
       <div class="grid gap-3 md:grid-cols-[1fr_1fr_1fr_auto]">
         <label class="text-sm text-white/70">Search
           <input id="searchInput" type="search" placeholder="Search candidate..." class="mt-1 w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm" />
