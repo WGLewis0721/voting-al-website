@@ -183,7 +183,7 @@
   <body>
     <header class="wrap">
       <p class="eyebrow">Primary 2026 · Alabama Votes</p>
-      <h1>🗺️ Interactive Alabama Voting Map – Districts &amp; Communities</h1>
+      <h1><span aria-hidden="true">🗺️ </span>Interactive Alabama Voting Map – Districts &amp; Communities</h1>
       <p class="intro">
         Explore major Alabama cities, counties, and congressional districts to better understand your 2026 election context.
         Use the map layers to toggle city markers, county boundaries, and district boundaries.
@@ -334,9 +334,46 @@
       }
 
       function parseGeoJsonFromTypeScript(text) {
-        const match = text.match(/const map: GeoJSON\\.FeatureCollection = (\\{[\\s\\S]*\\});\\s*export default map;/);
-        if (!match) throw new Error('District source format changed');
-        return JSON.parse(match[1]);
+        const marker = 'const map: GeoJSON.FeatureCollection = ';
+        const markerIndex = text.indexOf(marker);
+        if (markerIndex < 0) throw new Error('District source marker not found');
+
+        const start = text.indexOf('{', markerIndex + marker.length);
+        if (start < 0) throw new Error('District GeoJSON object start not found');
+
+        let depth = 0;
+        let inString = false;
+        let escaped = false;
+
+        for (let i = start; i < text.length; i += 1) {
+          const ch = text[i];
+
+          if (escaped) {
+            escaped = false;
+            continue;
+          }
+
+          if (ch === '\\') {
+            escaped = true;
+            continue;
+          }
+
+          if (ch === '"') {
+            inString = !inString;
+            continue;
+          }
+
+          if (inString) continue;
+
+          if (ch === '{') depth += 1;
+          if (ch === '}') depth -= 1;
+
+          if (depth === 0) {
+            return JSON.parse(text.slice(start, i + 1));
+          }
+        }
+
+        throw new Error('District GeoJSON object end not found');
       }
 
       async function loadDistrictBoundaries() {
@@ -360,7 +397,7 @@
       Promise.allSettled([loadCountyBoundaries(), loadDistrictBoundaries()]).then((results) => {
         const failed = results.filter((r) => r.status === 'rejected');
         if (failed.length) {
-          statusEl.textContent = 'Map loaded. Some optional boundary layers could not be loaded on this network.';
+          statusEl.textContent = 'Map loaded. Some boundary layers failed to load. Check your network connection or try again later.';
           return;
         }
         statusEl.textContent = 'Map loaded: cities, county boundaries, and congressional districts are available.';
