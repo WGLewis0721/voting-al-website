@@ -48,6 +48,8 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
       </div>
     </div>
 
+    <p id="filterPrompt" class="mt-6 text-center text-white/60">Use search or select a party/office filter to view candidate cards.</p>
+
     <div id="candidateGrid" class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       {allCandidates.map((candidate) => <CandidateCard candidate={candidate} />)}
     </div>
@@ -75,14 +77,21 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
   const officeFilter = document.getElementById('officeFilter');
   const clearCandidateFilters = document.getElementById('clearCandidateFilters');
   const noResults = document.getElementById('noResults');
+  const filterPrompt = document.getElementById('filterPrompt');
 
   const applyFilters = debounce(() => {
     const q = searchInput.value.trim().toLowerCase();
     const party = partyFilter.value;
     const office = officeFilter.value;
+    const hasActiveFilter = !!q || party !== 'all' || office !== 'all';
 
     let visible = 0;
     cards.forEach((card) => {
+      if (!hasActiveFilter) {
+        card.hidden = true;
+        return;
+      }
+
       const cardText = card.textContent.toLowerCase();
       const cardParty = card.dataset.party;
       const cardOffice = card.dataset.office;
@@ -96,7 +105,8 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
       if (show) visible++;
     });
 
-    if (noResults) noResults.classList.toggle('hidden', visible > 0);
+    if (filterPrompt) filterPrompt.classList.toggle('hidden', hasActiveFilter);
+    if (noResults) noResults.classList.toggle('hidden', !hasActiveFilter || visible > 0);
   }, 130);
 
   searchInput?.addEventListener('input', applyFilters);
@@ -109,4 +119,6 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
     officeFilter.value = 'all';
     applyFilters();
   });
+
+  applyFilters();
 </script>
