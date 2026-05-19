@@ -286,7 +286,7 @@
 
     const loadCountyBoundaries = async () => {
       try {
-        const response = await fetch(countyGeoJsonUrl, { cache: 'force-cache' });
+        const response = await fetch(countyGeoJsonUrl);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const countyGeoJson = await response.json();
         L.geoJSON(countyGeoJson, {
@@ -310,7 +310,7 @@
 
     const loadCongressionalDistrictBoundaries = async () => {
       try {
-        const response = await fetch(congressionalGeoJsonUrl, { cache: 'force-cache' });
+        const response = await fetch(congressionalGeoJsonUrl);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const districtGeoJson = await response.json();
         L.geoJSON(districtGeoJson, {
