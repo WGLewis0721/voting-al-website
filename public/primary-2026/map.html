@@ -274,9 +274,10 @@
       ).replace(/^0+/, '');
     };
 
-    const countyGeoJsonUrl = 'https://services1.arcgis.com/UA2F4DkJXNqsRRXU/arcgis/rest/services/Alabama_County_Boundaries/FeatureServer/0/query?where=1%3D1&outFields=*&f=geojson';
+    const geoJsonQuerySuffix = 'query?where=1%3D1&outFields=*&f=geojson';
+    const countyGeoJsonUrl = `https://services1.arcgis.com/UA2F4DkJXNqsRRXU/arcgis/rest/services/Alabama_County_Boundaries/FeatureServer/0/${geoJsonQuerySuffix}`;
     // Alabama's 2023 court-ordered congressional map is the map in use for the 2026 cycle.
-    const congressionalGeoJsonUrl = 'https://services1.arcgis.com/0aTeT6zxNv8D9lmM/arcgis/rest/services/Alabama_State_Congressional_Districts_2023/FeatureServer/0/query?where=1%3D1&outFields=*&f=geojson';
+    const congressionalGeoJsonUrl = `https://services1.arcgis.com/0aTeT6zxNv8D9lmM/arcgis/rest/services/Alabama_State_Congressional_Districts_2023/FeatureServer/0/${geoJsonQuerySuffix}`;
 
     // Redistricting updates:
     // 1) Replace congressionalGeoJsonUrl with a refreshed 2028+ GeoJSON endpoint/file.
@@ -300,8 +301,9 @@
             fillOpacity: 0.09
           },
           onEachFeature: (feature, layer) => {
-            const countyName = feature?.properties?.NAME || feature?.properties?.County || 'County';
-            layer.bindPopup(`<strong>${countyName} County</strong><br />${keyVotingMessage}`);
+            const countyName = feature?.properties?.NAME || feature?.properties?.County || '';
+            const countyLabel = countyName ? `${countyName} County` : 'Unknown County';
+            layer.bindPopup(`<strong>${countyLabel}</strong><br />${keyVotingMessage}`);
           }
         }).addTo(countyBoundariesLayer);
         statusCounties.textContent = 'County boundaries loaded';
