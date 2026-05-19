@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Alabama Voting Map — Districts & Communities</title>
+  <meta
+    name="description"
+    content="Explore Alabama voting geography for the 2026 election, including major cities, county boundaries, and congressional districts."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <style>
+    :root {
+      color-scheme: dark;
+      --gold: #c7a24f;
+      --gold-soft: #e4c77f;
+      --graphite-950: #090909;
+      --graphite-900: #111111;
+      --text-soft: rgba(255, 255, 255, 0.78);
+      --border-soft: rgba(255, 255, 255, 0.16);
+      --panel: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Outfit, system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 90% -10%, rgba(199, 162, 79, 0.14), transparent 60%),
+        radial-gradient(800px 500px at 0% 20%, rgba(199, 162, 79, 0.08), transparent 50%),
+        var(--graphite-950);
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(1200px, calc(100% - 1.5rem));
+      margin-inline: auto;
+      padding-block: 1.25rem 1.75rem;
+    }
+
+    .eyebrow {
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      margin: 0.3rem 0 0;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      font-size: clamp(2rem, 5.2vw, 3.3rem);
+    }
+
+    .intro {
+      margin-top: 0.9rem;
+      max-width: 72ch;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0.65rem 1.05rem;
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn.primary { background: var(--gold); color: #111; }
+    .btn.primary:hover { background: var(--gold-soft); transform: translateY(-2px); }
+    .btn.ghost { border-color: rgba(255, 255, 255, 0.3); color: #fff; background: rgba(255, 255, 255, 0.03); }
+
+    .panel {
+      margin-top: 1.1rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 1rem;
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+
+    #map {
+      width: 100%;
+      height: min(70vh, 720px);
+      min-height: 430px;
+      background: #0f172a;
+    }
+
+    .status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.8rem 1rem 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .chip {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.74rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    footer {
+      margin-top: 1rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.95rem 1rem;
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+
+    a.inline-link { color: var(--gold-soft); }
+
+    .leaflet-container { font-family: Outfit, system-ui, sans-serif; }
+    .leaflet-popup-content { line-height: 1.45; margin: 0.7rem 0.8rem; }
+    .leaflet-popup-content strong { color: #111; }
+    .leaflet-control-layers-expanded {
+      background: rgba(15, 15, 15, 0.92);
+      color: #fff;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.65rem;
+      min-width: 230px;
+    }
+
+    *:focus-visible {
+      outline: 2px solid #f1d899;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(1200px, calc(100% - 1rem)); padding-top: 1rem; }
+      #map { height: 62vh; min-height: 390px; }
+      .btn { justify-content: center; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" id="main">
+    <p class="eyebrow">Primary 2026 · Alabama Votes</p>
+    <h1>🗺️ Interactive Alabama Voting Map – Districts &amp; Communities</h1>
+    <p class="intro">
+      Explore major Alabama cities, county boundaries, and current congressional districts to better understand the 2026 election landscape. Use this map to identify your area, then confirm race details and ballot content through official Alabama Secretary of State resources.
+    </p>
+
+    <div class="actions">
+      <a class="btn primary" href="https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots" target="_blank" rel="noopener noreferrer" aria-label="Open official 2026 primary sample ballots at Alabama Secretary of State">
+        Official SOS Sample Ballots
+      </a>
+      <a class="btn ghost" href="./" aria-label="Return to the Alabama 2026 primary page">Back to Primary 2026</a>
+    </div>
+
+    <section class="panel" aria-label="Interactive Alabama voting map panel">
+      <div id="map" role="region" aria-label="Interactive map of Alabama voting areas with layered district and county boundaries"></div>
+      <div class="status" id="map-status" aria-live="polite">
+        <span class="chip" id="status-cities">Cities loaded</span>
+        <span class="chip" id="status-counties">Loading county boundaries…</span>
+        <span class="chip" id="status-districts">Loading congressional districts…</span>
+      </div>
+    </section>
+
+    <footer>
+      <strong>Official sources disclaimer:</strong> This map is for voter education and orientation only. Always verify district assignment, polling place, and ballot content using official Alabama election resources.<br />
+      District maps (official): <a class="inline-link" href="https://www.sos.alabama.gov/alabama-votes/state-district-maps" target="_blank" rel="noopener noreferrer">Alabama Secretary of State — State District Maps</a>
+    </footer>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>
+    const statusCities = document.getElementById('status-cities');
+    const statusCounties = document.getElementById('status-counties');
+    const statusDistricts = document.getElementById('status-districts');
+
+    const map = L.map('map', {
+      center: [32.8, -86.8],
+      zoom: 7,
+      zoomControl: true,
+      preferCanvas: true
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const majorCitiesLayer = L.layerGroup().addTo(map);
+    const countyBoundariesLayer = L.layerGroup().addTo(map);
+    const congressionalDistrictsLayer = L.layerGroup().addTo(map);
+
+    const majorCities = [
+      { name: 'Birmingham', coords: [33.5186, -86.8104] },
+      { name: 'Montgomery', coords: [32.3792, -86.3077] },
+      { name: 'Mobile', coords: [30.6954, -88.0399] },
+      { name: 'Huntsville', coords: [34.7304, -86.5861] },
+      { name: 'Tuscaloosa', coords: [33.2098, -87.5692] },
+      { name: 'Auburn', coords: [32.6099, -85.4808] },
+      { name: 'Dothan', coords: [31.2232, -85.3905] },
+      { name: 'Decatur', coords: [34.6059, -86.9833] },
+      { name: 'Hoover', coords: [33.4054, -86.8114] },
+      { name: 'Florence', coords: [34.7998, -87.6773] },
+      { name: 'Gadsden', coords: [34.0143, -86.0066] }
+    ];
+
+    majorCities.forEach((city) => {
+      L.circleMarker(city.coords, {
+        radius: 7,
+        color: '#f1d899',
+        weight: 1.5,
+        fillColor: '#c7a24f',
+        fillOpacity: 0.92
+      })
+        .bindPopup(`<strong>${city.name}</strong><br />Key voting area – check your county sample ballot.`)
+        .addTo(majorCitiesLayer);
+    });
+    statusCities.textContent = `Cities loaded (${majorCities.length})`;
+
+    const districtColors = {
+      '1': '#f97316',
+      '2': '#22d3ee',
+      '3': '#facc15',
+      '4': '#a78bfa',
+      '5': '#34d399',
+      '6': '#fb7185',
+      '7': '#60a5fa'
+    };
+
+    const getDistrictNumber = (properties = {}) => {
+      return String(
+        properties.DISTRICT ??
+        properties.District ??
+        properties.CONGDIST ??
+        properties.CONG_DIST ??
+        properties.CD118FP ??
+        properties.CD
+      ).replace(/^0+/, '');
+    };
+
+    const countyGeoJsonUrl = 'https://services1.arcgis.com/UA2F4DkJXNqsRRXU/arcgis/rest/services/Alabama_County_Boundaries/FeatureServer/0/query?where=1%3D1&outFields=*&f=geojson';
+    const congressionalGeoJsonUrl = 'https://services1.arcgis.com/0aTeT6zxNv8D9lmM/arcgis/rest/services/Alabama_State_Congressional_Districts_2023/FeatureServer/0/query?where=1%3D1&outFields=*&f=geojson';
+
+    // Redistricting updates:
+    // 1) Replace congressionalGeoJsonUrl with a refreshed 2028+ GeoJSON endpoint/file.
+    // 2) Keep district attribute mapping in getDistrictNumber in sync with new field names.
+    // 3) If you convert a shapefile locally, place output in this folder and fetch './your-file.geojson'.
+    //
+    // Example local load:
+    // const countyGeoJsonUrl = './alabama-counties.geojson';
+    // const congressionalGeoJsonUrl = './alabama-congressional-districts-2023.geojson';
+
+    const loadCountyBoundaries = async () => {
+      try {
+        const response = await fetch(countyGeoJsonUrl, { cache: 'force-cache' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const countyGeoJson = await response.json();
+        L.geoJSON(countyGeoJson, {
+          style: {
+            color: '#d4d4d8',
+            weight: 1.1,
+            fillColor: '#52525b',
+            fillOpacity: 0.09
+          },
+          onEachFeature: (feature, layer) => {
+            const countyName = feature?.properties?.NAME || feature?.properties?.County || 'County';
+            layer.bindPopup(`<strong>${countyName} County</strong><br />Key voting area – check your county sample ballot.`);
+          }
+        }).addTo(countyBoundariesLayer);
+        statusCounties.textContent = 'County boundaries loaded';
+      } catch (error) {
+        console.warn('County boundaries failed to load:', error);
+        statusCounties.textContent = 'County boundaries unavailable (check source URL)';
+      }
+    };
+
+    const loadCongressionalDistrictBoundaries = async () => {
+      try {
+        const response = await fetch(congressionalGeoJsonUrl, { cache: 'force-cache' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const districtGeoJson = await response.json();
+        L.geoJSON(districtGeoJson, {
+          style: (feature) => {
+            const districtNumber = getDistrictNumber(feature?.properties) || '1';
+            return {
+              color: districtColors[districtNumber] || '#38bdf8',
+              weight: 2,
+              fillColor: districtColors[districtNumber] || '#38bdf8',
+              fillOpacity: 0.28
+            };
+          },
+          onEachFeature: (feature, layer) => {
+            const districtNumber = getDistrictNumber(feature?.properties) || '?';
+            layer.bindPopup(`Congressional District ${districtNumber} – Click official SOS link for full details.`);
+          }
+        }).addTo(congressionalDistrictsLayer);
+        statusDistricts.textContent = 'Congressional districts loaded';
+      } catch (error) {
+        console.warn('Congressional districts failed to load:', error);
+        statusDistricts.textContent = 'Congressional districts unavailable (check source URL)';
+      }
+    };
+
+    L.control.layers(
+      null,
+      {
+        'Major Cities': majorCitiesLayer,
+        'County Boundaries': countyBoundariesLayer,
+        'Congressional Districts': congressionalDistrictsLayer
+      },
+      { collapsed: false, position: 'topright' }
+    ).addTo(map);
+
+    Promise.allSettled([
+      loadCountyBoundaries(),
+      loadCongressionalDistrictBoundaries()
+    ]);
+  </script>
+</body>
+</html>
