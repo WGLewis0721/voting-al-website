@@ -26,7 +26,9 @@ const officeLabel = candidate.district
       'h-1',
       candidate.party === 'Republican'
         ? 'bg-gradient-to-r from-red-500/90 to-red-400/60'
-        : 'bg-gradient-to-r from-blue-500/90 to-blue-400/60',
+        : candidate.party === 'Democratic'
+          ? 'bg-gradient-to-r from-blue-500/90 to-blue-400/60'
+          : 'bg-gradient-to-r from-gold/70 to-gold-soft/40',
     ]}
   ></div>
   <div class="p-4">
