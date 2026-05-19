@@ -21,7 +21,14 @@ const officeLabel = candidate.district
   data-office={candidate.office.toLowerCase()}
   data-district={candidate.district ?? ''}
 >
-  <div class="h-1 bg-gradient-to-r from-gold/70 to-gold-soft/40"></div>
+  <div
+    class:list={[
+      'h-1',
+      candidate.party === 'Republican'
+        ? 'bg-gradient-to-r from-red-500/90 to-red-400/60'
+        : 'bg-gradient-to-r from-blue-500/90 to-blue-400/60',
+    ]}
+  ></div>
   <div class="p-4">
     <p class="meta text-[11px] uppercase tracking-[0.16em] text-white/55">{officeLabel} · {candidate.party}</p>
     <h3 class="name mt-1 font-display text-2xl leading-none">{candidate.name}</h3>
@@ -41,4 +48,3 @@ const officeLabel = candidate.district
     </a>
   </div>
 </article>
-
