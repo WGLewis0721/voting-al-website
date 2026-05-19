@@ -224,6 +224,8 @@
     const countyBoundariesLayer = L.layerGroup().addTo(map);
     const congressionalDistrictsLayer = L.layerGroup().addTo(map);
 
+    const keyVotingMessage = 'Key voting area – check your county sample ballot.';
+
     const majorCities = [
       { name: 'Birmingham', coords: [33.5186, -86.8104] },
       { name: 'Montgomery', coords: [32.3792, -86.3077] },
@@ -246,7 +248,7 @@
         fillColor: '#c7a24f',
         fillOpacity: 0.92
       })
-        .bindPopup(`<strong>${city.name}</strong><br />Key voting area – check your county sample ballot.`)
+        .bindPopup(`<strong>${city.name}</strong><br />${keyVotingMessage}`)
         .addTo(majorCitiesLayer);
     });
     statusCities.textContent = `Cities loaded (${majorCities.length})`;
@@ -298,7 +300,7 @@
           },
           onEachFeature: (feature, layer) => {
             const countyName = feature?.properties?.NAME || feature?.properties?.County || 'County';
-            layer.bindPopup(`<strong>${countyName} County</strong><br />Key voting area – check your county sample ballot.`);
+            layer.bindPopup(`<strong>${countyName} County</strong><br />${keyVotingMessage}`);
           }
         }).addTo(countyBoundariesLayer);
         statusCounties.textContent = 'County boundaries loaded';
