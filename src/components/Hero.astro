@@ -1,23 +1,89 @@
 ---
-import dates from '../data/dates.json';
+import counties from '../data/counties.json';
+const base=import.meta.env.BASE_URL;
+const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_State_Capitol%2C_Montgomery%2C_West_view_20160713_1.jpg/1280px-Alabama_State_Capitol%2C_Montgomery%2C_West_view_20160713_1.jpg';
 ---
-<section class="relative overflow-hidden pb-16 pt-24 md:pb-24 md:pt-28">
-  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_78%_20%,rgba(199,162,79,0.27),transparent_55%)]"></div>
-  <div class="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,.25)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.25)_1px,transparent_1px)] [background-size:58px_58px]"></div>
-  <div class="section-wrap relative">
-    <span class="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gold/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-gold-soft"><span class="inline-block h-2 w-2 animate-pulse rounded-full bg-gold"></span> Election Day · November 3, 2026</span>
-    <div class="mt-7 max-w-5xl">
-      <p class="section-eyebrow">Alabama General Election · Nonpartisan Guide</p>
-      <h1 class="mt-3 font-display text-6xl leading-[0.88] tracking-tight md:text-8xl">Today's the day.<br /><em class="text-gold-soft">Know before you go.</em></h1>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">Polls are open from <strong class="text-white">7 AM to 7 PM Central</strong>. Find your assigned polling place, bring an accepted photo ID, and review the candidates and four statewide amendments before you cast your ballot.</p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn gold">Find My Polling Place ↗</a>
-        <a href="https://www.sos.alabama.gov/alabama-votes/2026-general-election-sample-ballots" target="_blank" rel="noopener" class="btn ghost">View Official Sample Ballot ↗</a>
-      </div>
-      <p class="mt-4 text-sm text-white/55">Already in line at 7 PM? Stay in line. If you do not have a photo ID, ask a poll worker about your options.</p>
+<section class="impact-hero" aria-labelledby="impact-title">
+ <div class="impact-photo" aria-hidden="true"><img src={photo} alt="" width="1280" height="1024" fetchpriority="high" decoding="async"/></div>
+ <div class="impact-pattern" aria-hidden="true"></div>
+ <div class="impact-stripe" aria-hidden="true"></div>
+ <div class="section-wrap impact-container">
+  <div class="impact-topline"><span><i aria-hidden="true"></i> ALABAMA / GENERAL ELECTION 2026</span><span class="impact-topline-right">NONPARTISAN VOTER GUIDE <b>✳</b> NOV 03</span></div>
+  <div class="impact-layout">
+   <div class="impact-content">
+    <div class="impact-sticker"><span aria-hidden="true">✳</span> TUESDAY <strong>11.03.26</strong></div>
+    <h1 id="impact-title"><span>ALABAMA.</span><span>IT'S YOUR</span><span class="impact-invert">ELECTION</span><span>DAY.</span></h1>
+    <div class="impact-subtitle"><span class="impact-subtitle-bar" aria-hidden="true"></span><p>One ballot. A lot to understand. Find your polling place, explore your county's candidates and questions, and go in informed.</p></div>
+    <div class="impact-actions">
+     <a class="impact-button impact-button-primary" target="_blank" rel="noopener noreferrer" href="https://myinfo.alabamavotes.gov/VoterView">FIND MY POLLING PLACE <span aria-hidden="true">↗</span></a>
+     <a class="impact-button impact-button-secondary" href={base + 'voter-guide'}>THE 60-SECOND VOTER GUIDE <span aria-hidden="true">→</span></a>
     </div>
-    <div class="glass-panel mt-10 grid grid-cols-2 gap-2 p-3 md:grid-cols-4" aria-label="Election day essentials">
-      {dates.map(d => <article class="rounded-xl border border-white/10 bg-black/40 p-4"><p class="text-[10px] uppercase tracking-[0.14em] text-white/60">{d.label}</p><p class="mt-1 text-lg font-semibold">{d.date}</p></article>)}
+    <div class="impact-stats" aria-label="Election Day essentials"><div><strong>7AM–7PM</strong><span>Local polling hours</span></div><div><strong>PHOTO ID</strong><span>Bring accepted ID</span></div><div><strong>04</strong><span>Statewide amendments</span></div></div>
+   </div>
+   <div class="impact-side">
+    <div class="impact-history"><span class="impact-star" aria-hidden="true">✳</span><p><strong>THIS IS MONTGOMERY.</strong> The Alabama State Capitol is where the 1965 Selma-to-Montgomery voting rights march concluded.</p><a href="https://www.nps.gov/semo/learn/historyculture/places.htm" target="_blank" rel="noopener noreferrer">DISCOVER THE HISTORY ↗</a></div>
+    <div class="impact-county">
+     <div class="impact-county-kicker"><span>YOUR COUNTY / YOUR BALLOT</span><span aria-hidden="true">↗</span></div>
+     <h2>Find your part<br/>of Alabama.</h2>
+     <form action={base + 'counties'} method="get">
+      <label for="impact-county-select">Choose your county</label>
+      <select id="impact-county-select" name="county" required><option value="">Select from 67 counties</option>{counties.map(county => <option value={county}>{county} County</option>)}</select>
+      <button type="submit">EXPLORE COUNTY BALLOT <span aria-hidden="true">→</span></button>
+     </form>
+     <p>Opens your county guide and links to official sample ballots. Your voting district determines the exact ballot style.</p>
     </div>
+   </div>
   </div>
+  <div class="impact-bottom"><span>THE VOTE, EXPLAINED. NO ENDORSEMENTS.</span><span>67 COUNTIES <b aria-hidden="true">✳</b> ONE STATE</span></div>
+  <p class="impact-credit">Capitol photograph: <a href="https://commons.wikimedia.org/wiki/File:Alabama_State_Capitol,_Montgomery,_West_view_20160713_1.jpg" target="_blank" rel="noopener noreferrer">DXR / Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Image cropped and tinted.</p>
+ </div>
 </section>
+<style>
+.impact-hero{position:relative;isolation:isolate;overflow:hidden;background:#090a0b;color:#f9f4e5;border-bottom:2px solid #c7a24f;min-height:720px}
+.impact-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#09090a 0%,#09090a 26%,rgba(9,9,10,.95) 42%,rgba(9,9,10,.46) 78%,rgba(9,9,10,.7) 100%),linear-gradient(0deg,#09090a,transparent 25%);pointer-events:none}
+.impact-photo{position:absolute;inset:0 0 0 30%;z-index:-3;overflow:hidden}
+.impact-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:grayscale(1) contrast(1.2) sepia(.2);opacity:.82;animation:impact-appear 1s ease-out both}
+.impact-pattern{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.2;background:radial-gradient(#050505 .9px,transparent 1.65px) 0 0/5px 5px;mask-image:linear-gradient(90deg,transparent 23%,#000 100%)}
+.impact-stripe{position:absolute;right:-55px;top:23%;height:19px;width:280px;background:#a52e37;transform:rotate(-31deg);box-shadow:0 28px #316cb7;z-index:-1;opacity:.7}
+.impact-container{padding-top:32px;padding-bottom:17px}
+.impact-topline{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:13px;border-top:1px solid rgba(242,208,121,.6);font-size:11px;letter-spacing:.16em;font-weight:800;color:#f0cb71}
+.impact-topline i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e8bd57;margin-right:8px;box-shadow:0 0 0 4px rgba(232,189,87,.17)}
+.impact-topline-right{color:#eee6d4}.impact-topline b{color:#d4525b;margin:0 9px}
+.impact-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(270px,.75fr);gap:clamp(16px,3vw,40px);min-height:640px;align-items:end;padding-top:37px}
+.impact-content{padding-bottom:37px}.impact-sticker{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;background:#edc55f;color:#111;font-weight:900;font-size:13px;letter-spacing:.06em;transform:rotate(-2deg);box-shadow:5px 5px 0 #090909}
+.impact-sticker strong{font-size:16px}.impact-sticker span{font-size:18px}
+.impact-content h1{margin:28px 0 20px;font-family:"Barlow Condensed",Impact,"Arial Narrow",sans-serif;font-size:clamp(5.2rem,9.2vw,10.7rem);line-height:.77;letter-spacing:-.035em;font-weight:900;text-transform:uppercase;filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
+.impact-content h1 span{display:block;max-width:100%;width:max-content}.impact-content h1 span+span{margin-top:.105em}
+.impact-invert{color:#111;background:#e7ba54;transform:skewX(-4deg);padding:0 .075em .065em;box-shadow:6px 5px 0 #090909}
+.impact-subtitle{display:flex;align-items:stretch;gap:15px;max-width:550px}.impact-subtitle-bar{flex:none;width:5px;background:#edc75e}
+.impact-subtitle p{margin:0;line-height:1.55;font-size:clamp(.98rem,1.4vw,1.15rem);font-weight:500;color:#f4ece0;text-shadow:0 2px 9px #000}
+.impact-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.impact-button{display:inline-flex;align-items:center;justify-content:center;gap:15px;min-height:52px;padding:13px 17px;text-decoration:none;font-size:12px;letter-spacing:.04em;font-weight:900;transition:transform .18s,background .18s}
+.impact-button:hover{transform:translateY(-2px)}
+.impact-button-primary{background:#efc65d;color:#101010;border:2px solid #efc65d}.impact-button-primary:hover{background:#ffe298}
+.impact-button-secondary{background:rgba(10,10,10,.77);color:#fff6e7;border:1px solid rgba(255,239,204,.73)}.impact-button-secondary:hover{background:rgba(210,163,69,.2)}
+.impact-stats{display:flex;gap:20px;flex-wrap:wrap;margin-top:25px}
+.impact-stats div{display:flex;flex-direction:column;gap:3px;border-left:1px solid #dfbb63;padding-left:11px}
+.impact-stats strong{font-size:14px}.impact-stats span{font-size:11px;color:#d4d0c7}
+.impact-side{display:flex;flex-direction:column;gap:22px;padding-bottom:45px}
+.impact-history{max-width:335px;align-self:flex-end;border-left:3px solid #e0b85d;background:rgba(6,7,10,.85);padding:13px 17px;box-shadow:0 18px 40px #0006}
+.impact-star{font-size:22px;color:#f0d285}.impact-history p{margin:6px 0 7px;color:#f5eede;font-size:12px;line-height:1.5}
+.impact-history strong{color:#f4cf79;letter-spacing:.06em}.impact-history a{color:#edcb75;font-weight:850;font-size:11px;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:31px}
+.impact-county{background:#eddaa1;color:#101111;padding:18px;border:4px solid #101010;box-shadow:8px 8px 0 #d4aa4c,0 24px 60px #0009;transform:rotate(1deg)}
+.impact-county-kicker{display:flex;justify-content:space-between;border-bottom:2px solid #151515;padding-bottom:8px;letter-spacing:.095em;font-size:10px;font-weight:900}
+.impact-county-kicker span:last-child{font-size:18px;line-height:.7}
+.impact-county h2{font:900 clamp(2.3rem,3.5vw,3.6rem)/.87 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin:13px 0 19px}
+.impact-county label{font-size:12px;font-weight:800;display:block;margin-bottom:7px}
+.impact-county select{width:100%;min-height:48px;padding:9px;background:#fffef8;border:2px solid #171717;color:#111;font-size:16px;border-radius:0}
+.impact-county button{margin-top:9px;width:100%;display:flex;align-items:center;justify-content:space-between;padding:12px;min-height:48px;background:#121212;color:#ffe2a2;border:0;cursor:pointer;font-size:11px;font-weight:900;letter-spacing:.055em}
+.impact-county button:hover{background:#333}.impact-county p{margin:10px 0 0;font-size:11px;line-height:1.45;color:#272522}
+.impact-bottom{display:flex;justify-content:space-between;gap:10px;border-block:1px solid rgba(234,201,127,.4);padding:11px 0;font-size:10px;letter-spacing:.1em;font-weight:800;color:#f4d68f}
+.impact-bottom b{color:#d65359;margin:0 8px}.impact-credit{font-size:9px;color:#c8c4bd;margin:8px 0 0}.impact-credit a{color:inherit;text-decoration:underline}
+@keyframes impact-appear{from{opacity:.2;transform:scale(1.07)}to{opacity:.82;transform:scale(1)}}
+@media(max-width:1100px){.impact-content h1{font-size:clamp(5rem,9vw,8rem)}.impact-layout{grid-template-columns:minmax(0,1.4fr) minmax(270px,.75fr)}}
+@media(max-width:900px){.impact-layout{grid-template-columns:1fr;gap:18px;min-height:0}.impact-content h1{font-size:clamp(5.6rem,12vw,9rem)}.impact-side{display:grid;grid-template-columns:1fr 1fr;align-items:end;padding-bottom:30px;gap:16px}.impact-county{transform:none}.impact-photo{inset:0 0 20% 0}.impact-hero:before{background:linear-gradient(90deg,rgba(6,7,8,.93),rgba(6,7,8,.64)),linear-gradient(0deg,#0a0a0a,transparent 45%)}}
+@media(max-width:650px){.impact-topline-right{display:none}.impact-container{padding-top:20px}.impact-layout{padding-top:26px}.impact-content h1{font-size:clamp(4.25rem,14.2vw,6.8rem)}.impact-photo{inset:0 -35% 36% 0}.impact-actions{display:grid;max-width:430px}.impact-stats{gap:10px}.impact-stats div{flex:1;min-width:78px}.impact-stats strong{font-size:12px}.impact-stats span{font-size:10px}.impact-side{grid-template-columns:1fr}.impact-history{max-width:none;align-self:stretch}.impact-bottom span:last-child{display:none}.impact-county h2{font-size:2.8rem}}
+@media(max-width:390px){.impact-content h1{font-size:clamp(3.45rem,13.8vw,4.4rem)}.impact-sticker{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.impact-photo img{animation:none}.impact-button,.impact-button:hover{transition:none;transform:none}}
+@media(prefers-contrast:more){.impact-hero:before{background:rgba(0,0,0,.84)}.impact-subtitle p,.impact-stats span,.impact-credit{color:#fff}.impact-county{background:#ffe6a1}}
+</style>
