@@ -25,8 +25,8 @@ const {
   democraticCandidates,
   republicanCandidates,
   uncontested = false,
-  sourceDem = 'https://www.alabamademocrats.com/2026-qualified-candidates',
-  sourceRep = 'https://algop.org/2026-qualified-candidates',
+  sourceDem = 'https://www.sos.alabama.gov/alabama-votes/voter/election-information/2026',
+  sourceRep = 'https://www.sos.alabama.gov/alabama-votes/voter/election-information/2026',
 } = Astro.props;
 
 const title = district ? `${office} — District ${district}` : office;
@@ -50,9 +50,9 @@ const totalCandidates = democraticCandidates.length + republicanCandidates.lengt
 
   <div class="grid gap-0 sm:grid-cols-2">
     <div class="border-b border-white/10 p-4 sm:border-b-0 sm:border-r">
-      <p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/50">Democratic Primary</p>
+      <p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/50">Democratic candidate</p>
       {democraticCandidates.length === 0 ? (
-        <p class="text-sm text-white/35 italic">No Democratic candidates filed.</p>
+        <p class="text-sm text-white/35 italic">No Democratic candidate included in this overview; verify official ballot.</p>
       ) : (
         <ul class="space-y-2">
           {democraticCandidates.map((c) => (
@@ -70,7 +70,7 @@ const totalCandidates = democraticCandidates.length + republicanCandidates.lengt
           rel="noopener"
           class="mt-3 inline-flex items-center gap-1 text-[11px] text-white/40 transition hover:text-gold-soft"
         >
-          Source: Alabama Democratic Party
+          Source: Alabama SOS 2026 general election
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
@@ -79,9 +79,9 @@ const totalCandidates = democraticCandidates.length + republicanCandidates.lengt
     </div>
 
     <div class="p-4">
-      <p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/50">Republican Primary</p>
+      <p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/50">Republican candidate</p>
       {republicanCandidates.length === 0 ? (
-        <p class="text-sm text-white/35 italic">No Republican candidates filed.</p>
+        <p class="text-sm text-white/35 italic">No Republican candidate included in this overview; verify official ballot.</p>
       ) : (
         <ul class="space-y-2">
           {republicanCandidates.map((c) => (
@@ -99,7 +99,7 @@ const totalCandidates = democraticCandidates.length + republicanCandidates.lengt
           rel="noopener"
           class="mt-3 inline-flex items-center gap-1 text-[11px] text-white/40 transition hover:text-gold-soft"
         >
-          Source: Alabama Republican Party
+          Source: Alabama SOS 2026 general election
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
