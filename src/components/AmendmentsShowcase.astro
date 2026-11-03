@@ -1,0 +1,125 @@
+---
+import AmendmentCard from './AmendmentCard.astro';
+import amendments from '../data/amendments.json';
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const officialUrl = 'https://www.sos.alabama.gov/alabama-votes/voter/ballot-measures/statewide';
+---
+
+<section id={compact ? 'amendments' : 'amendments-guide'} class:list={['amendments-showcase', { 'amendments-showcase--compact': compact }]} aria-labelledby={compact ? 'amendments-heading-home' : 'amendments-heading-guide'}>
+  <div class="section-wrap">
+    <div class="amendments-hero">
+      <div class="amendments-hero__flag" aria-hidden="true"></div>
+      <svg class="amendments-hero__capitol" aria-hidden="true" viewBox="0 0 360 246" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+          <path d="M31 210H329M47 199H313M62 183H298M88 183V121M111 183V121M136 183V121M224 183V121M249 183V121M272 183V121M79 119H281L270 108H90L79 119Z"/>
+          <path d="M102 106H258L245 93H115L102 106Z" />
+          <path d="M120 92C122 54 151 35 180 32C209 35 238 54 240 92H120Z" />
+          <path d="M180 12V34M168 12H192M151 92V63M209 92V63M180 92V50"/>
+          <path d="M39 211V230H321V211M61 230V239H299V230" />
+        </g>
+      </svg>
+
+      <p class="amendments-kicker">Constitutional amendments <span aria-hidden="true">·</span> Alabama 2026</p>
+      <h2 id={compact ? 'amendments-heading-home' : 'amendments-heading-guide'} class="amendments-title">Know the <em>Amendments.</em></h2>
+      <p class="amendments-lede">Four proposals. Four separate decisions. Understand what changes before you mark YES or NO.</p>
+      <div class="amendments-disclosure-note" role="note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 10.5v5.5M12 7.3h.01"/></svg>
+        <span>Nonpartisan explanations. Each amendment is voted on independently. Read the official ballot language before voting.</span>
+      </div>
+    </div>
+
+    <div class="amendments-grid" aria-label="Four statewide constitutional amendments">
+      {amendments.map((a) => (
+        <AmendmentCard
+          number={a.number}
+          title={a.title}
+          election={a.election}
+          officialSummary={a.officialSummary}
+          plainEnglish={a.plainEnglish}
+          yesMeans={a.yesMeans}
+          noMeans={a.noMeans}
+          costTaxImpact={a.costTaxImpact}
+          sourceUrl={a.sourceUrl}
+        />
+      ))}
+    </div>
+
+    <div class="amendments-actions">
+      <a class="amendments-primary-link" href={officialUrl} target="_blank" rel="noopener noreferrer">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v6h5M8 13h8M8 17h8"/></svg>
+        Read official ballot statements
+        <span aria-hidden="true">↗</span>
+      </a>
+      {compact && <a class="amendments-secondary-link" href={`${base}amendments`}>Explore amendments in detail <span aria-hidden="true">→</span></a>}
+      <p class="amendments-source">Source: <a href={officialUrl} target="_blank" rel="noopener noreferrer">Alabama Secretary of State · Fair Ballot Commission</a></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .amendments-showcase {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(3.75rem, 6vw, 6rem) 0 clamp(3.5rem, 6vw, 5.5rem);
+    background:
+      radial-gradient(ellipse 55% 31% at 91% 2%, rgba(199,162,79,.14), transparent),
+      radial-gradient(ellipse 54% 25% at 0% 6%, rgba(148,43,48,.085), transparent),
+      linear-gradient(180deg,rgba(19,19,21,.82),rgba(8,8,10,.96));
+  }
+  .amendments-showcase::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(135deg,transparent 20%,rgba(199,162,79,.028) 49%,transparent 77%);
+  }
+  .amendments-showcase--compact { border-block: 1px solid rgba(199,162,79,.13); }
+  .amendments-hero { position: relative; text-align: center; padding: 1.6rem 0 2.6rem; }
+  .amendments-hero__flag { position:absolute; inset:-2rem auto auto -8%; width:20rem; height:13rem; transform:rotate(-27deg); background:linear-gradient(110deg,transparent 20%,rgba(146,34,41,.14) 32%,rgba(225,225,225,.055) 44%,transparent 60%); filter:blur(1px); pointer-events:none; }
+  .amendments-hero__capitol { position:absolute; top:-6rem; right:-3.5rem; width:min(31vw,20rem); color:rgba(222,182,107,.18); filter:drop-shadow(0 0 21px rgba(199,162,79,.16)); pointer-events:none; }
+  .amendments-kicker {
+    position:relative; display:inline-flex; flex-wrap:wrap; justify-content:center; gap:.45rem;
+    padding:.55rem 1.2rem; border:1px solid rgba(228,199,127,.55); border-radius:999px;
+    box-shadow:inset 0 0 0 1px rgba(199,162,79,.11),0 0 21px rgba(199,162,79,.08);
+    color:#edcf86; font-size:.7rem; font-weight:750; letter-spacing:.18em; text-transform:uppercase;
+  }
+  .amendments-title { position:relative; margin:.9rem 0 .6rem; color:#f8f5ec; font-family:var(--font-display); font-size:clamp(3.1rem,6.6vw,6rem); font-weight:700; letter-spacing:-.035em; line-height:.98; text-wrap:balance; }
+  .amendments-title em { color:var(--color-gold-soft); font-weight:650; }
+  .amendments-lede { position:relative; max-width:58ch; margin:auto; font-size:clamp(.98rem,1.55vw,1.17rem); line-height:1.6; color:rgba(255,255,255,.79); }
+  .amendments-disclosure-note { position:relative; display:flex; gap:.75rem; align-items:center; justify-content:center; width:fit-content; max-width:54rem; margin:1.4rem auto 0; padding:.78rem 1rem; border:1px solid rgba(228,199,127,.25); border-radius:.75rem; background:rgba(255,255,255,.055); color:rgba(255,255,255,.83); font-size:.82rem; line-height:1.45; text-align:left; }
+  .amendments-disclosure-note svg { flex:none; color:var(--color-gold-soft); }
+  .amendments-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; align-items:stretch; }
+  .amendments-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:1rem 1.65rem; margin-top:2rem; }
+  .amendments-primary-link {
+    display:inline-flex; align-items:center; justify-content:center; gap:.7rem; min-height:48px;
+    padding:.8rem 1.3rem; border-radius:999px; border:1px solid #f5d98c;
+    background:linear-gradient(145deg,#f2d88f,#cda048);
+    color:#17130c; font-size:.87rem; font-weight:800; text-decoration:none;
+    box-shadow:0 8px 26px rgba(187,137,42,.17);
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .amendments-primary-link:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(187,137,42,.25); }
+  .amendments-secondary-link { display:inline-flex; align-items:center; min-height:44px; gap:.4rem; color:#f1d899; font-size:.85rem; text-decoration:underline; text-underline-offset:4px; }
+  .amendments-source { flex-basis:100%; margin:0; text-align:center; color:rgba(255,255,255,.5); font-size:.76rem; }
+  .amendments-source a { color:rgba(255,255,255,.72); text-decoration:underline; text-underline-offset:3px; }
+  @media(max-width:880px) { .amendments-grid { grid-template-columns:1fr; max-width:730px; margin-inline:auto; } }
+  @media(max-width:600px) {
+    .amendments-hero { padding:.4rem 0 1.75rem; }
+    .amendments-hero__capitol { width:12rem; top:-2rem; right:-3rem; opacity:.6; }
+    .amendments-title { font-size:clamp(2.9rem,13vw,4.1rem); }
+    .amendments-disclosure-note { font-size:.8rem; }
+    .amendments-actions { flex-direction:column; gap:.8rem; }
+  }
+  @media(prefers-reduced-motion:reduce) { .amendments-primary-link:hover { transform:none; } }
+  @media(prefers-contrast:more) {
+    .amendments-disclosure-note { background:#181818; border-color:#e4c77f; }
+    .amendments-source, .amendments-source a { color:#fff; }
+  }
+</style>
