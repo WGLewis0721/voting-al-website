@@ -36,12 +36,12 @@ const totalCandidates = democraticCandidates.length + republicanCandidates.lengt
 <article class="glass-panel overflow-hidden">
   <div class="border-b border-white/10 px-5 py-4">
     <div class="flex flex-wrap items-center justify-between gap-2">
-      <h3 class="font-display text-2xl leading-none md:text-3xl">{title}</h3>
+      <h2 class="font-display text-2xl leading-none md:text-3xl">{title}</h2>
       <div class="flex flex-wrap items-center gap-2">
         {uncontested && (
-          <span class="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-gold-soft">Uncontested</span>
+          <span class="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-xs uppercase tracking-[0.14em] text-gold-soft">Uncontested</span>
         )}
-        <span class="rounded-full border border-white/20 bg-white/5 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-white/55">
+        <span class="rounded-full border border-white/20 bg-white/5 px-2.5 py-1 text-xs uppercase tracking-[0.12em] text-white/55">
           {totalCandidates} candidate{totalCandidates !== 1 ? 's' : ''}
         </span>
       </div>
@@ -50,7 +50,7 @@ const totalCandidates = democraticCandidates.length + republicanCandidates.lengt
 
   <div class="grid gap-0 sm:grid-cols-2">
     <div class="race-panel party-dem border-b border-white/10 p-5 sm:border-b-0 sm:border-r">
-      <p class="race-party-label mb-3 text-[11px] font-bold uppercase tracking-[0.16em]">Democratic candidate</p>
+      <p class="race-party-label mb-3 text-xs font-bold uppercase tracking-[0.16em]">Democratic candidate</p>
       {democraticCandidates.length === 0 ? (
         <p class="text-sm text-white/35 italic">No Democratic candidate included in this overview; verify official ballot.</p>
       ) : (
@@ -68,7 +68,7 @@ const totalCandidates = democraticCandidates.length + republicanCandidates.lengt
           href={sourceDem}
           target="_blank"
           rel="noopener"
-          class="race-source mt-4 inline-flex items-center gap-1 text-[11px] transition"
+          class="race-source mt-2 inline-flex min-h-11 items-center gap-1 text-xs transition"
         >
           Source: Alabama SOS 2026 general election
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -79,7 +79,7 @@ const totalCandidates = democraticCandidates.length + republicanCandidates.lengt
     </div>
 
     <div class="race-panel party-rep p-5">
-      <p class="race-party-label mb-3 text-[11px] font-bold uppercase tracking-[0.16em]">Republican candidate</p>
+      <p class="race-party-label mb-3 text-xs font-bold uppercase tracking-[0.16em]">Republican candidate</p>
       {republicanCandidates.length === 0 ? (
         <p class="text-sm text-white/35 italic">No Republican candidate included in this overview; verify official ballot.</p>
       ) : (
@@ -97,7 +97,7 @@ const totalCandidates = democraticCandidates.length + republicanCandidates.lengt
           href={sourceRep}
           target="_blank"
           rel="noopener"
-          class="race-source mt-4 inline-flex items-center gap-1 text-[11px] transition"
+          class="race-source mt-2 inline-flex min-h-11 items-center gap-1 text-xs transition"
         >
           Source: Alabama SOS 2026 general election
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">

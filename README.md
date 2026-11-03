@@ -13,6 +13,7 @@ A static, independent and nonpartisan Alabama voter-information site using Astro
 | Site-wide CSS and light/dark design tokens | `src/styles/global.css` |
 | Screens and reusable sections | `src/pages/`, `src/components/` |
 | Voting information, candidates, amendments and county data | `src/data/*.json` (except `assets.json`) |
+| Per-county official sample ballot PDFs (Alabama SOS file names are not uniform, so verify when SOS republishes) | `src/data/county-ballots.json` |
 | Architecture, visual identity and operational guides | `docs/` |
 | Legacy single-file snapshot (not the shipped design) | `alabama-voter-guide.html` |
 

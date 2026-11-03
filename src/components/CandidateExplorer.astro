@@ -29,17 +29,17 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
     <div class="z-40 mt-8 rounded-2xl border border-white/10 bg-black/70 p-4 backdrop-blur-lg md:sticky md:top-[67px]">
       <div class="grid gap-3 md:grid-cols-[1fr_1fr_1fr_auto]">
         <label class="text-sm text-white/70">Search
-          <input id="searchInput" type="search" placeholder="Search candidate..." class="mt-1 w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm" />
+          <input id="searchInput" type="search" placeholder="Search candidate..." class="mt-1 w-full rounded-lg border border-white/20 bg-black/60 min-h-11 px-3 py-2 text-base md:text-sm" />
         </label>
         <label class="text-sm text-white/70">Party
-          <select id="partyFilter" class="party-filter mt-1 w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm">
+          <select id="partyFilter" class="party-filter mt-1 w-full rounded-lg border border-white/20 bg-black/60 min-h-11 px-3 py-2 text-base md:text-sm">
             <option value="all">All parties</option>
             <option value="republican">Republican</option>
             <option value="democratic">Democratic</option>
           </select>
         </label>
         <label class="text-sm text-white/70">Office
-          <select id="officeFilter" class="mt-1 w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm">
+          <select id="officeFilter" class="mt-1 w-full rounded-lg border border-white/20 bg-black/60 min-h-11 px-3 py-2 text-base md:text-sm">
             <option value="all">All offices</option>
             {uniqueOffices.map((office) => (
               <option value={office.toLowerCase()}>{office}</option>

@@ -24,7 +24,7 @@ const officeLabel = candidate.district
 >
   <div class="party-accent-bar" aria-hidden="true"></div>
   <div class="p-4">
-    <div class="party-eyebrow"><span class="meta text-[11px] uppercase tracking-[0.12em] text-white/60">{officeLabel}</span><span class="party-badge">{candidate.party}</span></div>
+    <div class="party-eyebrow"><span class="meta text-xs uppercase tracking-[0.12em] text-white/60">{officeLabel}</span><span class="party-badge">{candidate.party}</span></div>
     <h3 class="party-name name mt-3 font-display text-3xl leading-none">{candidate.name}</h3>
     {candidate.notes && <p class="mt-1.5 text-xs text-white/55">{candidate.notes}</p>}
   </div>
@@ -33,7 +33,7 @@ const officeLabel = candidate.district
       href={candidate.sourceUrl}
       target="_blank"
       rel="noopener"
-      class="party-link inline-flex items-center gap-1 text-[11px] transition"
+      class="party-link inline-flex min-h-11 items-center gap-1 text-xs transition"
     >
       Source: Alabama SOS 2026 election information
       <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -6,6 +6,7 @@ interface Props {
   compact?: boolean;
 }
 const { compact = false } = Astro.props;
+const Heading = compact ? 'h2' : 'h1';
 const base = import.meta.env.BASE_URL;
 const officialUrl = 'https://www.sos.alabama.gov/alabama-votes/voter/ballot-measures/statewide';
 ---
@@ -25,7 +26,7 @@ const officialUrl = 'https://www.sos.alabama.gov/alabama-votes/voter/ballot-meas
       </svg>
 
       <p class="amendments-kicker">Constitutional amendments <span aria-hidden="true">·</span> Alabama 2026</p>
-      <h2 id={compact ? 'amendments-heading-home' : 'amendments-heading-guide'} class="amendments-title">Know the <em>Amendments.</em></h2>
+      <Heading id={compact ? 'amendments-heading-home' : 'amendments-heading-guide'} class="amendments-title">Know the <em>Amendments.</em></Heading>
       <p class="amendments-lede">Four proposals. Four separate decisions. Understand what changes before you mark YES or NO.</p>
       <div class="amendments-disclosure-note" role="note">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 10.5v5.5M12 7.3h.01"/></svg>
@@ -36,6 +37,7 @@ const officialUrl = 'https://www.sos.alabama.gov/alabama-votes/voter/ballot-meas
     <div class="amendments-grid" aria-label="Four statewide constitutional amendments">
       {amendments.map((a) => (
         <AmendmentCard
+          headingLevel={compact ? 3 : 2}
           number={a.number}
           title={a.title}
           election={a.election}
@@ -88,7 +90,7 @@ const officialUrl = 'https://www.sos.alabama.gov/alabama-votes/voter/ballot-meas
     position:relative; display:inline-flex; flex-wrap:wrap; justify-content:center; gap:.45rem;
     padding:.55rem 1.2rem; border:0; border-radius:999px;
     background:rgba(202,162,70,.14);
-    color:#edcf86; font-size:.7rem; font-weight:750; letter-spacing:.18em; text-transform:uppercase;
+    color:#edcf86; font-size:.75rem; font-weight:750; letter-spacing:.18em; text-transform:uppercase;
   }
   .amendments-title { position:relative; margin:.9rem 0 .6rem; color:#f8f5ec; font-family:var(--font-display); font-size:clamp(3.1rem,6.6vw,6rem); font-weight:700; letter-spacing:-.035em; line-height:.98; text-wrap:balance; }
   .amendments-title em { color:var(--color-gold-soft); font-weight:650; }
