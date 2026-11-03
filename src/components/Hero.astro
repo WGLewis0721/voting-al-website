@@ -52,7 +52,10 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
 .impact-photo{position:absolute;inset:0 0 0 30%;z-index:-3;overflow:hidden}
 .impact-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:grayscale(1) contrast(1.2) sepia(.2);opacity:.82;animation:impact-appear 1s ease-out both}
 .impact-pattern{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.2;background:radial-gradient(#050505 .9px,transparent 1.65px) 0 0/5px 5px;mask-image:linear-gradient(90deg,transparent 23%,#000 100%)}
-.impact-stripe{position:absolute;right:-55px;top:23%;height:19px;width:280px;background:#a52e37;transform:rotate(-31deg);box-shadow:0 28px #316cb7;z-index:-1;opacity:.7}
+.impact-stripe{position:absolute;right:-55px;top:23%;height:15px;width:280px;background:#a52e37;transform:rotate(-31deg);z-index:-1;opacity:.8;pointer-events:none}
+.impact-stripe::before,.impact-stripe::after{content:"";position:absolute;left:0;display:block;width:100%;height:100%}
+.impact-stripe::before{top:19px;background:#fff8e8;box-shadow:0 0 1px rgba(0,0,0,.45)}
+.impact-stripe::after{top:38px;background:#316cb7}
 .impact-container{padding-top:32px;padding-bottom:17px}
 .impact-topline{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:13px;border-top:1px solid rgba(242,208,121,.6);font-size:11px;letter-spacing:.16em;font-weight:800;color:#f0cb71}
 .impact-topline i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e8bd57;margin-right:8px;box-shadow:0 0 0 4px rgba(232,189,87,.17)}
@@ -93,7 +96,7 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
 .impact-county button{margin-top:9px;width:100%;display:flex;align-items:center;justify-content:space-between;padding:12px;min-height:48px;background:#121212;color:#ffe2a2;border:0;cursor:pointer;font-size:11px;font-weight:900;letter-spacing:.055em}
 .impact-county button:hover{background:#333}.impact-county p{margin:10px 0 0;font-size:11px;line-height:1.45;color:#272522}
 .impact-bottom{display:flex;justify-content:space-between;gap:10px;border-block:1px solid rgba(234,201,127,.4);padding:11px 0;font-size:10px;letter-spacing:.1em;font-weight:800;color:#f4d68f}
-.impact-bottom i{display:inline-block;width:12px;height:3px;margin:0 8px 2px;background:#d65359;transform:rotate(-45deg)}.impact-credit{font-size:9px;color:#c8c4bd;margin:8px 0 0}.impact-credit a{color:inherit;text-decoration:underline}
+.impact-bottom i{display:inline-block;width:24px;height:5px;margin:0 8px 2px;background:linear-gradient(90deg,#d65359 0 33%,#fff8ed 33% 67%,#367fd6 67% 100%);transform:rotate(-25deg)}.impact-credit{font-size:9px;color:#c8c4bd;margin:8px 0 0}.impact-credit a{color:inherit;text-decoration:underline}
 @keyframes impact-appear{from{opacity:.2;transform:scale(1.07)}to{opacity:.82;transform:scale(1)}}
 @media(max-width:1100px){.impact-content h1{font-size:clamp(5rem,9vw,8rem)}.impact-layout{grid-template-columns:minmax(0,1.4fr) minmax(270px,.75fr)}}
 @media(max-width:900px){.impact-layout{grid-template-columns:1fr;gap:18px;min-height:0}.impact-content h1{font-size:clamp(5.6rem,12vw,9rem)}.impact-side{display:grid;grid-template-columns:1fr 1fr;align-items:end;padding-bottom:30px;gap:16px}.impact-county{transform:none}.impact-photo{inset:0 0 20% 0}.impact-hero:before{background:linear-gradient(90deg,rgba(6,7,8,.93),rgba(6,7,8,.64)),linear-gradient(0deg,#0a0a0a,transparent 45%)}}
