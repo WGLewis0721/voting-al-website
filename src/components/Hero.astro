@@ -26,7 +26,20 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
      <a class="impact-button impact-button-primary" target="_blank" rel="noopener noreferrer" href="https://myinfo.alabamavotes.gov/VoterView">FIND MY POLLING PLACE <span aria-hidden="true">↗</span></a>
      <a class="impact-button impact-button-secondary" href={base + 'voter-guide'}>THE 60-SECOND VOTER GUIDE <span aria-hidden="true">→</span></a>
     </div>
-    <div class="impact-stats" aria-label="Election Day essentials"><div><strong>7AM–7PM</strong><span>Local polling hours</span></div><div><strong>PHOTO ID</strong><span>Bring accepted ID</span></div><div><strong>04</strong><span>Statewide amendments</span></div></div>
+    <div class="impact-stats" role="group" aria-label="Election Day essentials">
+      <div class="impact-stat">
+       <div class="impact-stat__heading"><span class="impact-stat__label">POLLING HOURS</span><strong class="impact-stat__value">7 AM–7 PM</strong></div>
+       <span class="impact-stat__detail">Central Time</span>
+      </div>
+      <div class="impact-stat">
+       <div class="impact-stat__heading"><span class="impact-stat__label">VOTER IDENTIFICATION</span><strong class="impact-stat__value">PHOTO ID</strong></div>
+       <span class="impact-stat__detail">Bring accepted ID</span>
+      </div>
+      <div class="impact-stat">
+       <div class="impact-stat__heading"><span class="impact-stat__label">ON THE BALLOT</span><strong class="impact-stat__value">4 AMENDMENTS</strong></div>
+       <span class="impact-stat__detail">Statewide questions</span>
+      </div>
+     </div>
    </div>
    <div class="impact-side">
     <div class="impact-history"><span class="impact-history-eyebrow">HISTORY / MONTGOMERY</span><p><strong>THIS IS MONTGOMERY.</strong> The Alabama State Capitol is where the 1965 Selma-to-Montgomery voting rights march concluded.</p><a href="https://www.nps.gov/semo/learn/historyculture/places.htm" target="_blank" rel="noopener noreferrer">DISCOVER THE HISTORY ↗</a></div>
@@ -80,9 +93,15 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
 .impact-button:hover{transform:translateY(-2px)}
 .impact-button-primary{background:#efc65d;color:#101010;border:2px solid #efc65d}.impact-button-primary:hover{background:#ffe298}
 .impact-button-secondary{background:rgba(44,44,45,.98);color:#fff6e7;border:0}.impact-button-secondary:hover{background:rgba(210,163,69,.2)}
-.impact-stats{display:flex;gap:20px;flex-wrap:wrap;margin-top:25px}
-.impact-stats div{display:flex;flex-direction:column;gap:3px;border-left:1px solid #dfbb63;padding-left:11px}
-.impact-stats strong{font-size:14px}.impact-stats span{font-size:11px;color:var(--impact-muted)}
+/* Important voter details: solid, legible surfaces instead of tiny text on a photo. */
+.impact-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px;max-width:730px}
+.impact-stat{min-width:0;min-height:108px;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:17px 18px;border:0;border-radius:10px;background:#222326;color:#f8f4e9;box-shadow:0 12px 28px rgba(0,0,0,.2)}
+.impact-stat:nth-child(2){background:#2b2927}
+.impact-stat__heading{display:flex;flex-direction:column;gap:6px;min-width:0}
+.impact-stat__label{font-size:10px;line-height:1.35;font-weight:850;letter-spacing:.11em;color:#f3d487}
+.impact-stat__value{font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(26px,2.65vw,37px);font-weight:900;line-height:1;letter-spacing:.01em;white-space:normal;color:inherit}
+.impact-stat__detail{font-size:13px;line-height:1.35;font-weight:500;color:#eeebe4}
+
 .impact-side{display:flex;flex-direction:column;gap:22px;padding-bottom:45px}
 .impact-history{max-width:335px;align-self:flex-end;border:0;background:#1e1e20;padding:17px 20px;border-radius:10px;box-shadow:0 18px 40px #0004}
 .impact-history-eyebrow{display:inline-block;color:#f0d285;font-size:10px;font-weight:900;letter-spacing:.17em;border-bottom:1px solid #d7a94c;padding-bottom:4px}.impact-history p{margin:6px 0 7px;color:#f5eede;font-size:12px;line-height:1.5}
@@ -100,10 +119,10 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
 @keyframes impact-appear{from{opacity:.2;transform:scale(1.07)}to{opacity:.82;transform:scale(1)}}
 @media(max-width:1100px){.impact-content h1{font-size:clamp(5rem,9vw,8rem)}.impact-layout{grid-template-columns:minmax(0,1.4fr) minmax(270px,.75fr)}}
 @media(max-width:900px){.impact-layout{grid-template-columns:1fr;gap:18px;min-height:0}.impact-content h1{font-size:clamp(5.6rem,12vw,9rem)}.impact-side{display:grid;grid-template-columns:1fr 1fr;align-items:end;padding-bottom:30px;gap:16px}.impact-county{transform:none}.impact-photo{inset:0 0 20% 0}.impact-hero:before{background:linear-gradient(90deg,rgba(6,7,8,.93),rgba(6,7,8,.64)),linear-gradient(0deg,#0a0a0a,transparent 45%)}}
-@media(max-width:650px){.impact-topline-right{display:none}.impact-container{padding-top:20px}.impact-layout{padding-top:26px}.impact-content h1{font-size:clamp(4.25rem,14.2vw,6.8rem)}.impact-photo{inset:0 -35% 36% 0}.impact-actions{display:grid;max-width:430px}.impact-stats{gap:10px}.impact-stats div{flex:1;min-width:78px}.impact-stats strong{font-size:12px}.impact-stats span{font-size:10px}.impact-side{grid-template-columns:1fr}.impact-history{max-width:none;align-self:stretch}.impact-bottom span:last-child{display:none}.impact-county h2{font-size:2.8rem}}
+@media(max-width:650px){.impact-topline-right{display:none}.impact-container{padding-top:20px}.impact-layout{padding-top:26px}.impact-content h1{font-size:clamp(4.25rem,14.2vw,6.8rem)}.impact-photo{inset:0 -35% 36% 0}.impact-actions{display:grid;max-width:430px}.impact-stats{grid-template-columns:1fr;gap:8px}.impact-stat{display:grid;grid-template-columns:minmax(0,1fr) minmax(105px,.68fr);align-items:center;min-height:76px;padding:13px 17px;gap:12px}.impact-stat__label{font-size:10px}.impact-stat__value{font-size:clamp(27px,7.5vw,34px)}.impact-stat__detail{font-size:13px;line-height:1.35;text-align:right}.impact-side{grid-template-columns:1fr}.impact-history{max-width:none;align-self:stretch}.impact-bottom span:last-child{display:none}.impact-county h2{font-size:2.8rem}}
 @media(max-width:390px){.impact-content h1{font-size:clamp(3.45rem,13.8vw,4.4rem)}.impact-identity-symbol{width:60px}.impact-identity-copy{padding:9px 10px 9px 2px}.impact-identity-copy strong{font-size:26px}.impact-identity-seal{padding:8px}.impact-identity-seal small{font-size:7px}}
 @media(prefers-reduced-motion:reduce){.impact-photo img{animation:none}.impact-button,.impact-button:hover{transition:none;transform:none}}
-@media(prefers-contrast:more){.impact-hero:before{background:rgba(0,0,0,.84)}.impact-subtitle p,.impact-stats span,.impact-credit{color:#fff}.impact-county{background:#ffe6a1}}
+@media(prefers-contrast:more){.impact-hero:before{background:rgba(0,0,0,.84)}.impact-subtitle p,.impact-stat__detail,.impact-credit{color:#fff}.impact-county{background:#ffe6a1}}
 
 /* One source of truth for hero copy in both appearances. */
 :global(html[data-theme="light"]) .impact-hero {
@@ -114,7 +133,11 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
   color:var(--impact-description);
   text-shadow:none;
 }
-:global(html[data-theme="light"]) .impact-stats span { color:var(--impact-muted); }
+:global(html[data-theme="light"]) .impact-stat{background:#f0dfba;color:#1b2026;box-shadow:0 12px 28px rgba(60,46,23,.14)}
+:global(html[data-theme="light"]) .impact-stat:nth-child(2){background:#e9d5ad}
+:global(html[data-theme="light"]) .impact-stat__label{color:#654611}
+:global(html[data-theme="light"]) .impact-stat__value{color:#171e27}
+:global(html[data-theme="light"]) .impact-stat__detail{color:#353c43}
 :global(html[data-theme="light"]) .impact-history {
   background:#222326;
   color:#f9f0df;
