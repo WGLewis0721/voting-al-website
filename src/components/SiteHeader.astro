@@ -34,7 +34,16 @@ const navLinks = [
       ))}
     </nav>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-1.5 sm:gap-2">
+      <button id="themeToggle" class="color-mode-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+        <svg class="color-mode-toggle__sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>
+        </svg>
+        <svg class="color-mode-toggle__moon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.6 14.4A8.7 8.7 0 0 1 9.6 3.4 8.7 8.7 0 1 0 20.6 14.4Z"/>
+        </svg>
+      </button>
       <button
         id="mobileMenuBtn"
         type="button"
@@ -50,7 +59,7 @@ const navLinks = [
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-      <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn gold text-[11px]">Find Polling Place</a>
+      <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn gold text-[11px]"><span class="hidden sm:inline">Find Polling Place</span><span class="sm:hidden">Find Polls</span></a>
     </div>
   </div>
 
@@ -77,6 +86,22 @@ const navLinks = [
   const iconOpen = document.getElementById('menuIconOpen');
   const iconClose = document.getElementById('menuIconClose');
 
+  const themeButton = document.getElementById('themeToggle');
+  const themeKey = 'alabama-votes-color-mode';
+  const syncThemeButton = () => {
+    const current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+    const label = current === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
+    themeButton?.setAttribute('aria-label', label);
+    themeButton?.setAttribute('title', label);
+  };
+  syncThemeButton();
+  themeButton?.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem(themeKey, next); } catch {}
+    syncThemeButton();
+  });
+
   btn?.addEventListener('click', () => {
     const isOpen = menu.classList.toggle('hidden') === false;
     btn.setAttribute('aria-expanded', String(isOpen));
@@ -84,3 +109,31 @@ const navLinks = [
     iconClose.classList.toggle('hidden', !isOpen);
   });
 </script>
+
+<style>
+  .color-mode-toggle {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    flex:none;
+    border-radius:999px;
+    border:1px solid rgba(228,199,127,.52);
+    background:rgba(255,255,255,.045);
+    color:#f5d88c;
+    cursor:pointer;
+    transition:background .18s ease,border-color .18s ease,transform .18s ease;
+  }
+  .color-mode-toggle:hover { background:rgba(228,199,127,.16); border-color:#e4c77f; transform:translateY(-1px); }
+  .color-mode-toggle__moon { display:none; }
+  html[data-theme="light"] .color-mode-toggle {
+    background:#fff9eb;
+    color:#49330b;
+    border-color:#ba8c40;
+  }
+  html[data-theme="light"] .color-mode-toggle__sun { display:none; }
+  html[data-theme="light"] .color-mode-toggle__moon { display:block; }
+  html[data-theme="light"] .color-mode-toggle:hover { background:#f2e4c6; }
+  @media(prefers-reduced-motion:reduce) {.color-mode-toggle:hover{transform:none}}
+</style>
