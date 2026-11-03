@@ -110,55 +110,59 @@ const headingId = `amendment-${number}-title`;
 <style>
   .amendment-card {
     display:flex; flex-direction:column; min-width:0;
-    padding:1.15rem; border:1px solid rgba(221,179,88,.51); border-radius:1.1rem;
-    background:linear-gradient(138deg,rgba(255,255,255,.1),rgba(255,255,255,.035) 32%,rgba(9,9,10,.84));
-    box-shadow:inset 0 1px 0 rgba(255,236,194,.06),0 14px 45px rgba(0,0,0,.33);
-    color:#f4f1e9;
+    --amend-ink:#f4f1e9; --amend-summary:#e8e2d8; --amend-facts:#e7e1d8;
+    --amend-category:#e5be67; --amend-key-bg:#272521; --amend-key-ink:#ede5d7;
+    --amend-key-title:#f0ca77; --amend-context:#dad4c9; --amend-context-muted:#b6afa5;
+    --amend-link:#f4d693;
+    padding:1.35rem; border:0; border-radius:1.3rem;
+    background:linear-gradient(145deg,#242322 0%,#19191a 53%,#141415 100%);
+    box-shadow:0 14px 45px rgba(0,0,0,.2);
+    color:var(--amend-ink);
   }
   .amendment-card__top { display:grid; grid-template-columns:78px minmax(0,1fr); gap:1rem; align-items:start; }
   .amendment-card__number {
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     padding:.48rem .3rem .7rem; min-height:108px;
-    border:1px solid #efcc72; border-radius:.55rem .55rem .9rem .9rem;
+    border:0; border-radius:.55rem .55rem .9rem .9rem;
     background:linear-gradient(135deg,#f5dda3 0%,#d8aa51 55%,#ac792c 100%);
     color:#19130b; box-shadow:inset 0 0 0 2px rgba(255,251,216,.2),0 5px 15px rgba(0,0,0,.23);
   }
   .amendment-card__number span { font-size:.53rem; font-weight:900; text-transform:uppercase; letter-spacing:.035em; }
   .amendment-card__number strong { font-family:var(--font-display); font-size:3.7rem; line-height:.95; font-weight:700; }
-  .amendment-card__category { margin:0 0 .3rem; text-transform:uppercase; letter-spacing:.14em; font-size:.62rem; color:#e6c57b; font-weight:800; }
+  .amendment-card__category { margin:0 0 .3rem; text-transform:uppercase; letter-spacing:.14em; font-size:.62rem; color:var(--amend-category); font-weight:800; }
   .amendment-card__heading h3 { margin:0; font-family:var(--font-display); font-size:clamp(1.55rem,2.25vw,2.1rem); font-weight:700; line-height:1.02; text-wrap:balance; }
-  .amendment-card__summary { margin:.63rem 0 0; font-size:.86rem; line-height:1.5; color:rgba(255,255,255,.82); }
+  .amendment-card__summary { margin:.63rem 0 0; font-size:.9rem; line-height:1.5; color:var(--amend-summary); }
   .amendment-card__body { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(0,1fr); align-items:stretch; gap:1rem; margin:1.1rem 0 1rem; }
   .amendment-card__facts { display:grid; grid-template-columns:44px minmax(0,1fr); gap:.7rem; }
   .amendment-card__icon { display:flex; justify-content:center; align-items:flex-start; color:#f0cb71; padding-top:.15rem; }
   .amendment-card__icon svg { width:44px; height:44px; }
   .amendment-card__facts ul { display:grid; align-content:start; gap:.48rem; margin:0; padding:0; list-style:none; }
-  .amendment-card__facts li { position:relative; padding-left:.9rem; font-size:.75rem; line-height:1.4; color:#e5e2dc; }
+  .amendment-card__facts li { position:relative; padding-left:.9rem; font-size:.8rem; line-height:1.5; color:var(--amend-facts); }
   .amendment-card__facts li::before { content:''; position:absolute; left:0; top:.5em; width:.36rem; height:.36rem; border-radius:50%; background:#eccb78; }
   .amendment-card__choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.45rem; }
-  .amendment-card__choice { display:flex; flex-direction:column; min-width:0; border-radius:.72rem; overflow:hidden; border:1px solid; background:rgba(0,0,0,.24); }
-  .amendment-card__choice--yes { border-color:rgba(105,167,237,.57); background:linear-gradient(#123a65,#122338); }
-  .amendment-card__choice--no { border-color:rgba(255,124,128,.55); background:linear-gradient(#632426,#331719); }
-  .amendment-card__choice-label { display:flex; align-items:center; justify-content:center; gap:.45rem; min-height:39px; border-bottom:1px solid rgba(255,255,255,.14); background:rgba(18,22,33,.2); font-size:.92rem; font-weight:850; letter-spacing:.035em; }
+  .amendment-card__choice { display:flex; flex-direction:column; min-width:0; border-radius:.8rem; overflow:hidden; border:0; background:rgba(0,0,0,.24); color:#fff; }
+  .amendment-card__choice--yes { background:linear-gradient(155deg,#1d4f79,#102b47); }
+  .amendment-card__choice--no { background:linear-gradient(155deg,#703537,#3c1c20); }
+  .amendment-card__choice-label { display:flex; align-items:center; justify-content:center; gap:.45rem; min-height:42px; background:rgba(0,0,0,.16); font-size:.92rem; font-weight:850; letter-spacing:.035em; }
   .amendment-card__choice-label span { display:inline-flex; width:1.15rem; height:1.15rem; border-radius:50%; justify-content:center; align-items:center; background:rgba(255,255,255,.88); color:#15243b; font-size:.91rem; font-weight:900; }
   .amendment-card__choice--no .amendment-card__choice-label span { color:#702326; }
   .amendment-card__choice p { margin:0; padding:.72rem .6rem; font-size:.72rem; line-height:1.42; color:#fff; }
-  .amendment-card__key { display:flex; align-items:flex-start; gap:.65rem; margin-top:auto; padding:.75rem .8rem; border:1px solid rgba(224,195,133,.34); border-radius:.72rem; background:linear-gradient(125deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); }
+  .amendment-card__key { display:flex; align-items:flex-start; gap:.65rem; margin-top:auto; padding:.75rem .8rem; border:0; border-radius:.82rem; background:var(--amend-key-bg); }
   .amendment-card__key svg { flex:none; color:#f3d381; margin-top:.07rem; }
-  .amendment-card__key p { margin:0; color:#eae5d9; font-size:.74rem; line-height:1.5; }
-  .amendment-card__key strong { color:#edc96f; text-transform:uppercase; letter-spacing:.035em; }
-  .amendment-card__more { margin-top:.65rem; border-bottom:1px solid rgba(255,255,255,.1); }
-  .amendment-card__more summary { display:flex; justify-content:space-between; align-items:center; min-height:44px; gap:.5rem; cursor:pointer; font-weight:700; font-size:.75rem; color:rgba(255,255,255,.76); list-style:none; }
+  .amendment-card__key p { margin:0; color:var(--amend-key-ink); font-size:.81rem; line-height:1.55; }
+  .amendment-card__key strong { color:var(--amend-key-title); text-transform:uppercase; letter-spacing:.035em; }
+  .amendment-card__more { margin-top:.65rem; border-bottom:1px solid rgba(128,115,91,.25); }
+  .amendment-card__more summary { display:flex; justify-content:space-between; align-items:center; min-height:44px; gap:.5rem; cursor:pointer; font-weight:700; font-size:.82rem; color:var(--amend-context); list-style:none; }
   .amendment-card__more summary::-webkit-details-marker { display:none; }
   .amendment-card__more[open] summary span { transform:rotate(180deg); }
-  .amendment-card__more-body { padding:.3rem 0 1rem; color:rgba(255,255,255,.77); font-size:.77rem; line-height:1.6; }
+  .amendment-card__more-body { padding:.3rem 0 1rem; color:var(--amend-context); font-size:.82rem; line-height:1.6; }
   .amendment-card__more-body p { margin:0 0 .55rem; }
-  .amendment-card__fiscal { color:rgba(255,255,255,.6); }
-  .amendment-card__source { align-self:flex-start; display:inline-flex; gap:.45rem; align-items:center; min-height:44px; color:#f4d693; font-size:.77rem; font-weight:650; text-decoration:underline; text-underline-offset:4px; }
+  .amendment-card__fiscal { color:var(--amend-context-muted); }
+  .amendment-card__source { align-self:flex-start; display:inline-flex; gap:.45rem; align-items:center; min-height:44px; color:var(--amend-link); font-size:.82rem; font-weight:650; text-decoration:underline; text-underline-offset:4px; }
   .amendment-card__source:hover { color:#fff2cb; }
   @media(min-width:881px) and (max-width:1120px) { .amendment-card__body { grid-template-columns:1fr; } .amendment-card__facts { grid-template-columns:40px 1fr; } }
   @media(max-width:480px) {
-    .amendment-card { padding:.9rem; }
+    .amendment-card { padding:1rem; }
     .amendment-card__top { grid-template-columns:64px minmax(0,1fr); gap:.75rem; }
     .amendment-card__number { min-height:92px; }
     .amendment-card__number strong { font-size:3.2rem; }
@@ -173,5 +177,47 @@ const headingId = `amendment-${number}-title`;
     .amendment-card__heading h3,.amendment-card__summary,.amendment-card__facts li,.amendment-card__key p { color:white; }
     .amendment-card__choice--yes { background:#113c6a; border-color:#b9dcff; }
     .amendment-card__choice--no { background:#622222; border-color:#ffbcbc; }
+  }
+  /* Palette is component-owned: text stays legible whenever the theme toggles.
+     Surfaces are separated by tone and elevation, never a decorative outline. */
+  :global(html[data-theme="light"]) .amendment-card {
+    --amend-ink:#242525;
+    --amend-summary:#353a40;
+    --amend-facts:#333940;
+    --amend-category:#765018;
+    --amend-key-bg:#e8dec8;
+    --amend-key-ink:#38372f;
+    --amend-key-title:#674814;
+    --amend-context:#424344;
+    --amend-context-muted:#555656;
+    --amend-link:#654513;
+    color:var(--amend-ink);
+    background:#fffefa;
+    border:0;
+    box-shadow:0 16px 40px rgba(69,51,22,.1);
+  }
+  :global(html[data-theme="light"]) .amendment-card__heading h3 {color:#212426;}
+  :global(html[data-theme="light"]) .amendment-card__category {color:var(--amend-category);}
+  :global(html[data-theme="light"]) .amendment-card__summary {color:var(--amend-summary);}
+  :global(html[data-theme="light"]) .amendment-card__facts li {color:var(--amend-facts);}
+  :global(html[data-theme="light"]) .amendment-card__icon {color:#916b23;}
+  :global(html[data-theme="light"]) .amendment-card__facts li::before {background:#bc9236;}
+  :global(html[data-theme="light"]) .amendment-card__choice {border:0; color:#fff;}
+  :global(html[data-theme="light"]) .amendment-card__choice .amendment-card__choice-label {color:#fff;}
+  :global(html[data-theme="light"]) .amendment-card__choice p {color:#fff;}
+  :global(html[data-theme="light"]) .amendment-card__key {background:var(--amend-key-bg); border:0;}
+  :global(html[data-theme="light"]) .amendment-card__key p {color:var(--amend-key-ink);}
+  :global(html[data-theme="light"]) .amendment-card__key strong {color:var(--amend-key-title);}
+  :global(html[data-theme="light"]) .amendment-card__key svg {color:#856020;}
+  :global(html[data-theme="light"]) .amendment-card__more summary,
+  :global(html[data-theme="light"]) .amendment-card__more-body {color:var(--amend-context);}
+  :global(html[data-theme="light"]) .amendment-card__fiscal {color:var(--amend-context-muted);}
+  :global(html[data-theme="light"]) .amendment-card__source {color:var(--amend-link);}
+  :global(html[data-theme="light"]) .amendment-card__source:hover {color:#31230c;}
+  @media(prefers-contrast:more){
+    :global(html[data-theme="light"]) .amendment-card {background:#fff; color:#171717; border:0;}
+    :global(html[data-theme="light"]) .amendment-card__key {background:#e5dac4;}
+    :global(html[data-theme="light"]) .amendment-card__heading h3,
+    :global(html[data-theme="light"]) .amendment-card__facts li {color:#151515;}
   }
 </style>
