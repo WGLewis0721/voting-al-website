@@ -1,17 +1,16 @@
 ---
-const base = import.meta.env.BASE_URL;
+const base=import.meta.env.BASE_URL;
 ---
-
-<section id="journey" class="py-16 md:py-20">
+<section id="journey" class="py-14 md:py-20">
   <div class="section-wrap">
-    <p class="section-eyebrow">Start Your Voter Journey</p>
-    <h2 class="section-title">Choose your next step.</h2>
-    <p class="section-deck">Check registration, find your ballot, review candidates, and understand what's at stake before Election Day.</p>
+    <p class="section-eyebrow">Your 60-second voting checklist</p>
+    <h2 class="section-title">Four things. Then vote.</h2>
+    <p class="section-deck">No guesswork: use official Alabama state resources for your individual voting information.</p>
     <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener"><p class="text-2xl">🪪</p><h3 class="mt-2 text-lg font-semibold">Check Registration</h3><p class="mt-1 text-sm text-white/65">Verify status, polling place, and registration details.</p></a>
-      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}counties`}><p class="text-2xl">🗳️</p><h3 class="mt-2 text-lg font-semibold">Find My Sample Ballot</h3><p class="mt-1 text-sm text-white/65">Select your county and get official SOS ballot links.</p></a>
-      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}candidates`}><p class="text-2xl">⚖️</p><h3 class="mt-2 text-lg font-semibold">See Who's Running</h3><p class="mt-1 text-sm text-white/65">Browse all 2026 primary candidates by race and party.</p></a>
-      <a class="glass-panel block min-h-44 p-4 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}amendments`}><p class="text-2xl">📜</p><h3 class="mt-2 text-lg font-semibold">Review Amendments</h3><p class="mt-1 text-sm text-white/65">Plain-language explainers for the two statewide amendments.</p></a>
+      <a class="glass-panel block min-h-44 p-5 transition hover:-translate-y-1 hover:border-gold/70" href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener"><p class="text-xs font-bold tracking-widest text-gold-soft">01 / LOCATION</p><h3 class="mt-3 text-xl font-semibold">Find your poll</h3><p class="mt-2 text-sm text-white/65">Verify the assigned place where you vote today.</p></a>
+      <a class="glass-panel block min-h-44 p-5 transition hover:-translate-y-1 hover:border-gold/70" href="https://www.sos.alabama.gov/alabama-votes/voter/voter-id" target="_blank" rel="noopener"><p class="text-xs font-bold tracking-widest text-gold-soft">02 / ID</p><h3 class="mt-3 text-xl font-semibold">Bring photo ID</h3><p class="mt-2 text-sm text-white/65">Check acceptable IDs and alternatives.</p></a>
+      <a class="glass-panel block min-h-44 p-5 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}counties`}><p class="text-xs font-bold tracking-widest text-gold-soft">03 / BALLOT</p><h3 class="mt-3 text-xl font-semibold">Review your ballot</h3><p class="mt-2 text-sm text-white/65">Get the official general-election sample ballot.</p></a>
+      <a class="glass-panel block min-h-44 p-5 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}amendments`}><p class="text-xs font-bold tracking-widest text-gold-soft">04 / DECISIONS</p><h3 class="mt-3 text-xl font-semibold">Read amendments</h3><p class="mt-2 text-sm text-white/65">Four measures, explained without endorsements.</p></a>
     </div>
   </div>
 </section>
