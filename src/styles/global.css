@@ -100,8 +100,8 @@ main, header, footer { position: relative; z-index: 2; }
 }
 
 .glass-panel {
-  background: linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
-  border: 1px solid rgba(255,255,255,.15);
+  background: linear-gradient(160deg, #252427, #1a1b1d);
+  border: 0;
   border-radius: 1rem;
   box-shadow: 0 20px 80px rgba(0,0,0,.45);
   backdrop-filter: blur(12px);
@@ -138,8 +138,8 @@ main, header, footer { position: relative; z-index: 2; }
 .party-key__item {
   display:inline-flex; align-items:center; gap:.6rem;
   padding:.42rem .8rem;
-  border:1px solid rgba(var(--party-rgb),.35);
-  background:rgba(var(--party-rgb),.085);
+  border:0;
+  background:rgba(var(--party-rgb),.13);
   border-radius:999px;
   color:var(--party-soft);
   font-weight:600; font-size:.72rem;
@@ -148,12 +148,11 @@ main, header, footer { position: relative; z-index: 2; }
 .party-key__dot { width:.55rem; height:.55rem; border-radius:50%; background:var(--party-accent); box-shadow:0 0 0 3px rgba(var(--party-rgb),.13); flex:none; }
 .party-card {
   position:relative;
-  border-color:rgba(var(--party-rgb),.3);
-  background:linear-gradient(145deg,rgba(var(--party-rgb),.105),rgba(255,255,255,.035) 42%,rgba(255,255,255,.018));
+  border:0;
+  background:linear-gradient(145deg,rgba(var(--party-rgb),.15),#222225 48%,#191a1c);
   transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;
 }
 .party-card:hover {
-  border-color:rgba(var(--party-rgb),.64);
   transform:translateY(-2px);
   box-shadow:0 18px 55px rgba(0,0,0,.38),0 0 24px rgba(var(--party-rgb),.07);
 }
@@ -164,8 +163,8 @@ main, header, footer { position: relative; z-index: 2; }
 .party-card .party-eyebrow { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
 .party-card .party-badge {
   color:var(--party-soft);
-  border:1px solid rgba(var(--party-rgb),.38);
-  background:rgba(var(--party-rgb),.11);
+  border:0;
+  background:rgba(var(--party-rgb),.16);
   border-radius:999px; padding:.23rem .55rem;
   font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
 }
@@ -175,7 +174,8 @@ main, header, footer { position: relative; z-index: 2; }
 .race-panel {
   position:relative;
   background:linear-gradient(130deg,rgba(var(--party-rgb),.105),rgba(var(--party-rgb),.025) 55%,transparent);
-  border-top:3px solid var(--party-accent);
+  border:0;
+  box-shadow:inset 4px 0 0 var(--party-accent);
 }
 .race-panel .race-party-label { display:flex; align-items:center; gap:.5rem; color:var(--party-soft); }
 .race-panel .race-party-label::before { content:''; width:.52rem; height:.52rem; border-radius:50%; background:var(--party-accent); flex:none; }
@@ -212,8 +212,8 @@ html[data-theme="light"] .section-eyebrow { color:#755217; }
 html[data-theme="light"] .section-eyebrow::before { background:#98732d; }
 html[data-theme="light"] .section-deck { color:#50515a; }
 html[data-theme="light"] .glass-panel {
-  background:linear-gradient(155deg,rgba(255,255,255,.94),rgba(251,245,233,.9));
-  border-color:rgba(52,43,28,.19);
+  background:linear-gradient(155deg,#fffefa,#f9f3e8);
+  border:0;
   box-shadow:0 11px 33px rgba(71,53,23,.065);
   backdrop-filter:none;
 }
@@ -245,12 +245,12 @@ html[data-theme="light"] footer#resources {
 }
 html[data-theme="light"] .party-key__item {
   color:var(--party-accent);
-  background:rgba(var(--party-rgb),.08);
-  border-color:rgba(var(--party-rgb),.33);
+  background:rgba(var(--party-rgb),.09);
+  border:0;
 }
 html[data-theme="light"] .party-card {
-  background:linear-gradient(145deg,rgba(var(--party-rgb),.08),#fffdf8 46%,#fffaf0);
-  border-color:rgba(var(--party-rgb),.26);
+  background:linear-gradient(145deg,rgba(var(--party-rgb),.10),#fffefa 46%,#f7f1e5);
+  border:0;
 }
 html[data-theme="light"] .party-card .party-badge,
 html[data-theme="light"] .party-card .party-link,
@@ -303,7 +303,7 @@ html[data-theme="light"] .amendments-secondary-link {color:#70511f;}
 html[data-theme="light"] .amendment-card {
   color:#24221e;
   background:linear-gradient(145deg,#fffefa,#f5efdf);
-  border-color:rgba(158,115,40,.57);
+  border:0;
   box-shadow:0 12px 27px rgba(77,55,16,.095);
 }
 html[data-theme="light"] .amendment-card__category {color:#78531d;}
@@ -325,4 +325,67 @@ html[data-theme="light"] .amendment-card__choice--no {color:white;}
 html[data-theme="light"] .civic-ticker {--color-white:#fff;}
 @media (prefers-reduced-motion: reduce) {
   html[data-theme="light"] .impact-hero .impact-photo img {animation:none}
+}
+
+
+/* Tonal separation, not a stroked box. Keep focus rings on controls. */
+html[data-theme="light"] :is(main, footer, header) [class~="text-white"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/95"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/90"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/85"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/80"] {
+  color:#25282d;
+}
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/75"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/70"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/65"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/60"] {
+  color:#41474d;
+}
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/55"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/50"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/45"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/40"],
+html[data-theme="light"] :is(main, footer, header) [class~="text-white/35"] {
+  color:#555a5f;
+}
+html[data-theme="light"] header.sticky nav a {color:#40434b;}
+html[data-theme="light"] header.sticky nav a:hover,
+html[data-theme="light"] header.sticky nav a[aria-current="page"] {color:#1b1e24;}
+html[data-theme="light"] .party-key__item {border:0;}
+html[data-theme="light"] .party-card .party-badge {border:0;}
+html[data-theme="light"] .race-panel {border:0;box-shadow:inset 4px 0 0 var(--party-accent);}
+html[data-theme="light"] footer#resources a.rounded-lg {
+  border:0;
+  background:#fcf8ee;
+  box-shadow:0 6px 19px rgba(70,49,20,.07);
+}
+html[data-theme="light"] footer#resources .rounded-lg:not(a) {
+  border:0;
+  background:#e4d8bf;
+}
+html[data-theme="light"] main .rounded-xl[class*="border-gold"] {
+  border:0;
+  background:#e9ddc4;
+}
+html[data-theme="light"] .amendment-card__choice,
+html[data-theme="light"] .amendment-card__choice-label,
+html[data-theme="light"] .amendment-card__choice p {
+  color:#fff;
+}
+/* The history callout and moving facts ticker deliberately stay dark.
+   Do not turn their text into ink on dark surfaces. */
+html[data-theme="light"] .impact-history,
+html[data-theme="light"] .impact-history p {color:#f5eede;}
+html[data-theme="light"] .impact-history a {color:#f5d584;}
+html[data-theme="light"] .civic-ticker__header,
+html[data-theme="light"] .civic-ticker__sources {color:#f9f1dd;}
+html[data-theme="light"] .civic-ticker__marquee {color:#141414;}
+@media(prefers-contrast:more){
+  html[data-theme="light"] .glass-panel,
+  html[data-theme="light"] .amendment-card,
+  html[data-theme="light"] .party-card {
+    outline:0;
+    box-shadow:0 0 0 2px #69501f;
+  }
 }
