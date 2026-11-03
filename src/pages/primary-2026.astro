@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import TrustBanner from '../components/TrustBanner.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -43,7 +44,7 @@ const base = import.meta.env.BASE_URL;
     <section class="py-12 md:py-16">
       <div class="section-wrap">
         <div class="rounded-xl border border-gold/30 bg-gold/8 px-5 py-4 text-sm text-white/75">
-          <strong class="text-gold-soft">⚠ Important:</strong> Candidate lists and ballot content can vary by county and district. Always verify your final ballot using the official Alabama Secretary of State sample ballot for your county.
+          <strong class="text-gold-soft"><Icon name="warn" /> Important:</strong> Candidate lists and ballot content can vary by county and district. Always verify your final ballot using the official Alabama Secretary of State sample ballot for your county.
         </div>
       </div>
     </section>
@@ -57,14 +58,14 @@ const base = import.meta.env.BASE_URL;
             <h3 class="font-display text-2xl">Democratic Primary</h3>
             <p class="mt-2 text-sm text-white/75">Democratic voters choose nominees for Governor, Lieutenant Governor, U.S. Senate, Attorney General, Secretary of State, Treasurer, Auditor, Commissioner of Agriculture & Industries, Public Service Commission, and U.S. House districts.</p>
             <a href={`${base}candidates`} class="mt-1 inline-flex min-h-11 items-center gap-1 text-sm text-gold-soft hover:underline">
-              Democratic candidates →
+              Democratic candidates <Icon name="e" />
             </a>
           </div>
           <div class="glass-panel p-5">
             <h3 class="font-display text-2xl">Republican Primary</h3>
             <p class="mt-2 text-sm text-white/75">Republican voters choose nominees for the same statewide and federal offices. The Republican primary includes significantly more contested races and candidates across all offices.</p>
             <a href={`${base}candidates`} class="mt-1 inline-flex min-h-11 items-center gap-1 text-sm text-gold-soft hover:underline">
-              Republican candidates →
+              Republican candidates <Icon name="e" />
             </a>
           </div>
           <div class="glass-panel p-5">
@@ -75,7 +76,7 @@ const base = import.meta.env.BASE_URL;
               <li>Amendment 2 — District Attorney Salary Protection</li>
             </ul>
             <a href={`${base}amendments`} class="mt-1 inline-flex min-h-11 items-center gap-1 text-sm text-gold-soft hover:underline">
-              Amendment details →
+              Amendment details <Icon name="e" />
             </a>
           </div>
           <div class="glass-panel p-5">
@@ -131,17 +132,17 @@ const base = import.meta.env.BASE_URL;
           <a href="https://www.sos.alabama.gov/alabama-votes" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50 hover:text-gold-soft">
             <p class="font-semibold">Alabama Secretary of State</p>
             <p class="mt-1 text-sm text-white/60">2026 Election Information</p>
-            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov →</p>
+            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov <Icon name="e" /></p>
           </a>
           <a href="https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50 hover:text-gold-soft">
             <p class="font-semibold">2026 Primary Sample Ballots</p>
             <p class="mt-1 text-sm text-white/60">Official county-by-county ballots</p>
-            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov →</p>
+            <p class="mt-2 text-xs text-gold-soft/60">sos.alabama.gov <Icon name="e" /></p>
           </a>
           <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="glass-panel block p-4 transition hover:border-gold/50 hover:text-gold-soft">
             <p class="font-semibold">VoterView</p>
             <p class="mt-1 text-sm text-white/60">Check registration & polling place</p>
-            <p class="mt-2 text-xs text-gold-soft/60">alabamavotes.gov →</p>
+            <p class="mt-2 text-xs text-gold-soft/60">alabamavotes.gov <Icon name="e" /></p>
           </a>
         </div>
       </div>

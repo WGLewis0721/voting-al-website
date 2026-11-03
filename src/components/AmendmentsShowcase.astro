@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import AmendmentCard from './AmendmentCard.astro';
 import amendments from '../data/amendments.json';
 
@@ -55,9 +56,9 @@ const officialUrl = 'https://www.sos.alabama.gov/alabama-votes/voter/ballot-meas
       <a class="amendments-primary-link" href={officialUrl} target="_blank" rel="noopener noreferrer">
         <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v6h5M8 13h8M8 17h8"/></svg>
         Read official ballot statements
-        <span aria-hidden="true">↗</span>
+        <Icon name="ne" />
       </a>
-      {compact && <a class="amendments-secondary-link" href={`${base}amendments`}>Explore amendments in detail <span aria-hidden="true">→</span></a>}
+      {compact && <a class="amendments-secondary-link" href={`${base}amendments`}>Explore amendments in detail <Icon name="e" /></a>}
       <p class="amendments-source">Source: <a href={officialUrl} target="_blank" rel="noopener noreferrer">Alabama Secretary of State · Fair Ballot Commission</a></p>
     </div>
   </div>

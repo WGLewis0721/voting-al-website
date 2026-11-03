@@ -428,3 +428,6 @@ html[data-theme="light"] .civic-ticker__marquee {color:#141414;}
     box-shadow:0 0 0 2px #69501f;
   }
 }
+
+/* Inline SVG icons: one arrow style across the whole site, never emoji-capable glyphs. */
+.icon { display:inline-block; flex:none; vertical-align:-.14em; }
