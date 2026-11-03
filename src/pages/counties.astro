@@ -57,7 +57,7 @@ const sosBallotsUrl = 'https://www.sos.alabama.gov/alabama-votes/2026-general-el
           </div>
           <div class="glass-panel p-3 md:p-5 lg:order-1">
             <CountyMap />
-            <p class="mt-3 text-center text-white/60">Small counties hard to tap? Use the county list instead.</p>
+            <p class="mt-3 text-center text-white/60">Use + and - to zoom, drag to move around. Tiny counties zoom in when you tap them.</p>
           </div>
         </div>
       </div>
@@ -101,14 +101,88 @@ const sosBallotsUrl = 'https://www.sos.alabama.gov/alabama-votes/2026-general-el
     const select = document.getElementById('countySelect');
     const btn = document.getElementById('ballotLinkBtn');
     const status = document.getElementById('countyStatus');
-    const svg = document.querySelector('#countyMap svg');
+    const fig = document.getElementById('countyMap');
+    const svg = fig.querySelector('svg');
+    const label = document.getElementById('countyLabel');
     const paths = Array.from(document.querySelectorAll('.county'));
-    const arrow = btn ? btn.querySelector('svg')?.outerHTML ?? '' : '';
+    const zoomInBtn = document.getElementById('zoomIn');
+    const zoomOutBtn = document.getElementById('zoomOut');
+    const whole = document.getElementById('zoomReset');
+    const arrow = btn.querySelector('svg')?.outerHTML ?? '';
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // ---- view box (zoom + pan) ----
+    const [bx, by, bw, bh] = fig.dataset.viewbox.split(' ').map(Number);
+    const MAX_Z = 4;
+    let view = { x: bx, y: by, w: bw, h: bh };
+    let z = 1;
+    const unitsPerPx = () => view.w / svg.clientWidth;
+
+    function clamp(v) {
+      v.x = Math.min(Math.max(v.x, bx), bx + bw - v.w);
+      v.y = Math.min(Math.max(v.y, by), by + bh - v.h);
+      return v;
+    }
+    function apply() {
+      svg.setAttribute('viewBox', `${view.x.toFixed(2)} ${view.y.toFixed(2)} ${view.w.toFixed(2)} ${view.h.toFixed(2)}`);
+      fig.classList.toggle('is-zoomed', z > 1.01);
+      whole.hidden = !(z > 1.01);
+      zoomInBtn.disabled = z >= MAX_Z - 0.01;
+      zoomOutBtn.disabled = z <= 1.01;
+      positionLabel();
+    }
+    function animateTo(target, nextZ) {
+      const from = { ...view };
+      z = nextZ;
+      if (reduce) { view = clamp({ ...target }); apply(); return; }
+      const t0 = performance.now(), dur = 220;
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        view = clamp({ x: from.x + (target.x - from.x) * e, y: from.y + (target.y - from.y) * e, w: from.w + (target.w - from.w) * e, h: from.h + (target.h - from.h) * e });
+        apply();
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+    function zoomTo(nextZ, cx, cy) {
+      nextZ = Math.min(MAX_Z, Math.max(1, nextZ));
+      const w = bw / nextZ, h = bh / nextZ;
+      animateTo({ x: cx - w / 2, y: cy - h / 2, w, h }, nextZ);
+    }
+    const viewCenter = () => [view.x + view.w / 2, view.y + view.h / 2];
+
+    zoomInBtn.addEventListener('click', () => { const [cx, cy] = viewCenter(); zoomTo(z * 1.8, cx, cy); });
+    zoomOutBtn.addEventListener('click', () => { const [cx, cy] = viewCenter(); zoomTo(z / 1.8, cx, cy); });
+    whole.addEventListener('click', () => zoomTo(1, bx + bw / 2, by + bh / 2));
+    window.addEventListener('resize', apply);
+
+    // ---- drag to pan when zoomed ----
+    let drag = null, moved = false;
+    svg.addEventListener('pointerdown', (e) => { if (z > 1.01) { drag = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y, id: e.pointerId }; moved = false; } });
+    svg.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!moved && Math.hypot(dx, dy) > 8) { moved = true; fig.classList.add('is-dragging'); svg.setPointerCapture?.(drag.id); }
+      if (moved) { const u = unitsPerPx(); view = clamp({ ...view, x: drag.vx - dx * u, y: drag.vy - dy * u }); apply(); }
+    });
+    const endDrag = () => { drag = null; fig.classList.remove('is-dragging'); setTimeout(() => { moved = false; }, 0); };
+    svg.addEventListener('pointerup', endDrag);
+    svg.addEventListener('pointercancel', endDrag);
+
+    // ---- selection ----
+    function positionLabel() {
+      const on = paths.find((p) => p.classList.contains('is-selected'));
+      if (!on) { label.textContent = ''; return; }
+      label.textContent = on.dataset.county;
+      label.setAttribute('x', on.dataset.cx);
+      label.setAttribute('y', on.dataset.cy);
+      label.setAttribute('font-size', (14 * unitsPerPx()).toFixed(2));
+      label.style.strokeWidth = '4px';
+    }
     function choose(name) {
       const hit = paths.find((p) => p.dataset.county === name);
       paths.forEach((p) => { const on = p === hit; p.classList.toggle('is-selected', on); p.setAttribute('aria-pressed', String(on)); });
-      if (hit) svg.appendChild(hit); // draw the selected county on top
+      if (hit) { svg.insertBefore(hit, label); }
       if (select) select.value = hit ? name : '';
       if (hit && ballots[name]) {
         btn.href = ballots[name];
@@ -119,16 +193,32 @@ const sosBallotsUrl = 'https://www.sos.alabama.gov/alabama-votes/2026-general-el
         btn.innerHTML = 'Browse all official ballots ' + arrow;
         status.textContent = 'No county selected yet.';
       }
+      positionLabel();
+      return hit;
+    }
+    function centerOn(hit, level) {
+      zoomTo(level, +hit.dataset.cx, +hit.dataset.cy);
     }
 
     paths.forEach((p) => {
-      p.addEventListener('click', () => choose(p.dataset.county));
+      p.addEventListener('click', () => {
+        if (moved) return;
+        const hit = choose(p.dataset.county);
+        // Tiny county on screen? Zoom in on it so neighbours are easy to tap too.
+        const r = p.getBoundingClientRect();
+        if (hit && z < 2.5 && Math.min(r.width, r.height) < 44) centerOn(hit, 3);
+      });
       p.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(p.dataset.county); } });
+      p.addEventListener('focus', () => { if (z > 1.01) { zoomTo(z, +p.dataset.cx, +p.dataset.cy); } });
     });
-    select?.addEventListener('change', () => choose(select.value));
+    select?.addEventListener('change', () => {
+      const hit = choose(select.value);
+      if (hit && z > 1.01) centerOn(hit, z);
+    });
 
     // A county chosen in the homepage hero is carried into this finder.
     const requested = new URLSearchParams(window.location.search).get('county');
     if (requested && paths.some((p) => p.dataset.county === requested)) choose(requested);
+    apply();
   })();
 </script>

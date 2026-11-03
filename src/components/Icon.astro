@@ -1,12 +1,14 @@
 ---
 // Shared inline SVG icons. Used instead of text glyphs (arrows, check, warning, play/pause)
 // because iOS and Android swap many of those characters for colour emoji.
-interface Props { name: 'ne' | 'e' | 'x' | 'warn' | 'check' | 'chevron' | 'play' | 'pause'; }
+interface Props { name: 'ne' | 'e' | 'x' | 'plus' | 'minus' | 'warn' | 'check' | 'chevron' | 'play' | 'pause'; }
 const { name } = Astro.props;
 const paths: Record<string, string> = {
   ne: '<path d="M7 17 17 7"/><path d="M8 7h9v9"/>',
   e: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
   x: '<path d="m6 6 12 12M18 6 6 18"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  minus: '<path d="M5 12h14"/>',
   warn: '<path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 10v4.5"/><path d="M12 17.4v.1"/>',
   check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
   chevron: '<path d="m6 9 6 6 6-6"/>',
