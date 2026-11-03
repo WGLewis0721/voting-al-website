@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import TrustBanner from '../components/TrustBanner.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import NextStep from '../components/NextStep.astro';
 import RaceSection from '../components/RaceSection.astro';
 import candidates from '../data/candidates.json';
 const races=['U.S. Senate','Governor','Lieutenant Governor','Attorney General','Secretary of State','State Treasurer','State Auditor','Commissioner of Agriculture & Industries','Public Service Commission, Place 1','Public Service Commission, Place 2'];
@@ -45,6 +46,7 @@ const sos='https://www.sos.alabama.gov/alabama-votes/voter/election-information/
         </div>
       </div>
     </section>
+  <NextStep />
   </main><SiteFooter />
 </Layout>
 <script is:inline>

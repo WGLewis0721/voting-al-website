@@ -11,7 +11,7 @@
   --color-democratic-soft: #a4ceff;
   --color-graphite-950: #090909;
   --color-graphite-900: #111111;
-  --font-display: "Cormorant Garamond", serif;
+  --font-display: "Barlow Condensed", Impact, "Arial Narrow", sans-serif;
   --font-sans: Outfit, system-ui, sans-serif;
   --shadow-cinematic: 0 20px 80px rgba(0,0,0,.45);
 }
@@ -68,45 +68,76 @@ main, header, footer { position: relative; z-index: 2; }
 
 .section-wrap { margin-inline: auto; width: min(1200px, calc(100% - 2rem)); }
 
+/* Sticker label: the site's one "informal" accent. Small, tilted, high contrast. */
 .section-eyebrow {
-  color: #e4c77f;
+  display: inline-block;
+  width: fit-content;
+  background: #e7ba54;
+  color: #111;
   text-transform: uppercase;
-  letter-spacing: .18em;
-  font-size: .75rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-}
-
-.section-eyebrow::before {
-  content: '';
-  width: 24px;
-  height: 1px;
-  background: #e4c77f;
+  letter-spacing: .12em;
+  font-size: .8125rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: .45rem .7rem .4rem;
+  border-radius: 3px;
+  transform: rotate(-1.4deg);
+  box-shadow: 3px 3px 0 rgba(0,0,0,.55);
+  margin-bottom: .4rem;
 }
 
 .section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: .95;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 6.5vw, 4rem);
+  line-height: .92;
   letter-spacing: -.01em;
-  margin-top: .35rem;
+  margin-top: .8rem;
+}
+
+/* Shared display type: Barlow Condensed everywhere, caps only on short headings. */
+.font-display { font-weight: 800; letter-spacing: -.005em; }
+h1.font-display, h2.font-display { font-weight: 900; text-transform: uppercase; line-height: .92; }
+h1.font-display em, .section-title em, .amendments-title em {
+  font-style: normal;
+  display: inline-block;
+  background: #e7ba54;
+  color: #111;
+  padding: 0 .12em .04em;
+  transform: skewX(-4deg);
+  box-shadow: 5px 5px 0 rgba(0,0,0,.6);
 }
 
 .section-deck {
-  color: rgba(255,255,255,.75);
-  max-width: 66ch;
-  margin-top: .65rem;
+  color: rgba(255,255,255,.82);
+  max-width: 62ch;
+  margin-top: .9rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
 
+/* Readable body copy for every age: nothing in running text below 16px. */
+main p.text-sm, main li.text-sm, main .text-sm p { font-size: 1rem; line-height: 1.6; }
+main p.text-xs { font-size: .875rem; line-height: 1.5; }
+
 .glass-panel {
-  background: linear-gradient(160deg, #252427, #1a1b1d);
-  border: 0;
-  border-radius: 1rem;
-  box-shadow: 0 20px 80px rgba(0,0,0,.45);
-  backdrop-filter: blur(12px);
+  background: #1b1c1f;
+  border: 2px solid rgba(255,255,255,.14);
+  border-radius: .9rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
 }
+/* Anything you can tap gets a hard offset shadow, so "clickable" is obvious (Jakob, Fitts). */
+a.glass-panel, button.glass-panel {
+  border-color: rgba(231,186,84,.55);
+  box-shadow: 6px 6px 0 rgba(231,186,84,.9);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+a.glass-panel:hover, button.glass-panel:hover {
+  transform: translate(-2px,-2px);
+  box-shadow: 8px 8px 0 #e7ba54;
+}
+a.glass-panel:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 #e7ba54; }
 
 *:focus-visible {
   outline: 2px solid #f1d899;
@@ -209,15 +240,21 @@ html[data-theme="light"] body {
     #f7f3eb;
 }
 html[data-theme="light"] body::before { opacity: .045; }
-html[data-theme="light"] .section-eyebrow { color:#755217; }
-html[data-theme="light"] .section-eyebrow::before { background:#98732d; }
-html[data-theme="light"] .section-deck { color:#50515a; }
+html[data-theme="light"] .section-eyebrow { box-shadow:3px 3px 0 rgba(33,24,8,.45); }
+html[data-theme="light"] .section-deck { color:#3b3d44; }
+html[data-theme="light"] h1.font-display em, html[data-theme="light"] .section-title em, html[data-theme="light"] .amendments-title em { box-shadow:5px 5px 0 rgba(33,24,8,.55); }
 html[data-theme="light"] .glass-panel {
-  background:linear-gradient(155deg,#fffefa,#f9f3e8);
-  border:0;
-  box-shadow:0 11px 33px rgba(71,53,23,.065);
+  background:#fffdf7;
+  border:2px solid rgba(53,39,22,.2);
+  box-shadow:0 11px 33px rgba(71,53,23,.08);
   backdrop-filter:none;
 }
+html[data-theme="light"] a.glass-panel, html[data-theme="light"] button.glass-panel {
+  border-color:#21180a;
+  box-shadow:6px 6px 0 #21180a;
+}
+html[data-theme="light"] a.glass-panel:hover { box-shadow:8px 8px 0 #21180a; }
+html[data-theme="light"] a.glass-panel:active { box-shadow:2px 2px 0 #21180a; }
 html[data-theme="light"] .btn.ghost {
   border-color:rgba(76,63,38,.42);
   color:#302f2e;
