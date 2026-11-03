@@ -1,0 +1,47 @@
+---
+// Interactive Alabama county map. Outlines come from src/data/al-county-map.json
+// (see scripts/build-county-map.mjs). Selection logic lives in the page that uses it.
+import map from '../data/al-county-map.json';
+import Icon from './Icon.astro';
+const [[x0, y0], [x1, y1]] = map.bounds as [[number, number], [number, number]];
+const pad = 6;
+const viewBox = `${(x0 - pad).toFixed(1)} ${(y0 - pad).toFixed(1)} ${(x1 - x0 + pad * 2).toFixed(1)} ${(y1 - y0 + pad * 2).toFixed(1)}`;
+const entries = Object.entries(map.counties as Record<string, { d: string }>).sort(([a], [b]) => a.localeCompare(b));
+---
+<figure class="county-map" id="countyMap" data-viewbox={viewBox}>
+  <svg viewBox={viewBox} role="group" aria-label="Map of Alabama's 67 counties. Choose a county to open its official sample ballot." xmlns="http://www.w3.org/2000/svg">
+    {entries.map(([name, c]) => (
+      <path class="county" d={c.d} data-county={name} data-cx={c.cx} data-cy={c.cy} role="button" tabindex="0" aria-label={`${name} County`} aria-pressed="false"><title>{name} County</title></path>
+    ))}
+    <text id="countyLabel" class="county-label" text-anchor="middle" aria-hidden="true"></text>
+  </svg>
+  <div class="map-controls">
+    <button type="button" class="map-ctl" id="zoomIn" aria-label="Zoom in"><Icon name="plus" /></button>
+    <button type="button" class="map-ctl" id="zoomOut" aria-label="Zoom out"><Icon name="minus" /></button>
+  </div>
+  <button type="button" class="map-whole" id="zoomReset" hidden>Show whole state</button>
+</figure>
+<style>
+  .county-map { margin: 0; position: relative; }
+  .county-map svg { display: block; width: 100%; height: auto; max-height: 78vh; margin-inline: auto; overflow: visible; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .county-map.is-zoomed svg { touch-action: none; cursor: grab; }
+  .county-map.is-dragging svg { cursor: grabbing; }
+  .county { fill: #1d1e21; stroke: #e7ba54; stroke-width: 1.4px; vector-effect: non-scaling-stroke; stroke-linejoin: round; cursor: pointer; transition: fill .12s ease; outline: none; }
+  .county:hover { fill: #5b4818; }
+  .county:focus-visible { fill: #5b4818; stroke: #fff; stroke-width: 3px; }
+  .county.is-selected { fill: #e7ba54; stroke: #fff; stroke-width: 2.4px; filter: drop-shadow(4px 5px 0 rgba(0,0,0,.65)); }
+  :global(html[data-theme="light"]) .county { fill: #fffdf7; stroke: #21180a; }
+  :global(html[data-theme="light"]) .county:hover { fill: #f2d99b; }
+  :global(html[data-theme="light"]) .county:focus-visible { fill: #f2d99b; stroke: #000; stroke-width: 3px; }
+  :global(html[data-theme="light"]) .county.is-selected { fill: #e7ba54; stroke: #21180a; filter: drop-shadow(4px 5px 0 rgba(33,24,8,.55)); }
+  .county-label { font-family: Outfit, system-ui, sans-serif; font-weight: 800; fill: #111; stroke: #fff; stroke-width: 4px; paint-order: stroke; stroke-linejoin: round; pointer-events: none; vector-effect: non-scaling-stroke; }
+  .map-controls { position: absolute; top: .5rem; right: .5rem; display: flex; flex-direction: column; gap: .5rem; }
+  .map-ctl { display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; font-size: 1.5rem; background: #e7ba54; color: #111; border: 2px solid #111; border-radius: .6rem; box-shadow: 3px 3px 0 rgba(0,0,0,.6); cursor: pointer; }
+  .map-ctl:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 rgba(0,0,0,.6); }
+  .map-ctl:disabled { opacity: .4; cursor: default; }
+  .map-whole { position: absolute; left: .5rem; top: .5rem; min-height: 3rem; padding: 0 1rem; font-weight: 800; font-size: .875rem; letter-spacing: .04em; text-transform: uppercase; background: #111; color: #f3d487; border: 2px solid #e7ba54; border-radius: .6rem; cursor: pointer; }
+  .map-whole[hidden] { display: none; }
+  :global(html[data-theme="light"]) .map-ctl { border-color: #21180a; box-shadow: 3px 3px 0 rgba(33,24,8,.55); }
+  :global(html[data-theme="light"]) .map-whole { background: #21180a; color: #fff3cf; border-color: #21180a; }
+  @media (prefers-reduced-motion: reduce) { .county { transition: none; } }
+</style>
