@@ -24,13 +24,15 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
     <h2 class="section-title">2026 General Election Candidates.</h2>
     <p class="section-deck">Explore confirmed statewide nominees by party or office. This is a statewide overview, not your full local ballot. For the full race-by-race breakdown, visit the <a href={`${base}candidates`} class="text-gold-soft underline hover:text-gold">Candidates page</a>.</p>
 
+    <div class="party-key mt-5" aria-label="Party color legend"><span class="party-key__item party-dem"><span class="party-key__dot" aria-hidden="true"></span>Democratic · Blue</span><span class="party-key__item party-rep"><span class="party-key__dot" aria-hidden="true"></span>Republican · Red</span></div>
+
     <div class="z-40 mt-8 rounded-2xl border border-white/10 bg-black/70 p-4 backdrop-blur-lg md:sticky md:top-[67px]">
       <div class="grid gap-3 md:grid-cols-[1fr_1fr_1fr_auto]">
         <label class="text-sm text-white/70">Search
           <input id="searchInput" type="search" placeholder="Search candidate..." class="mt-1 w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm" />
         </label>
         <label class="text-sm text-white/70">Party
-          <select id="partyFilter" class="mt-1 w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm">
+          <select id="partyFilter" class="party-filter mt-1 w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm">
             <option value="all">All parties</option>
             <option value="republican">Republican</option>
             <option value="democratic">Democratic</option>
@@ -82,6 +84,7 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
   const applyFilters = debounce(() => {
     const q = searchInput.value.trim().toLowerCase();
     const party = partyFilter.value;
+    partyFilter.dataset.party = party;
     const office = officeFilter.value;
     const hasActiveFilter = !!q || party !== 'all' || office !== 'all';
 
