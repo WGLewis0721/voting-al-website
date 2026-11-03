@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import counties from '../data/counties.json';
 import assets from '../data/assets.json';
 import ballots from '../data/county-ballots.json';
@@ -25,8 +26,8 @@ const photo=assets.external.alabamaCapitolHero.url;
     <h1 id="impact-title"><span>ALABAMA.</span><span>IT'S YOUR</span><span class="impact-invert">ELECTION</span><span>DAY.</span></h1>
     <div class="impact-subtitle"><span class="impact-subtitle-bar" aria-hidden="true"></span><p>One ballot. A lot to understand. Find your polling place, explore your county's candidates and questions, and go in informed.</p></div>
     <div class="impact-actions">
-     <a class="impact-button impact-button-primary" target="_blank" rel="noopener noreferrer" href="https://myinfo.alabamavotes.gov/VoterView">FIND MY POLLING PLACE <span aria-hidden="true">↗</span></a>
-     <a class="impact-button impact-button-secondary" href={base + 'voter-guide'}>THE 60-SECOND VOTER GUIDE <span aria-hidden="true">→</span></a>
+     <a class="impact-button impact-button-primary" target="_blank" rel="noopener noreferrer" href="https://myinfo.alabamavotes.gov/VoterView">FIND MY POLLING PLACE <Icon name="ne" /></a>
+     <a class="impact-button impact-button-secondary" href={base + 'voter-guide'}>THE 60-SECOND VOTER GUIDE <Icon name="e" /></a>
     </div>
     <div class="impact-stats" role="group" aria-label="Election Day essentials">
       <div class="impact-stat">
@@ -44,14 +45,14 @@ const photo=assets.external.alabamaCapitolHero.url;
      </div>
    </div>
    <div class="impact-side">
-    <div class="impact-history"><span class="impact-history-eyebrow">HISTORY / MONTGOMERY</span><p><strong>THIS IS MONTGOMERY.</strong> The Alabama State Capitol is where the 1965 Selma-to-Montgomery voting rights march concluded.</p><a href="https://www.nps.gov/semo/learn/historyculture/places.htm" target="_blank" rel="noopener noreferrer">DISCOVER THE HISTORY ↗</a></div>
+    <div class="impact-history"><span class="impact-history-eyebrow">HISTORY / MONTGOMERY</span><p><strong>THIS IS MONTGOMERY.</strong> The Alabama State Capitol is where the 1965 Selma-to-Montgomery voting rights march concluded.</p><a href="https://www.nps.gov/semo/learn/historyculture/places.htm" target="_blank" rel="noopener noreferrer">DISCOVER THE HISTORY <Icon name="ne" /></a></div>
     <div class="impact-county" id="your-county">
-     <div class="impact-county-kicker"><span>YOUR COUNTY / YOUR BALLOT</span><span aria-hidden="true">↗</span></div>
+     <div class="impact-county-kicker"><span>YOUR COUNTY / YOUR BALLOT</span><Icon name="ne" /></div>
      <h2>Find your part<br/>of Alabama.</h2>
      <form id="impact-county-form" action={base + 'counties#county-finder'} method="get">
       <label for="impact-county-select">Choose your county</label>
       <select id="impact-county-select" name="county" required><option value="">Select from 67 counties</option>{counties.map(county => <option value={county}>{county} County</option>)}</select>
-      <button type="submit">OPEN MY SAMPLE BALLOT <span aria-hidden="true">↗</span></button>
+      <button type="submit">OPEN MY SAMPLE BALLOT <Icon name="ne" /></button>
      </form>
      <p>Opens your county's official sample ballot (PDF) from the Alabama Secretary of State. Your voting district may determine the exact ballot style.</p>
     </div>

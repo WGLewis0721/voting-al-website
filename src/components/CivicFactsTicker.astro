@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 const facts=[
   {kind:'ALABAMA',year:'1846',statement:'Montgomery became Alabama’s capital city.'},
   {kind:'ALABAMA',year:'1851',statement:'The present Alabama State Capitol was completed.'},
@@ -15,7 +16,7 @@ const facts=[
  <div class="civic-ticker__header">
   <div class="section-wrap civic-ticker__header-wrap">
    <div class="civic-ticker__header-title"><svg class="civic-ticker__spark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 5h11v10H4zM18 5h10v10H18zM4 18h11v10H4zM18 18h10v10H18z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M12 12h8v8h-8z" fill="currentColor"/></svg><h2 id="civic-fact-title">DID YOU KNOW?</h2><span class="civic-ticker__header-caption">ALABAMA + U.S. VOTING HISTORY / 01—09</span></div>
-   <button id="civic-ticker-toggle" type="button" aria-pressed="false" aria-label="Pause the moving voting history facts">PAUSE <span aria-hidden="true">Ⅱ</span></button>
+   <button id="civic-ticker-toggle" type="button" aria-pressed="false" aria-label="Pause the moving voting history facts">PAUSE <Icon name="pause" /></button>
   </div>
  </div>
  <div class="civic-ticker__marquee" id="civic-ticker-marquee" aria-label="Historical voting facts">
@@ -32,22 +33,24 @@ const facts=[
   <span>VERIFIED HISTORY, NOT ELECTION ENDORSEMENTS</span>
   <div aria-label="Sources for voting history facts">
    <span>FACT SOURCES:</span>
-   <a href="https://ahc.alabama.gov/AlabamaStateCapitolHistoryFacts.aspx" target="_blank" rel="noopener noreferrer">Alabama Historical Commission ↗</a>
-   <a href="https://archives.alabama.gov/research/guidance/Fast-Facts.aspx" target="_blank" rel="noopener noreferrer">Alabama Archives ↗</a>
-   <a href="https://www.nps.gov/articles/selmatomontgomery.htm" target="_blank" rel="noopener noreferrer">National Park Service ↗</a>
-   <a href="https://www.archives.gov/news/topics/voting-rights" target="_blank" rel="noopener noreferrer">National Archives ↗</a>
-   <a href="https://www.archives.gov/founding-docs/amendments-11-27" target="_blank" rel="noopener noreferrer">Constitutional Amendments ↗</a>
+   <a href="https://ahc.alabama.gov/AlabamaStateCapitolHistoryFacts.aspx" target="_blank" rel="noopener noreferrer">Alabama Historical Commission <Icon name="ne" /></a>
+   <a href="https://archives.alabama.gov/research/guidance/Fast-Facts.aspx" target="_blank" rel="noopener noreferrer">Alabama Archives <Icon name="ne" /></a>
+   <a href="https://www.nps.gov/articles/selmatomontgomery.htm" target="_blank" rel="noopener noreferrer">National Park Service <Icon name="ne" /></a>
+   <a href="https://www.archives.gov/news/topics/voting-rights" target="_blank" rel="noopener noreferrer">National Archives <Icon name="ne" /></a>
+   <a href="https://www.archives.gov/founding-docs/amendments-11-27" target="_blank" rel="noopener noreferrer">Constitutional Amendments <Icon name="ne" /></a>
   </div>
  </div>
 </section>
 <script is:inline>
  const toggle=document.getElementById('civic-ticker-toggle');
  const marquee=document.getElementById('civic-ticker-marquee');
+ const ICON_PLAY='<svg class="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7L8 5Z"/></svg>';
+ const ICON_PAUSE='<svg class="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 5v14M16 5v14"/></svg>';
  toggle?.addEventListener('click',()=>{
    const paused=toggle.getAttribute('aria-pressed')!=='true';
    toggle.setAttribute('aria-pressed',String(paused));
    toggle.setAttribute('aria-label',paused?'Resume moving voting history facts':'Pause the moving voting history facts');
-   toggle.innerHTML=paused?'PLAY <span aria-hidden="true">▶</span>':'PAUSE <span aria-hidden="true">Ⅱ</span>';
+   toggle.innerHTML=paused?'PLAY '+ICON_PLAY:'PAUSE '+ICON_PAUSE;
    marquee?.classList.toggle('civic-ticker__marquee--paused',paused);
  });
 </script>

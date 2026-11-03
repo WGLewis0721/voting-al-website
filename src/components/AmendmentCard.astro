@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 interface Props {
   number: number;
   title: string;
@@ -82,11 +83,11 @@ const headingId = `amendment-${number}-title`;
     </div>
     <div class="amendment-card__choices" aria-label={`Voting options for amendment ${number}`}>
       <div class="amendment-card__choice amendment-card__choice--yes">
-        <div class="amendment-card__choice-label"><span aria-hidden="true">✓</span> YES</div>
+        <div class="amendment-card__choice-label"><span aria-hidden="true"><Icon name="check" /></span> YES</div>
         <p>{yesMeans}</p>
       </div>
       <div class="amendment-card__choice amendment-card__choice--no">
-        <div class="amendment-card__choice-label"><span aria-hidden="true">×</span> NO</div>
+        <div class="amendment-card__choice-label"><span aria-hidden="true"><Icon name="x" /></span> NO</div>
         <p>{noMeans}</p>
       </div>
     </div>
@@ -98,14 +99,14 @@ const headingId = `amendment-${number}-title`;
   </div>
 
   <details class="amendment-card__more">
-    <summary>More context <span aria-hidden="true">⌄</span></summary>
+    <summary>More context <Icon name="chevron" /></summary>
     <div class="amendment-card__more-body">
       <p>{officialSummary}</p>
       <p class="amendment-card__fiscal">{costTaxImpact}</p>
     </div>
   </details>
   <a class="amendment-card__source" href={sourceUrl} target="_blank" rel="noopener noreferrer" aria-label={`Read official ballot statement for Amendment ${number}`}>
-    Read official ballot statement <span aria-hidden="true">↗</span>
+    Read official ballot statement <Icon name="ne" />
   </a>
 </article>
 
@@ -147,6 +148,7 @@ const headingId = `amendment-${number}-title`;
   .amendment-card__choice--no { background:linear-gradient(155deg,#703537,#3c1c20); }
   .amendment-card__choice-label { display:flex; align-items:center; justify-content:center; gap:.45rem; min-height:42px; background:rgba(0,0,0,.16); font-size:.92rem; font-weight:850; letter-spacing:.035em; }
   .amendment-card__choice-label span { display:inline-flex; width:1.15rem; height:1.15rem; border-radius:50%; justify-content:center; align-items:center; background:rgba(255,255,255,.88); color:#15243b; font-size:.91rem; font-weight:900; }
+  .amendment-card__choice-label span .icon { width:.8rem; height:.8rem; stroke-width:3.5; vertical-align:0; }
   .amendment-card__choice--no .amendment-card__choice-label span { color:#702326; }
   .amendment-card__choice p { margin:0; padding:.72rem .6rem; font-size:.75rem; line-height:1.42; color:#fff; }
   .amendment-card__key { display:flex; align-items:flex-start; gap:.65rem; margin-top:auto; padding:.75rem .8rem; border:0; border-radius:.82rem; background:var(--amend-key-bg); }

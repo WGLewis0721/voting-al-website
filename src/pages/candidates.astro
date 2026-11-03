@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import TrustBanner from '../components/TrustBanner.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -19,7 +20,7 @@ const sos='https://www.sos.alabama.gov/alabama-votes/voter/election-information/
         <h1 class="font-display text-5xl leading-[0.9] tracking-tight md:text-7xl">Who's on the<br /><em class="text-gold-soft">ballot today?</em></h1>
         <p class="mt-5 max-w-2xl text-white/70">A nonpartisan snapshot of Democratic and Republican nominees in ten prominent statewide races. This is not the full candidate list for every address or voting district.</p>
         <div class="party-key mt-6" aria-label="Party color legend"><span class="party-key__item party-dem"><span class="party-key__dot" aria-hidden="true"></span>Democratic · Blue</span><span class="party-key__item party-rep"><span class="party-key__dot" aria-hidden="true"></span>Republican · Red</span></div>
-        <div class="mt-6 flex flex-wrap gap-3"><a href="https://www.sos.alabama.gov/alabama-votes/2026-general-election-sample-ballots" target="_blank" rel="noopener" class="btn gold">Check My Official Ballot ↗</a><a href={sos} target="_blank" rel="noopener" class="btn ghost">SOS Candidate Certifications ↗</a></div>
+        <div class="mt-6 flex flex-wrap gap-3"><a href="https://www.sos.alabama.gov/alabama-votes/2026-general-election-sample-ballots" target="_blank" rel="noopener" class="btn gold">Check My Official Ballot <Icon name="ne" /></a><a href={sos} target="_blank" rel="noopener" class="btn ghost">SOS Candidate Certifications <Icon name="ne" /></a></div>
       </div>
     </section>
     <section class="py-6">
@@ -42,7 +43,7 @@ const sos='https://www.sos.alabama.gov/alabama-votes/voter/election-information/
           <p class="section-eyebrow">Beyond these races</p>
           <h2 class="font-display text-3xl">What about my district?</h2>
           <p class="mt-3 text-sm text-white/70">Your ballot may also include U.S. House, Alabama Legislature, judicial offices, local contests, and local amendments. Do not use this statewide overview as a substitute for the official ballot for your address.</p>
-          <a class="btn gold mt-5 inline-flex" href="https://www.sos.alabama.gov/alabama-votes/2026-general-election-sample-ballots" target="_blank" rel="noopener">Find My County Sample Ballot ↗</a>
+          <a class="btn gold mt-5 inline-flex" href="https://www.sos.alabama.gov/alabama-votes/2026-general-election-sample-ballots" target="_blank" rel="noopener">Find My County Sample Ballot <Icon name="ne" /></a>
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import TrustBanner from '../components/TrustBanner.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -32,7 +33,7 @@ const ballotUrl='https://www.sos.alabama.gov/alabama-votes/2026-general-election
           <article class="glass-panel p-5">
             <h3 class="font-display text-3xl">Which ballot applies?</h3>
             <p class="mt-2 text-sm leading-relaxed text-white/70">All four are statewide. Your ballot may also contain local or county-specific constitutional amendments.</p>
-            <a class="mt-4 inline-flex min-h-11 items-center text-sm text-gold-soft underline underline-offset-4" href={ballotUrl} target="_blank" rel="noopener noreferrer">Check official county sample ballots ↗</a>
+            <a class="mt-4 inline-flex min-h-11 items-center text-sm text-gold-soft underline underline-offset-4" href={ballotUrl} target="_blank" rel="noopener noreferrer">Check official county sample ballots <Icon name="ne" /></a>
           </article>
         </div>
       </div>
