@@ -47,7 +47,7 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
  </div>
 </section>
 <style>
-.impact-hero{position:relative;isolation:isolate;overflow:hidden;background:#090a0b;color:#f9f4e5;border-bottom:2px solid #c7a24f;min-height:720px}
+.impact-hero{--impact-description:#f4ece0;--impact-muted:#d4d0c7;position:relative;isolation:isolate;overflow:hidden;background:#090a0b;color:#f9f4e5;border-bottom:0;min-height:720px}
 .impact-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#09090a 0%,#09090a 26%,rgba(9,9,10,.95) 42%,rgba(9,9,10,.46) 78%,rgba(9,9,10,.7) 100%),linear-gradient(0deg,#09090a,transparent 25%);pointer-events:none}
 .impact-photo{position:absolute;inset:0 0 0 30%;z-index:-3;overflow:hidden}
 .impact-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:grayscale(1) contrast(1.2) sepia(.2);opacity:.82;animation:impact-appear 1s ease-out both}
@@ -61,8 +61,8 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
 .impact-topline i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e8bd57;margin-right:8px;box-shadow:0 0 0 4px rgba(232,189,87,.17)}
 .impact-topline-right{color:#eee6d4}
 .impact-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(270px,.75fr);gap:clamp(16px,3vw,40px);min-height:640px;align-items:end;padding-top:37px}
-.impact-content{padding-bottom:37px}.impact-identity{display:inline-flex;align-items:center;position:relative;gap:0;min-height:106px;max-width:100%;background:#f2dfa7;color:#111;border:2px solid #e4b956;outline:3px solid #090909;box-shadow:7px 7px 0 #090909;transform:rotate(-1.15deg);isolation:isolate}
-.impact-identity:after{content:"";position:absolute;inset:6px;z-index:-1;pointer-events:none;border:1px solid rgba(17,17,17,.16)}
+.impact-content{padding-bottom:37px}.impact-identity{display:inline-flex;align-items:center;position:relative;gap:0;min-height:106px;max-width:100%;background:#f2dfa7;color:#111;border:0;border-radius:5px;box-shadow:0 14px 29px rgba(0,0,0,.25);transform:rotate(-1.15deg);isolation:isolate}
+.impact-identity:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(110deg,rgba(255,255,255,.13),transparent 65%)}
 .impact-identity-symbol{display:block;width:79px;height:auto;max-height:99px;flex:none;object-fit:contain;margin:-5px 6px -6px 5px;filter:drop-shadow(1px 3px 0 rgba(12,12,12,.2))}
 .impact-identity-copy{display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;padding:12px 18px 11px 5px}
 .impact-identity-overline{font-size:9px;font-weight:900;letter-spacing:.14em;color:#55452a}
@@ -74,20 +74,20 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
 .impact-content h1 span{display:block;max-width:100%;width:max-content}.impact-content h1 span+span{margin-top:.105em}
 .impact-invert{color:#111;background:#e7ba54;transform:skewX(-4deg);padding:0 .075em .065em;box-shadow:6px 5px 0 #090909}
 .impact-subtitle{display:flex;align-items:stretch;gap:15px;max-width:550px}.impact-subtitle-bar{flex:none;width:5px;background:#edc75e}
-.impact-subtitle p{margin:0;line-height:1.55;font-size:clamp(.98rem,1.4vw,1.15rem);font-weight:500;color:#f4ece0;text-shadow:0 2px 9px #000}
+.impact-subtitle p{margin:0;line-height:1.55;font-size:clamp(.98rem,1.4vw,1.15rem);font-weight:500;color:var(--impact-description);text-shadow:0 2px 9px #000}
 .impact-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .impact-button{display:inline-flex;align-items:center;justify-content:center;gap:15px;min-height:52px;padding:13px 17px;text-decoration:none;font-size:12px;letter-spacing:.04em;font-weight:900;transition:transform .18s,background .18s}
 .impact-button:hover{transform:translateY(-2px)}
 .impact-button-primary{background:#efc65d;color:#101010;border:2px solid #efc65d}.impact-button-primary:hover{background:#ffe298}
-.impact-button-secondary{background:rgba(10,10,10,.77);color:#fff6e7;border:1px solid rgba(255,239,204,.73)}.impact-button-secondary:hover{background:rgba(210,163,69,.2)}
+.impact-button-secondary{background:rgba(44,44,45,.98);color:#fff6e7;border:0}.impact-button-secondary:hover{background:rgba(210,163,69,.2)}
 .impact-stats{display:flex;gap:20px;flex-wrap:wrap;margin-top:25px}
 .impact-stats div{display:flex;flex-direction:column;gap:3px;border-left:1px solid #dfbb63;padding-left:11px}
-.impact-stats strong{font-size:14px}.impact-stats span{font-size:11px;color:#d4d0c7}
+.impact-stats strong{font-size:14px}.impact-stats span{font-size:11px;color:var(--impact-muted)}
 .impact-side{display:flex;flex-direction:column;gap:22px;padding-bottom:45px}
-.impact-history{max-width:335px;align-self:flex-end;border-left:3px solid #e0b85d;background:rgba(6,7,10,.85);padding:13px 17px;box-shadow:0 18px 40px #0006}
+.impact-history{max-width:335px;align-self:flex-end;border:0;background:#1e1e20;padding:17px 20px;border-radius:10px;box-shadow:0 18px 40px #0004}
 .impact-history-eyebrow{display:inline-block;color:#f0d285;font-size:10px;font-weight:900;letter-spacing:.17em;border-bottom:1px solid #d7a94c;padding-bottom:4px}.impact-history p{margin:6px 0 7px;color:#f5eede;font-size:12px;line-height:1.5}
 .impact-history strong{color:#f4cf79;letter-spacing:.06em}.impact-history a{color:#edcb75;font-weight:850;font-size:11px;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:31px}
-.impact-county{background:#eddaa1;color:#101111;padding:18px;border:4px solid #101010;box-shadow:8px 8px 0 #d4aa4c,0 24px 60px #0009;transform:rotate(1deg)}
+.impact-county{background:#eddaa1;color:#101111;padding:22px;border:0;border-radius:12px;box-shadow:0 20px 52px rgba(0,0,0,.29);transform:rotate(1deg)}
 .impact-county-kicker{display:flex;justify-content:space-between;border-bottom:2px solid #151515;padding-bottom:8px;letter-spacing:.095em;font-size:10px;font-weight:900}
 .impact-county-kicker span:last-child{font-size:18px;line-height:.7}
 .impact-county h2{font:900 clamp(2.3rem,3.5vw,3.6rem)/.87 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin:13px 0 19px}
@@ -104,4 +104,32 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
 @media(max-width:390px){.impact-content h1{font-size:clamp(3.45rem,13.8vw,4.4rem)}.impact-identity-symbol{width:60px}.impact-identity-copy{padding:9px 10px 9px 2px}.impact-identity-copy strong{font-size:26px}.impact-identity-seal{padding:8px}.impact-identity-seal small{font-size:7px}}
 @media(prefers-reduced-motion:reduce){.impact-photo img{animation:none}.impact-button,.impact-button:hover{transition:none;transform:none}}
 @media(prefers-contrast:more){.impact-hero:before{background:rgba(0,0,0,.84)}.impact-subtitle p,.impact-stats span,.impact-credit{color:#fff}.impact-county{background:#ffe6a1}}
+
+/* One source of truth for hero copy in both appearances. */
+:global(html[data-theme="light"]) .impact-hero {
+  --impact-description:#252a2f;
+  --impact-muted:#464d52;
+}
+:global(html[data-theme="light"]) .impact-subtitle p {
+  color:var(--impact-description);
+  text-shadow:none;
+}
+:global(html[data-theme="light"]) .impact-stats span { color:var(--impact-muted); }
+:global(html[data-theme="light"]) .impact-history {
+  background:#222326;
+  color:#f9f0df;
+  box-shadow:0 15px 34px rgba(38,37,34,.16);
+}
+:global(html[data-theme="light"]) .impact-county {
+  background:#eed59a;
+  border:0;
+  box-shadow:0 14px 34px rgba(69,50,24,.13);
+}
+:global(html[data-theme="light"]) .impact-button-secondary {
+  color:#24282d;
+  border:0;
+  background:#e8dec9;
+}
+:global(html[data-theme="light"]) .impact-button-secondary:hover {background:#ded0b3;}
+
 </style>
