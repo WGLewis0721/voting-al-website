@@ -10,30 +10,22 @@ interface Candidate {
 }
 
 const { candidate } = Astro.props as { candidate: Candidate };
+const partyClass = candidate.party === 'Democratic' ? 'party-dem' : candidate.party === 'Republican' ? 'party-rep' : '';
 const officeLabel = candidate.district
   ? `${candidate.office} — District ${candidate.district}`
   : candidate.office;
 ---
 
 <article
-  class="candidate glass-panel overflow-hidden"
+  class={`candidate glass-panel party-card overflow-hidden ${partyClass}`}
   data-party={candidate.party.toLowerCase()}
   data-office={candidate.office.toLowerCase()}
   data-district={candidate.district ?? ''}
 >
-  <div
-    class:list={[
-      'h-1',
-      candidate.party === 'Republican'
-        ? 'bg-gradient-to-r from-red-500/90 to-red-400/60'
-        : candidate.party === 'Democratic'
-          ? 'bg-gradient-to-r from-blue-500/90 to-blue-400/60'
-          : 'bg-gradient-to-r from-gold/70 to-gold-soft/40',
-    ]}
-  ></div>
+  <div class="party-accent-bar" aria-hidden="true"></div>
   <div class="p-4">
-    <p class="meta text-[11px] uppercase tracking-[0.16em] text-white/55">{officeLabel} · {candidate.party}</p>
-    <h3 class="name mt-1 font-display text-2xl leading-none">{candidate.name}</h3>
+    <div class="party-eyebrow"><span class="meta text-[11px] uppercase tracking-[0.12em] text-white/60">{officeLabel}</span><span class="party-badge">{candidate.party}</span></div>
+    <h3 class="party-name name mt-3 font-display text-3xl leading-none">{candidate.name}</h3>
     {candidate.notes && <p class="mt-1.5 text-xs text-white/55">{candidate.notes}</p>}
   </div>
   <div class="border-t border-white/10 px-4 py-2.5">
@@ -41,7 +33,7 @@ const officeLabel = candidate.district
       href={candidate.sourceUrl}
       target="_blank"
       rel="noopener"
-      class="inline-flex items-center gap-1 text-[11px] text-white/40 transition hover:text-gold-soft"
+      class="party-link inline-flex items-center gap-1 text-[11px] transition"
     >
       Source: Alabama SOS 2026 election information
       <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
