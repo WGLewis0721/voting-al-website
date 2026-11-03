@@ -4,6 +4,11 @@
   --color-gold: #c7a24f;
   --color-gold-soft: #e4c77f;
   --color-gold-glow: #f1d899;
+  /* 60 / 30 / 5 / 5 palette: graphite / gold / Republican red / Democratic blue */
+  --color-republican: #d65359;
+  --color-republican-soft: #ffa7ac;
+  --color-democratic: #367fd6;
+  --color-democratic-soft: #a4ceff;
   --color-graphite-950: #090909;
   --color-graphite-900: #111111;
   --font-display: "Cormorant Garamond", serif;
@@ -20,6 +25,8 @@ body {
   background:
     radial-gradient(1200px 700px at 90% -10%, rgba(199,162,79,.14), transparent 60%),
     radial-gradient(800px 500px at 0% 20%, rgba(199,162,79,.08), transparent 50%),
+    radial-gradient(600px 520px at 100% 48%, rgba(214,83,89,.035), transparent 75%),
+    radial-gradient(600px 520px at 0% 66%, rgba(54,127,214,.04), transparent 75%),
     #090909;
   color: white;
   font-family: Outfit, system-ui, sans-serif;
@@ -111,4 +118,71 @@ main, header, footer { position: relative; z-index: 2; }
     transition: none !important;
     scroll-behavior: auto !important;
   }
+}
+
+
+/* 2026 party accents: semantic association, never blanket page background.
+   Graphite 60% / gold 30% / Republican red 5% / Democratic blue 5%
+   are visual-hierarchy targets, not assertions about exact rendered pixel counts. */
+.party-dem {
+  --party-accent: var(--color-democratic);
+  --party-soft: var(--color-democratic-soft);
+  --party-rgb: 54, 127, 214;
+}
+.party-rep {
+  --party-accent: var(--color-republican);
+  --party-soft: var(--color-republican-soft);
+  --party-rgb: 214, 83, 89;
+}
+.party-key { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem; }
+.party-key__item {
+  display:inline-flex; align-items:center; gap:.6rem;
+  padding:.42rem .8rem;
+  border:1px solid rgba(var(--party-rgb),.35);
+  background:rgba(var(--party-rgb),.085);
+  border-radius:999px;
+  color:var(--party-soft);
+  font-weight:600; font-size:.72rem;
+  letter-spacing:.04em;
+}
+.party-key__dot { width:.55rem; height:.55rem; border-radius:50%; background:var(--party-accent); box-shadow:0 0 0 3px rgba(var(--party-rgb),.13); flex:none; }
+.party-card {
+  position:relative;
+  border-color:rgba(var(--party-rgb),.3);
+  background:linear-gradient(145deg,rgba(var(--party-rgb),.105),rgba(255,255,255,.035) 42%,rgba(255,255,255,.018));
+  transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.party-card:hover {
+  border-color:rgba(var(--party-rgb),.64);
+  transform:translateY(-2px);
+  box-shadow:0 18px 55px rgba(0,0,0,.38),0 0 24px rgba(var(--party-rgb),.07);
+}
+.party-card .party-accent-bar {
+  height:4px;
+  background:linear-gradient(90deg,var(--party-accent),rgba(var(--party-rgb),.36) 65%,transparent);
+}
+.party-card .party-eyebrow { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
+.party-card .party-badge {
+  color:var(--party-soft);
+  border:1px solid rgba(var(--party-rgb),.38);
+  background:rgba(var(--party-rgb),.11);
+  border-radius:999px; padding:.23rem .55rem;
+  font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+}
+.party-card .party-link { color:var(--party-soft); }
+.party-card .party-link:hover { color:#fff; text-decoration:underline; }
+.party-card .party-name { text-wrap:balance; }
+.race-panel {
+  position:relative;
+  background:linear-gradient(130deg,rgba(var(--party-rgb),.105),rgba(var(--party-rgb),.025) 55%,transparent);
+  border-top:3px solid var(--party-accent);
+}
+.race-panel .race-party-label { display:flex; align-items:center; gap:.5rem; color:var(--party-soft); }
+.race-panel .race-party-label::before { content:''; width:.52rem; height:.52rem; border-radius:50%; background:var(--party-accent); flex:none; }
+.race-panel .race-source { color:var(--party-soft); }
+.race-panel .race-source:hover { color:#fff; text-decoration:underline; }
+.party-filter[data-party="democratic"] { border-color:var(--color-democratic); box-shadow:0 0 0 1px rgba(54,127,214,.25); }
+.party-filter[data-party="republican"] { border-color:var(--color-republican); box-shadow:0 0 0 1px rgba(214,83,89,.25); }
+@media (prefers-reduced-motion:reduce) {
+  .party-card:hover { transform:none; }
 }
