@@ -49,8 +49,9 @@ main, header, footer { position: relative; z-index: 2; }
   border: 1px solid transparent;
   border-radius: 999px;
   padding: .65rem 1.1rem;
+  min-height: 2.75rem;
   text-decoration: none;
-  font-size: .74rem;
+  font-size: .75rem;
   letter-spacing: .09em;
   text-transform: uppercase;
   font-weight: 700;
@@ -71,7 +72,7 @@ main, header, footer { position: relative; z-index: 2; }
   color: #e4c77f;
   text-transform: uppercase;
   letter-spacing: .18em;
-  font-size: .72rem;
+  font-size: .75rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -142,7 +143,7 @@ main, header, footer { position: relative; z-index: 2; }
   background:rgba(var(--party-rgb),.13);
   border-radius:999px;
   color:var(--party-soft);
-  font-weight:600; font-size:.72rem;
+  font-weight:600; font-size:.75rem;
   letter-spacing:.04em;
 }
 .party-key__dot { width:.55rem; height:.55rem; border-radius:50%; background:var(--party-accent); box-shadow:0 0 0 3px rgba(var(--party-rgb),.13); flex:none; }
@@ -166,7 +167,7 @@ main, header, footer { position: relative; z-index: 2; }
   border:0;
   background:rgba(var(--party-rgb),.16);
   border-radius:999px; padding:.23rem .55rem;
-  font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+  font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
 }
 .party-card .party-link { color:var(--party-soft); }
 .party-card .party-link:hover { color:#fff; text-decoration:underline; }
@@ -365,6 +366,9 @@ html[data-theme="light"] footer#resources .rounded-lg:not(a) {
 html[data-theme="light"] main .rounded-xl[class*="border-gold"] {
   border:0;
   background:#e9ddc4;
+}
+html[data-theme="light"] main .rounded-xl[class*="border-gold"] :is(strong, a, .text-gold-soft) {
+  color:#6b4e16;
 }
 html[data-theme="light"] .amendment-card__choice,
 html[data-theme="light"] .amendment-card__choice-label,

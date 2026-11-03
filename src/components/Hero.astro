@@ -1,6 +1,7 @@
 ---
 import counties from '../data/counties.json';
 import assets from '../data/assets.json';
+import ballots from '../data/county-ballots.json';
 const base=import.meta.env.BASE_URL;
 const photo=assets.external.alabamaCapitolHero.url;
 ---
@@ -47,19 +48,31 @@ const photo=assets.external.alabamaCapitolHero.url;
     <div class="impact-county">
      <div class="impact-county-kicker"><span>YOUR COUNTY / YOUR BALLOT</span><span aria-hidden="true">↗</span></div>
      <h2>Find your part<br/>of Alabama.</h2>
-     <form action={base + 'counties#county-finder'} method="get">
+     <form id="impact-county-form" action={base + 'counties#county-finder'} method="get">
       <label for="impact-county-select">Choose your county</label>
       <select id="impact-county-select" name="county" required><option value="">Select from 67 counties</option>{counties.map(county => <option value={county}>{county} County</option>)}</select>
-      <button type="submit">EXPLORE COUNTY BALLOT <span aria-hidden="true">→</span></button>
+      <button type="submit">OPEN MY SAMPLE BALLOT <span aria-hidden="true">↗</span></button>
      </form>
-     <p>Opens your county guide and links to official sample ballots. Your voting district determines the exact ballot style.</p>
+     <p>Opens your county's official sample ballot (PDF) from the Alabama Secretary of State. Your voting district may determine the exact ballot style.</p>
     </div>
    </div>
   </div>
-  <div class="impact-bottom"><span>THE VOTE, EXPLAINED. NO ENDORSEMENTS.</span><span>67 COUNTIES <i aria-hidden="true"></i> ONE STATE</span></div>
+  <div class="impact-bottom"><span>THE VOTE, EXPLAINED.</span><span>67 COUNTIES <i aria-hidden="true"></i> ONE STATE</span></div>
   <p class="impact-credit">Capitol photograph: <a href={assets.external.alabamaCapitolHero.creditUrl} target="_blank" rel="noopener noreferrer">{assets.external.alabamaCapitolHero.credit}</a>, <a href={assets.external.alabamaCapitolHero.licenseUrl} target="_blank" rel="noopener noreferrer">{assets.external.alabamaCapitolHero.license}</a>. Image cropped and tinted.</p>
  </div>
 </section>
+<script is:inline define:vars={{ ballots }}>
+  (() => {
+    const form = document.getElementById('impact-county-form');
+    const select = document.getElementById('impact-county-select');
+    form?.addEventListener('submit', (event) => {
+      const url = ballots[select.value];
+      if (!url) return;
+      event.preventDefault();
+      window.open(url, '_blank', 'noopener');
+    });
+  })();
+</script>
 <style>
 .impact-hero{--impact-description:#f4ece0;--impact-muted:#d4d0c7;position:relative;isolation:isolate;overflow:hidden;background:#090a0b;color:#f9f4e5;border-bottom:0;min-height:720px}
 .impact-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#09090a 0%,#09090a 26%,rgba(9,9,10,.95) 42%,rgba(9,9,10,.46) 78%,rgba(9,9,10,.7) 100%),linear-gradient(0deg,#09090a,transparent 25%);pointer-events:none}
@@ -71,19 +84,19 @@ const photo=assets.external.alabamaCapitolHero.url;
 .impact-stripe::before{top:19px;background:#fff8e8;box-shadow:0 0 1px rgba(0,0,0,.45)}
 .impact-stripe::after{top:38px;background:#316cb7}
 .impact-container{padding-top:32px;padding-bottom:17px}
-.impact-topline{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:13px;border-top:1px solid rgba(242,208,121,.6);font-size:11px;letter-spacing:.16em;font-weight:800;color:#f0cb71}
+.impact-topline{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:13px;border-top:1px solid rgba(242,208,121,.6);font-size:12px;letter-spacing:.16em;font-weight:800;color:#f0cb71}
 .impact-topline i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e8bd57;margin-right:8px;box-shadow:0 0 0 4px rgba(232,189,87,.17)}
 .impact-topline-right{color:#eee6d4}
 .impact-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(270px,.75fr);gap:clamp(16px,3vw,40px);min-height:640px;align-items:end;padding-top:37px}
-.impact-content{padding-bottom:37px}.impact-identity{display:inline-flex;align-items:center;position:relative;gap:0;min-height:106px;max-width:100%;background:#f2dfa7;color:#111;border:0;border-radius:5px;box-shadow:0 14px 29px rgba(0,0,0,.25);transform:rotate(-1.15deg);isolation:isolate}
+.impact-content{padding-bottom:37px}.impact-identity{display:inline-flex;align-items:center;position:relative;gap:0;min-height:106px;max-width:100%;background:#f2dfa7;color:#111;border:0;border-radius:5px;box-shadow:0 14px 29px rgba(0,0,0,.25);isolation:isolate}
 .impact-identity:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(110deg,rgba(255,255,255,.13),transparent 65%)}
 .impact-identity-symbol{display:block;width:79px;height:auto;max-height:99px;flex:none;object-fit:contain;margin:-5px 6px -6px 5px;filter:drop-shadow(1px 3px 0 rgba(12,12,12,.2))}
 .impact-identity-copy{display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;padding:12px 18px 11px 5px}
-.impact-identity-overline{font-size:9px;font-weight:900;letter-spacing:.14em;color:#55452a}
+.impact-identity-overline{font-size:12px;font-weight:900;letter-spacing:.14em;color:#55452a}
 .impact-identity-copy strong{font-family:"Barlow Condensed",Impact,"Arial Narrow",sans-serif;font-size:clamp(26px,3.45vw,38px);font-weight:900;line-height:.9;letter-spacing:.005em;white-space:nowrap}
-.impact-identity-caption{font-size:10px;font-weight:900;letter-spacing:.09em}
+.impact-identity-caption{font-size:12px;font-weight:900;letter-spacing:.09em}
 .impact-identity-seal{align-self:stretch;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1px;padding:11px 12px;border-left:2px solid #141414;background:#171719;color:#f2d383;font-family:"Barlow Condensed",Impact,sans-serif;font-size:31px;font-weight:900;line-height:.9}
-.impact-identity-seal small{font-family:Outfit,sans-serif;font-size:8px;letter-spacing:.025em}
+.impact-identity-seal small{font-family:Outfit,sans-serif;font-size:12px;letter-spacing:.02em}
 .impact-content h1{margin:28px 0 20px;font-family:"Barlow Condensed",Impact,"Arial Narrow",sans-serif;font-size:clamp(5.2rem,9.2vw,10.7rem);line-height:.77;letter-spacing:-.035em;font-weight:900;text-transform:uppercase;filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
 .impact-content h1 span{display:block;max-width:100%;width:max-content}.impact-content h1 span+span{margin-top:.105em}
 .impact-invert{color:#111;background:#e7ba54;transform:skewX(-4deg);padding:0 .075em .065em;box-shadow:6px 5px 0 #090909}
@@ -99,29 +112,29 @@ const photo=assets.external.alabamaCapitolHero.url;
 .impact-stat{min-width:0;min-height:108px;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:17px 18px;border:0;border-radius:10px;background:#222326;color:#f8f4e9;box-shadow:0 12px 28px rgba(0,0,0,.2)}
 .impact-stat:nth-child(2){background:#2b2927}
 .impact-stat__heading{display:flex;flex-direction:column;gap:6px;min-width:0}
-.impact-stat__label{font-size:10px;line-height:1.35;font-weight:850;letter-spacing:.11em;color:#f3d487}
+.impact-stat__label{font-size:12px;line-height:1.35;font-weight:850;letter-spacing:.11em;color:#f3d487}
 .impact-stat__value{font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(26px,2.65vw,37px);font-weight:900;line-height:1;letter-spacing:.01em;white-space:normal;color:inherit}
 .impact-stat__detail{font-size:13px;line-height:1.35;font-weight:500;color:#eeebe4}
 
 .impact-side{display:flex;flex-direction:column;gap:22px;padding-bottom:45px}
 .impact-history{max-width:335px;align-self:flex-end;border:0;background:#1e1e20;padding:17px 20px;border-radius:10px;box-shadow:0 18px 40px #0004}
-.impact-history-eyebrow{display:inline-block;color:#f0d285;font-size:10px;font-weight:900;letter-spacing:.17em;border-bottom:1px solid #d7a94c;padding-bottom:4px}.impact-history p{margin:6px 0 7px;color:#f5eede;font-size:12px;line-height:1.5}
-.impact-history strong{color:#f4cf79;letter-spacing:.06em}.impact-history a{color:#edcb75;font-weight:850;font-size:11px;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:31px}
-.impact-county{background:#eddaa1;color:#101111;padding:22px;border:0;border-radius:12px;box-shadow:0 20px 52px rgba(0,0,0,.29);transform:rotate(1deg)}
-.impact-county-kicker{display:flex;justify-content:space-between;border-bottom:2px solid #151515;padding-bottom:8px;letter-spacing:.095em;font-size:10px;font-weight:900}
+.impact-history-eyebrow{display:inline-block;color:#f0d285;font-size:12px;font-weight:900;letter-spacing:.17em;border-bottom:1px solid #d7a94c;padding-bottom:4px}.impact-history p{margin:6px 0 7px;color:#f5eede;font-size:12px;line-height:1.5}
+.impact-history strong{color:#f4cf79;letter-spacing:.06em}.impact-history a{color:#edcb75;font-weight:850;font-size:12px;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px}
+.impact-county{background:#eddaa1;color:#101111;padding:22px;border:0;border-radius:12px;box-shadow:0 20px 52px rgba(0,0,0,.29)}
+.impact-county-kicker{display:flex;justify-content:space-between;border-bottom:2px solid #151515;padding-bottom:8px;letter-spacing:.095em;font-size:12px;font-weight:900}
 .impact-county-kicker span:last-child{font-size:18px;line-height:.7}
 .impact-county h2{font:900 clamp(2.3rem,3.5vw,3.6rem)/.87 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin:13px 0 19px}
 .impact-county label{font-size:12px;font-weight:800;display:block;margin-bottom:7px}
 .impact-county select{width:100%;min-height:48px;padding:9px;background:#fffef8;border:2px solid #171717;color:#111;font-size:16px;border-radius:0}
-.impact-county button{margin-top:9px;width:100%;display:flex;align-items:center;justify-content:space-between;padding:12px;min-height:48px;background:#121212;color:#ffe2a2;border:0;cursor:pointer;font-size:11px;font-weight:900;letter-spacing:.055em}
-.impact-county button:hover{background:#333}.impact-county p{margin:10px 0 0;font-size:11px;line-height:1.45;color:#272522}
-.impact-bottom{display:flex;justify-content:space-between;gap:10px;border-block:1px solid rgba(234,201,127,.4);padding:11px 0;font-size:10px;letter-spacing:.1em;font-weight:800;color:#f4d68f}
-.impact-bottom i{display:inline-block;width:24px;height:5px;margin:0 8px 2px;background:linear-gradient(90deg,#d65359 0 33%,#fff8ed 33% 67%,#367fd6 67% 100%);transform:rotate(-25deg)}.impact-credit{font-size:9px;color:#c8c4bd;margin:8px 0 0}.impact-credit a{color:inherit;text-decoration:underline}
+.impact-county button{margin-top:9px;width:100%;display:flex;align-items:center;justify-content:space-between;padding:12px;min-height:48px;background:#121212;color:#ffe2a2;border:0;cursor:pointer;font-size:12px;font-weight:900;letter-spacing:.055em}
+.impact-county button:hover{background:#333}.impact-county p{margin:10px 0 0;font-size:12px;line-height:1.45;color:#272522}
+.impact-bottom{display:flex;justify-content:space-between;gap:10px;border-block:1px solid rgba(234,201,127,.4);padding:11px 0;font-size:12px;letter-spacing:.1em;font-weight:800;color:#f4d68f}
+.impact-bottom i{display:inline-block;width:24px;height:5px;margin:0 8px 2px;background:linear-gradient(90deg,#d65359 0 33%,#fff8ed 33% 67%,#367fd6 67% 100%);transform:rotate(-25deg)}.impact-credit{font-size:12px;color:#c8c4bd;margin:8px 0 0}.impact-credit a{color:inherit;text-decoration:underline}
 @keyframes impact-appear{from{opacity:.2;transform:scale(1.07)}to{opacity:.82;transform:scale(1)}}
 @media(max-width:1100px){.impact-content h1{font-size:clamp(5rem,9vw,8rem)}.impact-layout{grid-template-columns:minmax(0,1.4fr) minmax(270px,.75fr)}}
 @media(max-width:900px){.impact-layout{grid-template-columns:1fr;gap:18px;min-height:0}.impact-content h1{font-size:clamp(5.6rem,12vw,9rem)}.impact-side{display:grid;grid-template-columns:1fr 1fr;align-items:end;padding-bottom:30px;gap:16px}.impact-county{transform:none}.impact-photo{inset:0 0 20% 0}.impact-hero:before{background:linear-gradient(90deg,rgba(6,7,8,.93),rgba(6,7,8,.64)),linear-gradient(0deg,#0a0a0a,transparent 45%)}}
-@media(max-width:650px){.impact-topline-right{display:none}.impact-container{padding-top:20px}.impact-layout{padding-top:26px}.impact-content h1{font-size:clamp(4.25rem,14.2vw,6.8rem)}.impact-photo{inset:0 -35% 36% 0}.impact-actions{display:grid;max-width:430px}.impact-stats{grid-template-columns:1fr;gap:8px}.impact-stat{display:grid;grid-template-columns:minmax(0,1fr) minmax(105px,.68fr);align-items:center;min-height:76px;padding:13px 17px;gap:12px}.impact-stat__label{font-size:10px}.impact-stat__value{font-size:clamp(27px,7.5vw,34px)}.impact-stat__detail{font-size:13px;line-height:1.35;text-align:right}.impact-side{grid-template-columns:1fr}.impact-history{max-width:none;align-self:stretch}.impact-bottom span:last-child{display:none}.impact-county h2{font-size:2.8rem}}
-@media(max-width:390px){.impact-content h1{font-size:clamp(3.45rem,13.8vw,4.4rem)}.impact-identity-symbol{width:60px}.impact-identity-copy{padding:9px 10px 9px 2px}.impact-identity-copy strong{font-size:26px}.impact-identity-seal{padding:8px}.impact-identity-seal small{font-size:7px}}
+@media(max-width:650px){.impact-stripe,.impact-identity{display:none}.impact-topline-right{display:none}.impact-container{padding-top:20px}.impact-layout{padding-top:26px}.impact-content h1{font-size:clamp(4.25rem,14.2vw,6.8rem)}.impact-photo{inset:0 -35% 36% 0}.impact-actions{display:grid;max-width:430px}.impact-stats{grid-template-columns:1fr;gap:8px}.impact-stat{display:grid;grid-template-columns:minmax(0,1fr) minmax(105px,.68fr);align-items:center;min-height:76px;padding:13px 17px;gap:12px}.impact-stat__label{font-size:12px}.impact-stat__value{font-size:clamp(27px,7.5vw,34px)}.impact-stat__detail{font-size:13px;line-height:1.35;text-align:right}.impact-side{grid-template-columns:1fr}.impact-history{max-width:none;align-self:stretch}.impact-bottom span:last-child{display:none}.impact-county h2{font-size:2.8rem}}
+@media(max-width:390px){.impact-content h1{font-size:clamp(3.45rem,13.8vw,4.4rem)}.impact-identity-symbol{width:60px}.impact-identity-copy{padding:9px 10px 9px 2px}.impact-identity-copy strong{font-size:26px}.impact-identity-seal{padding:8px}.impact-identity-seal small{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.impact-photo img{animation:none}.impact-button,.impact-button:hover{transition:none;transform:none}}
 @media(prefers-contrast:more){.impact-hero:before{background:rgba(0,0,0,.84)}.impact-subtitle p,.impact-stat__detail,.impact-credit{color:#fff}.impact-county{background:#ffe6a1}}
 

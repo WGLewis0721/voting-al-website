@@ -11,6 +11,9 @@ const {
   title = 'Alabama Votes 2026 — Nonpartisan Voter Guide',
   description = 'Premium, nonpartisan Alabama voter education site for the 2026 elections.'
 } = Astro.props;
+const siteOrigin = Astro.site ?? new URL('https://wglewis0721.github.io');
+const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).href;
+const ogImageUrl = new URL(`${import.meta.env.BASE_URL}${assets.local.ogImage.path}`, siteOrigin).href;
 ---
 
 <!doctype html>
@@ -23,8 +26,14 @@ const {
     <meta property="og:site_name" content="Alabama Votes 2026" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content="https://wglewis0721.github.io/voting-al-website/" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Alabama Votes 2026: a nonpartisan voter guide with the Alabama shield" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="theme-color" content="#101114" />

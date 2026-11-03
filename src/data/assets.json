@@ -10,6 +10,11 @@
       "path": "assets/brand/favicon.svg",
       "type": "image/svg+xml",
       "description": "Browser tab icon, independent Alabama Votes brand"
+    },
+    "ogImage": {
+      "path": "assets/brand/og-image.png",
+      "type": "image/png",
+      "description": "1200x630 social link-preview card: Alabama Votes wordmark and shield; original artwork, no third-party imagery"
     }
   },
   "external": {
