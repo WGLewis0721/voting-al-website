@@ -186,3 +186,143 @@ main, header, footer { position: relative; z-index: 2; }
 @media (prefers-reduced-motion:reduce) {
   .party-card:hover { transform:none; }
 }
+
+
+/* Dual-theme civic design.
+   Light theme uses warm paper and ink, retaining the same hierarchy,
+   party semantics, gold brand, and accessibility affordances.
+   Dark theme remains the original default when JS is unavailable. */
+html[data-theme="light"] {
+  color-scheme: light;
+  --color-white: #24262c;
+  --color-gold-soft: #806025;
+  --color-gold-glow: #8c682a;
+  --color-republican-soft: #9f2932;
+  --color-democratic-soft: #215aa4;
+}
+html[data-theme="light"] body {
+  color: #202128;
+  background:
+    radial-gradient(1000px 610px at 89% -8%,rgba(207,163,71,.17),transparent 66%),
+    radial-gradient(770px 520px at -8% 25%,rgba(190,154,86,.085),transparent 60%),
+    #f7f3eb;
+}
+html[data-theme="light"] body::before { opacity: .045; }
+html[data-theme="light"] .section-eyebrow { color:#755217; }
+html[data-theme="light"] .section-eyebrow::before { background:#98732d; }
+html[data-theme="light"] .section-deck { color:#50515a; }
+html[data-theme="light"] .glass-panel {
+  background:linear-gradient(155deg,rgba(255,255,255,.94),rgba(251,245,233,.9));
+  border-color:rgba(52,43,28,.19);
+  box-shadow:0 11px 33px rgba(71,53,23,.065);
+  backdrop-filter:none;
+}
+html[data-theme="light"] .btn.ghost {
+  border-color:rgba(76,63,38,.42);
+  color:#302f2e;
+  background:rgba(255,255,255,.75);
+}
+html[data-theme="light"] .btn.ghost:hover { background:#efe5ce; }
+html[data-theme="light"] header.sticky {
+  background:rgba(251,247,238,.94);
+  color:#1d2026;
+  border-bottom-color:rgba(53,39,22,.18);
+}
+html[data-theme="light"] #mobileMenu {
+  background:#faf4e8;
+  border-top-color:rgba(53,39,22,.2);
+}
+html[data-theme="light"] :is(.glass-panel,.z-40) :is(input,select,textarea) {
+  color:#22252c;
+  border-color:rgba(58,53,44,.3);
+  background:#fffdf8;
+}
+html[data-theme="light"] :is(.glass-panel,.z-40) :is(input,select,textarea)::placeholder { color:#686b6f; }
+html[data-theme="light"] .z-40:has(input,select) { background:rgba(248,243,233,.96); border-color:rgba(67,50,25,.19); }
+html[data-theme="light"] footer#resources {
+  background:#eee5d4;
+  border-top-color:rgba(93,74,34,.17);
+}
+html[data-theme="light"] .party-key__item {
+  color:var(--party-accent);
+  background:rgba(var(--party-rgb),.08);
+  border-color:rgba(var(--party-rgb),.33);
+}
+html[data-theme="light"] .party-card {
+  background:linear-gradient(145deg,rgba(var(--party-rgb),.08),#fffdf8 46%,#fffaf0);
+  border-color:rgba(var(--party-rgb),.26);
+}
+html[data-theme="light"] .party-card .party-badge,
+html[data-theme="light"] .party-card .party-link,
+html[data-theme="light"] .race-panel .race-party-label,
+html[data-theme="light"] .race-panel .race-source { color:var(--party-soft); }
+html[data-theme="light"] .race-panel {
+  background:linear-gradient(130deg,rgba(var(--party-rgb),.075),rgba(var(--party-rgb),.015) 60%,transparent);
+}
+html[data-theme="light"] .party-card:hover {box-shadow:0 14px 35px rgba(55,42,28,.09);}
+html[data-theme="light"] *:focus-visible { outline-color:#81601d; }
+
+/* The editorial hero has a true daylight photographic treatment. */
+html[data-theme="light"] .impact-hero {
+  --color-white:#24262c;
+  color:#181c22;
+  background:#f5efdf;
+  border-bottom-color:#b68b35;
+}
+html[data-theme="light"] .impact-hero::before {
+  background:linear-gradient(90deg,rgba(250,248,240,.98) 0%,rgba(250,248,240,.93) 30%,rgba(249,244,233,.75) 54%,rgba(246,238,221,.29) 78%,rgba(248,243,231,.62) 100%),
+    linear-gradient(0deg,#f7f3ea 0%,transparent 32%);
+}
+html[data-theme="light"] .impact-photo img { opacity:.52; filter:grayscale(.9) contrast(.9) sepia(.22); }
+html[data-theme="light"] .impact-topline { color:#765416; border-color:rgba(129,94,30,.5); }
+html[data-theme="light"] .impact-topline-right { color:#525047; }
+html[data-theme="light"] .impact-content h1 { filter:drop-shadow(0 1px 2px rgba(255,255,255,.8)); }
+html[data-theme="light"] .impact-subtitle p { color:#343434; text-shadow:none; }
+html[data-theme="light"] .impact-stats div {border-color:#97712f;}
+html[data-theme="light"] .impact-stats span {color:#505056;}
+html[data-theme="light"] .impact-bottom {color:#6e4e1d;border-color:rgba(121,93,36,.35);}
+html[data-theme="light"] .impact-credit {color:#4b443a;}
+html[data-theme="light"] .impact-button-secondary {color:#272321;background:rgba(255,251,241,.84);border-color:#78643d;}
+html[data-theme="light"] .impact-button-secondary:hover {background:#ead8b5;}
+
+/* The amendments themselves become paper cards, while YES/NO remain
+   distinct dark saturated comparison surfaces with explicit labels. */
+html[data-theme="light"] .amendments-showcase {
+  --color-gold-soft:#806025;
+  color:#27231c;
+  background:linear-gradient(180deg,#eee3cb,#f8f4eb 34%,#efe6d5);
+}
+html[data-theme="light"] .amendments-title {color:#201d1b;}
+html[data-theme="light"] .amendments-lede {color:#514c44;}
+html[data-theme="light"] .amendments-kicker {color:#78531a;border-color:#b08c42;}
+html[data-theme="light"] .amendments-hero__capitol {color:#a37e36;}
+html[data-theme="light"] .amendments-disclosure-note {color:#292922;background:rgba(255,255,255,.7);border-color:#b5975d;}
+html[data-theme="light"] .amendments-source {color:#575044;}
+html[data-theme="light"] .amendments-source a {color:#533f23;}
+html[data-theme="light"] .amendments-secondary-link {color:#70511f;}
+html[data-theme="light"] .amendment-card {
+  color:#24221e;
+  background:linear-gradient(145deg,#fffefa,#f5efdf);
+  border-color:rgba(158,115,40,.57);
+  box-shadow:0 12px 27px rgba(77,55,16,.095);
+}
+html[data-theme="light"] .amendment-card__category {color:#78531d;}
+html[data-theme="light"] .amendment-card__summary {color:#393833;}
+html[data-theme="light"] .amendment-card__facts li {color:#3c3933;}
+html[data-theme="light"] .amendment-card__key {background:rgba(218,193,136,.18);border-color:rgba(148,113,47,.35);}
+html[data-theme="light"] .amendment-card__key p {color:#3e3932;}
+html[data-theme="light"] .amendment-card__key strong {color:#79551c;}
+html[data-theme="light"] .amendment-card__more {border-color:rgba(52,43,29,.17);}
+html[data-theme="light"] .amendment-card__more summary {color:#45413c;}
+html[data-theme="light"] .amendment-card__more-body {color:#514c44;}
+html[data-theme="light"] .amendment-card__fiscal {color:#62584b;}
+html[data-theme="light"] .amendment-card__source {color:#76531c;}
+html[data-theme="light"] .amendment-card__choice--yes,
+html[data-theme="light"] .amendment-card__choice--no {color:white;}
+
+/* The moving yellow history strip retains its dark editorial frame
+   in both themes. */
+html[data-theme="light"] .civic-ticker {--color-white:#fff;}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="light"] .impact-hero .impact-photo img {animation:none}
+}
