@@ -26,6 +26,17 @@ const {
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="theme-color" content="#101114" />
+    <script is:inline>
+      (() => {
+        const key = 'alabama-votes-color-mode';
+        let chosen = null;
+        try { chosen = localStorage.getItem(key); } catch {}
+        const systemLight = window.matchMedia?.('(prefers-color-scheme: light)').matches;
+        document.documentElement.dataset.theme =
+          chosen === 'light' || chosen === 'dark' ? chosen : (systemLight ? 'light' : 'dark');
+      })();
+    </script>
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
