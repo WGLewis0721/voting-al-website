@@ -4,7 +4,6 @@ import TrustBanner from '../components/TrustBanner.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import Hero from '../components/Hero.astro';
 import JourneyCards from '../components/JourneyCards.astro';
-import BallotSelector from '../components/BallotSelector.astro';
 import AmendmentsShowcase from '../components/AmendmentsShowcase.astro';
 import CandidateExplorer from '../components/CandidateExplorer.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -19,23 +18,23 @@ const base = import.meta.env.BASE_URL;
     <section class="py-12 md:py-16" aria-labelledby="election-day-essentials">
       <div class="section-wrap">
         <p class="section-eyebrow">Important today</p>
-        <h2 id="election-day-essentials" class="section-title">Before you head out.</h2>
+        <h2 id="election-day-essentials" class="section-title">Before you <em>head out.</em></h2>
         <div class="mt-8 grid gap-4 md:grid-cols-3">
           <article class="glass-panel p-6">
-            <p class="text-xs font-bold uppercase tracking-widest text-gold-soft">The clock</p>
-            <h3 class="mt-3 font-display text-3xl">7 AM – 7 PM</h3>
-            <p class="mt-2 text-sm text-white/70">Polls are open 7 a.m. to 7 p.m. Central. If you are in line by 7 p.m., stay in line to vote.</p>
+            <p class="text-sm font-bold uppercase tracking-widest text-gold-soft">The clock</p>
+            <h3 class="mt-3 font-display text-4xl uppercase leading-none">In line at 7 PM? Stay.</h3>
+            <p class="mt-2 text-white/80">Polls are open 7 a.m. to 7 p.m. Central. If you are in line by 7 p.m., stay in line to vote.</p>
           </article>
           <article class="glass-panel p-6">
-            <p class="text-xs font-bold uppercase tracking-widest text-gold-soft">Your identification</p>
-            <h3 class="mt-3 font-display text-3xl">Photo ID</h3>
-            <p class="mt-2 text-sm text-white/70">An accepted photo ID is required, but voters without one have procedures they can ask poll workers about.</p>
+            <p class="text-sm font-bold uppercase tracking-widest text-gold-soft">No ID with you?</p>
+            <h3 class="mt-3 font-display text-4xl uppercase leading-none">Ask. Do not leave.</h3>
+            <p class="mt-2 text-white/80">An accepted photo ID is required, but voters without one have procedures they can ask poll workers about.</p>
             <a class="mt-1 inline-flex min-h-11 items-center text-sm text-gold-soft underline" href="https://www.sos.alabama.gov/alabama-votes/voter/voter-id" target="_blank" rel="noopener">See accepted IDs and alternatives ↗</a>
           </article>
           <article class="glass-panel p-6">
-            <p class="text-xs font-bold uppercase tracking-widest text-gold-soft">Absentee deadline</p>
-            <h3 class="mt-3 font-display text-3xl">12 PM today</h3>
-            <p class="mt-2 text-sm text-white/70">For standard absentee ballots returned by mail, the county absentee election manager must receive them by noon today. In-person return deadline was November 2.</p>
+            <p class="text-sm font-bold uppercase tracking-widest text-gold-soft">Absentee deadline</p>
+            <h3 class="mt-3 font-display text-4xl uppercase leading-none">Noon today</h3>
+            <p class="mt-2 text-white/80">For standard absentee ballots returned by mail, the county absentee election manager must receive them by noon today. In-person return deadline was November 2.</p>
             <a class="mt-1 inline-flex min-h-11 items-center text-sm text-gold-soft underline" href="https://www.sos.alabama.gov/alabama-votes/voter/absentee-voting" target="_blank" rel="noopener">Check official absentee instructions ↗</a>
           </article>
         </div>
@@ -43,11 +42,10 @@ const base = import.meta.env.BASE_URL;
     </section>
     <div id="who-is-running"><CandidateExplorer /></div>
     <AmendmentsShowcase compact />
-    <BallotSelector />
     <section id="why-it-matters" class="py-14 md:py-20">
       <div class="section-wrap">
         <p class="section-eyebrow">Today's decisions</p>
-        <h2 class="section-title">More than one race.</h2>
+        <h2 class="section-title">More than <em>one race.</em></h2>
         <p class="section-deck">The November 3 general election includes U.S. Senate, governor, other statewide executive offices, Public Service Commission races, congressional and legislative districts, judicial contests, and some local elections. The particular races on your ballot depend on where you live.</p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a href={`${base}voter-guide`} class="btn gold">Election Day Voter Guide</a>

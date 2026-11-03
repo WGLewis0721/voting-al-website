@@ -1,16 +1,35 @@
 ---
 const base=import.meta.env.BASE_URL;
+const steps=[
+  { n:'1', title:'Find where to vote', body:'Look up your assigned polling place.', href:'https://myinfo.alabamavotes.gov/VoterView', external:true },
+  { n:'2', title:'Bring a photo ID', body:'See which IDs count, and what to do if you do not have one.', href:'https://www.sos.alabama.gov/alabama-votes/voter/voter-id', external:true },
+  { n:'3', title:'Look at your ballot', body:'Open your county\'s official sample ballot.', href:'#your-county', external:false },
+  { n:'4', title:'Read the 4 amendments', body:'Plain English, and no telling you how to vote.', href:`${base}amendments`, external:false },
+];
 ---
-<section id="journey" class="py-14 md:py-20">
+<section id="journey" class="py-14 md:py-20" aria-labelledby="journey-title">
   <div class="section-wrap">
     <p class="section-eyebrow">Your 60-second voting checklist</p>
-    <h2 class="section-title">Four things. Then vote.</h2>
-    <p class="section-deck">No guesswork: use official Alabama state resources for your individual voting information.</p>
-    <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-      <a class="glass-panel block min-h-44 p-5 transition hover:-translate-y-1 hover:border-gold/70" href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener"><p class="text-xs font-bold tracking-widest text-gold-soft">01 / LOCATION</p><h3 class="mt-3 text-xl font-semibold">Find your poll</h3><p class="mt-2 text-sm text-white/65">Verify the assigned place where you vote today.</p></a>
-      <a class="glass-panel block min-h-44 p-5 transition hover:-translate-y-1 hover:border-gold/70" href="https://www.sos.alabama.gov/alabama-votes/voter/voter-id" target="_blank" rel="noopener"><p class="text-xs font-bold tracking-widest text-gold-soft">02 / ID</p><h3 class="mt-3 text-xl font-semibold">Bring photo ID</h3><p class="mt-2 text-sm text-white/65">Check acceptable IDs and alternatives.</p></a>
-      <a class="glass-panel block min-h-44 p-5 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}counties`}><p class="text-xs font-bold tracking-widest text-gold-soft">03 / BALLOT</p><h3 class="mt-3 text-xl font-semibold">Review your ballot</h3><p class="mt-2 text-sm text-white/65">Get the official general-election sample ballot.</p></a>
-      <a class="glass-panel block min-h-44 p-5 transition hover:-translate-y-1 hover:border-gold/70" href={`${base}amendments`}><p class="text-xs font-bold tracking-widest text-gold-soft">04 / DECISIONS</p><h3 class="mt-3 text-xl font-semibold">Read amendments</h3><p class="mt-2 text-sm text-white/65">Four measures, explained without endorsements.</p></a>
-    </div>
+    <h2 id="journey-title" class="section-title">Four things. <em>Then vote.</em></h2>
+    <p class="section-deck">Start at 1 and work down. Every step uses official Alabama sources, so you are never guessing.</p>
+    <ol class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {steps.map((s) => (
+        <li>
+          <a class="glass-panel journey-step relative block h-full p-5" href={s.href} {...(s.external ? { target: '_blank', rel: 'noopener' } : {})}>
+            <span class="journey-step__num" aria-hidden="true">{s.n}</span>
+            <span class="journey-step__go" aria-hidden="true">{s.external ? '↗' : '→'}</span>
+            <h3 class="font-display mt-2 text-3xl uppercase leading-none">{s.title}</h3>
+            <p class="mt-3 text-white/75">{s.body}</p>
+          </a>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>
+<style>
+  .journey-step__num { display:inline-flex; align-items:center; justify-content:center; width:3.25rem; height:3.25rem; background:#e7ba54; color:#111; font-family:var(--font-display); font-weight:900; font-size:2.4rem; line-height:1; border-radius:4px; transform:rotate(-3deg); box-shadow:3px 3px 0 rgba(0,0,0,.55); }
+  .journey-step__go { position:absolute; top:1rem; right:1.1rem; font-family:var(--font-display); font-weight:900; font-size:2rem; line-height:1; color:#e7ba54; }
+  :global(html[data-theme="light"]) .journey-step__go { color:#21180a; }
+  .journey-step p { font-size:1rem; line-height:1.55; }
+  :global(html[data-theme="light"]) .journey-step p { color:#3b3d44; }
+</style>

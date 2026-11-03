@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import TrustBanner from '../components/TrustBanner.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import NextStep from '../components/NextStep.astro';
 const links=[
 {title:'Find my polling place',url:'https://myinfo.alabamavotes.gov/VoterView',desc:'Official registration and assigned polling place lookup'},
 {title:'County sample ballots',url:'https://www.sos.alabama.gov/alabama-votes/2026-general-election-sample-ballots',desc:'Official 2026 general-election ballots'},
@@ -60,5 +61,6 @@ const links=[
         <p class="mt-7 rounded-xl border border-white/15 bg-white/5 p-4 text-sm text-white/60">Independent, nonpartisan voter education. Not affiliated with Alabama election officials. Verify all details with official sources. Last reviewed November 3, 2026.</p>
       </div>
     </section>
+  <NextStep />
   </main><SiteFooter />
 </Layout>
