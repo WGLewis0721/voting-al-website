@@ -35,7 +35,7 @@ const sosBallotsUrl = 'https://www.sos.alabama.gov/alabama-votes/2026-general-el
     </section>
 
     <!-- County Selector -->
-    <section class="py-10 md:py-14">
+    <section id="county-finder" class="py-10 md:py-14">
       <div class="section-wrap">
         <p class="section-eyebrow">Sample Ballot Finder</p>
         <h2 class="section-title">Select your county.</h2>
@@ -138,6 +138,12 @@ const sosBallotsUrl = 'https://www.sos.alabama.gov/alabama-votes/2026-general-el
   const ballotInfo = document.getElementById('ballotInfo');
   const base = 'https://www.sos.alabama.gov/alabama-votes/2026-general-election-sample-ballots';
 
+  // A county chosen in the homepage hero is carried into this finder.
+  const requestedCounty = new URLSearchParams(window.location.search).get('county');
+  if (requestedCounty && countySelect && Array.from(countySelect.options).some(option => option.value === requestedCounty)) {
+    countySelect.value = requestedCounty;
+  }
+
   countySelect?.addEventListener('change', () => {
     const county = countySelect.value;
     if (county) {
@@ -150,4 +156,5 @@ const sosBallotsUrl = 'https://www.sos.alabama.gov/alabama-votes/2026-general-el
       ballotInfo?.classList.add('hidden');
     }
   });
+  if (countySelect?.value) countySelect.dispatchEvent(new Event('change'));
 </script>
