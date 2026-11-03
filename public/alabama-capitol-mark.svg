@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 124" role="img" aria-labelledby="title desc">
+<title id="title">Alabama Capitol insignia</title>
+<desc id="desc">An original gold and black architectural illustration of the Alabama State Capitol enclosed in a shield-shaped editorial badge.</desc>
+<defs>
+  <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f7dc90"/>
+    <stop offset=".46" stop-color="#e7b954"/>
+    <stop offset="1" stop-color="#b77d2f"/>
+  </linearGradient>
+  <pattern id="print-dots" width="6" height="6" patternUnits="userSpaceOnUse">
+    <circle cx="1.2" cy="1.2" r=".55" fill="#12120f" fill-opacity=".13"/>
+  </pattern>
+</defs>
+<path d="M4 4H108V105L56 121L4 105Z" fill="#0a0b0d" stroke="#0a0b0d" stroke-width="3"/>
+<path d="M10 9H102V100L56 113L10 100Z" fill="url(#plate)" stroke="#ffdf88" stroke-width="1.5"/>
+<path d="M10 9H102V100L56 113L10 100Z" fill="url(#print-dots)"/>
+<g fill="none" stroke="#17130f" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M56 22V12M52 15H60" stroke-width="2.4"/>
+  <path d="M37 43C38 30 44 25 56 23C68 25 74 30 75 43" stroke-width="2.8"/>
+  <path d="M56 25V43M43 35H69M33 44H79" stroke-width="2.5"/>
+  <path d="M32 47H80L85 54H27L32 47Z" stroke-width="2.2"/>
+  <path d="M24 56H88L92 61H20L24 56Z" stroke-width="2.5"/>
+  <path d="M25 65H87M25 88H87" stroke-width="2.2"/>
+  <path d="M30 65V87M42 65V87M54 65V87M66 65V87M78 65V87" stroke-width="3.3"/>
+  <path d="M21 91H91M18 96H94" stroke-width="3"/>
+</g>
+<path d="M17 103L43 110" stroke="#c34249" stroke-width="3"/>
+<path d="M95 103L69 110" stroke="#3471bd" stroke-width="3"/>
+</svg>
