@@ -7,11 +7,12 @@ const { currentPage = '' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
 const navLinks = [
-  { href: `${base}primary-2026`, label: 'Primary 2026' },
+  
   { href: `${base}candidates`, label: 'Candidates' },
   { href: `${base}amendments`, label: 'Amendments' },
   { href: `${base}counties`, label: 'Counties' },
   { href: `${base}voter-guide`, label: 'Voter Guide' },
+  { href: `${base}primary-2026`, label: 'Primary Archive' },
 ];
 ---
 
@@ -49,7 +50,7 @@ const navLinks = [
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-      <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn gold text-[11px]">Check Registration</a>
+      <a href="https://myinfo.alabamavotes.gov/VoterView" target="_blank" rel="noopener" class="btn gold text-[11px]">Find Polling Place</a>
     </div>
   </div>
 
