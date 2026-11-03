@@ -1,33 +1,29 @@
 ---
 import counties from '../data/counties.json';
+const official='https://www.sos.alabama.gov/alabama-votes/2026-general-election-sample-ballots';
 ---
-
 <section id="ballot" class="py-16 md:py-20">
   <div class="section-wrap">
-    <p class="section-eyebrow">My Ballot</p>
-    <h2 class="section-title">Find your county sample ballot.</h2>
-    <p class="section-deck">Select a county and jump to official Alabama Secretary of State sample ballot resources.</p>
-    <div class="glass-panel mt-8 grid gap-3 p-4 md:grid-cols-[1.4fr_auto] md:items-end">
+    <p class="section-eyebrow">Official County Ballots</p>
+    <h2 class="section-title">Find your sample ballot.</h2>
+    <p class="section-deck">Select your county, then open the Alabama Secretary of State's published November 3 general-election ballots. Your exact ballot also depends on your address and voting district.</p>
+    <div class="glass-panel mt-8 grid gap-3 p-5 md:grid-cols-[1.4fr_auto] md:items-end">
       <div>
-        <label for="county" class="mb-2 block text-sm text-white/80">Select county</label>
-        <select id="county" class="w-full rounded-lg border border-white/20 bg-black/60 px-3 py-2 text-sm">
+        <label for="county" class="mb-2 block text-sm text-white/80">Your county</label>
+        <select id="county" class="w-full rounded-lg border border-white/20 bg-black/60 px-3 py-3 text-sm">
           <option value="">Choose your county...</option>
-          {counties.map((county) => <option value={county}>{county}</option>)}
+          {counties.map(c => <option value={c}>{c} County</option>)}
         </select>
       </div>
-      <a id="ballotLink" href="https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots" target="_blank" rel="noopener" class="btn gold justify-center">Open Sample Ballots</a>
+      <a id="ballotLink" href={official} target="_blank" rel="noopener" class="btn gold justify-center">Open Official Ballots ↗</a>
     </div>
+    <p id="countyHint" class="mt-3 text-sm text-white/55" aria-live="polite">On the official page, choose your county and the correct ballot style for your voting district.</p>
   </div>
 </section>
-
-<script>
-  const county = document.getElementById('county');
-  const ballotLink = document.getElementById('ballotLink');
-
-  county?.addEventListener('change', () => {
-    const value = county.value;
-    const base = 'https://www.sos.alabama.gov/alabama-votes/2026-primary-election-sample-ballots';
-    ballotLink.href = value ? `${base}?county=${encodeURIComponent(value)}` : base;
-    ballotLink.textContent = value ? `Open ${value} Sample Ballot` : 'Open Sample Ballots';
-  });
+<script is:inline>
+const county = document.getElementById('county');
+const hint = document.getElementById('countyHint');
+county?.addEventListener('change', () => {
+  hint.textContent = county.value ? `On the Alabama Secretary of State page, locate ${county.value} County and select the ballot for your district.` : 'On the official page, choose your county and the correct ballot style for your voting district.';
+});
 </script>
