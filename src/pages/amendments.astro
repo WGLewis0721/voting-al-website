@@ -3,42 +3,37 @@ import Layout from '../layouts/Layout.astro';
 import TrustBanner from '../components/TrustBanner.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import AmendmentCard from '../components/AmendmentCard.astro';
-import amendments from '../data/amendments.json';
+import AmendmentsShowcase from '../components/AmendmentsShowcase.astro';
+const ballotUrl='https://www.sos.alabama.gov/alabama-votes/2026-general-election-sample-ballots';
 ---
-<Layout title="2026 General Election · Four Statewide Amendments | Alabama Votes" description="Neutral summaries explaining YES and NO for Alabama statewide constitutional Amendments 1–4 on the November 3, 2026 ballot.">
-  <TrustBanner /><SiteHeader currentPage="Amendments" />
+<Layout
+ title="Four Constitutional Amendments | Alabama Votes 2026"
+ description="Explore Alabama's four November 3, 2026 constitutional amendments with clear summaries, key details, and side-by-side YES / NO outcomes. Read official Fair Ballot Commission statements."
+>
+  <TrustBanner />
+  <SiteHeader currentPage="Amendments" />
   <main id="main">
-    <section class="relative overflow-hidden pb-10 pt-20 md:pt-24">
+    <AmendmentsShowcase />
+    <section class="py-14 md:py-20">
       <div class="section-wrap">
-        <p class="section-eyebrow">November 3, 2026 · General Election</p>
-        <h1 class="font-display text-5xl leading-[0.9] tracking-tight md:text-7xl">Four statewide<br /><em class="text-gold-soft">amendments.</em></h1>
-        <p class="mt-5 max-w-2xl text-white/75">Alabama voters will see four proposed changes to the state constitution today. Explore the subject of each measure and what a YES or NO vote means. Read the official ballot statement before deciding.</p>
-        <div class="mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-widest text-gold-soft"><span class="rounded-full border border-gold/40 px-3 py-2">4 proposed amendments</span><span class="rounded-full border border-gold/40 px-3 py-2">Nonpartisan explanations</span></div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="section-wrap">
-        <p class="rounded-xl border border-gold/30 bg-gold/8 px-5 py-4 text-sm text-white/70">This guide paraphrases the proposals for readability. It does not endorse YES or NO. For the precise language and context, see <a class="text-gold-soft underline" href="https://www.sos.alabama.gov/alabama-votes/voter/ballot-measures/statewide" target="_blank" rel="noopener">the official Alabama Fair Ballot Commission statements ↗</a>.</p>
-      </div>
-    </section>
-    <section class="py-12 md:py-16">
-      <div class="section-wrap">
-        <div class="grid gap-6 md:grid-cols-2">
-          {amendments.map(a => <AmendmentCard number={a.number} title={a.title} election={a.election} officialSummary={a.officialSummary} plainEnglish={a.plainEnglish} yesMeans={a.yesMeans} noMeans={a.noMeans} costTaxImpact={a.costTaxImpact} sourceUrl={a.sourceUrl} />)}
+        <p class="section-eyebrow">How the ballot works</p>
+        <h2 class="section-title">Make each choice on its own terms.</h2>
+        <p class="section-deck">Each constitutional amendment is a separate statewide question. A majority of votes cast on a proposal determines its outcome. Neither this site nor the YES / NO color treatment endorses a position or political party.</p>
+        <div class="mt-7 grid gap-4 md:grid-cols-3">
+          <article class="glass-panel p-5">
+            <h3 class="font-display text-3xl">What does YES mean?</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">YES approves the proposed constitutional change. The exact effect depends on the amendment's language.</p>
+          </article>
+          <article class="glass-panel p-5">
+            <h3 class="font-display text-3xl">What does NO mean?</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">NO rejects that proposal. It does not change the constitution in the way proposed by that measure.</p>
+          </article>
+          <article class="glass-panel p-5">
+            <h3 class="font-display text-3xl">Which ballot applies?</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">All four are statewide. Your ballot may also contain local or county-specific constitutional amendments.</p>
+            <a class="mt-4 inline-flex min-h-11 items-center text-sm text-gold-soft underline underline-offset-4" href={ballotUrl} target="_blank" rel="noopener noreferrer">Check official county sample ballots ↗</a>
+          </article>
         </div>
-      </div>
-    </section>
-    <section class="py-12">
-      <div class="section-wrap">
-        <p class="section-eyebrow">Voting on amendments</p>
-        <h2 class="section-title">Understand the choice.</h2>
-        <div class="mt-6 grid gap-4 md:grid-cols-3">
-          <article class="glass-panel p-5"><h3 class="font-semibold">What changes?</h3><p class="mt-2 text-sm text-white/70">A YES vote approves the specific proposed constitutional change. A NO vote leaves that proposed change unadopted.</p></article>
-          <article class="glass-panel p-5"><h3 class="font-semibold">Who votes?</h3><p class="mt-2 text-sm text-white/70">Registered voters eligible for the statewide general election may vote on all four statewide amendments.</p></article>
-          <article class="glass-panel p-5"><h3 class="font-semibold">Where is the full text?</h3><p class="mt-2 text-sm text-white/70">Use the Secretary of State's Fair Ballot Commission page and your county's official sample ballot.</p></article>
-        </div>
-        <a href="https://www.sos.alabama.gov/alabama-votes/voter/ballot-measures/statewide" target="_blank" rel="noopener" class="btn gold mt-7 inline-flex">Read Official Amendment Statements ↗</a>
       </div>
     </section>
   </main>
