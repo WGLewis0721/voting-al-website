@@ -1,0 +1,80 @@
+---
+const facts=[
+  {kind:'ALABAMA',year:'1846',statement:'Montgomery became Alabama’s capital city.'},
+  {kind:'ALABAMA',year:'1851',statement:'The present Alabama State Capitol was completed.'},
+  {kind:'ALABAMA',year:'67',statement:'Counties make up the state of Alabama.'},
+  {kind:'U.S. HISTORY',year:'1870',statement:'The 15th Amendment prohibited racial discrimination in voting.'},
+  {kind:'U.S. HISTORY',year:'1920',statement:'The 19th Amendment barred sex-based voting restrictions.'},
+  {kind:'U.S. HISTORY',year:'1964',statement:'The 24th Amendment barred poll taxes in federal elections.'},
+  {kind:'ALABAMA',year:'1965',statement:'The Selma-to-Montgomery voting rights march covered 54 miles.'},
+  {kind:'U.S. HISTORY',year:'1965',statement:'The Voting Rights Act was signed into law.'},
+  {kind:'U.S. HISTORY',year:'1971',statement:'The 26th Amendment protected voting rights for citizens age 18 and older.'}
+];
+---
+<section class="civic-ticker" aria-labelledby="civic-fact-title">
+ <div class="civic-ticker__header">
+  <div class="section-wrap civic-ticker__header-wrap">
+   <div class="civic-ticker__header-title"><span class="civic-ticker__spark" aria-hidden="true">✳</span><h2 id="civic-fact-title">DID YOU KNOW?</h2><span class="civic-ticker__header-caption">ALABAMA + U.S. VOTING HISTORY / 01—09</span></div>
+   <button id="civic-ticker-toggle" type="button" aria-pressed="false" aria-label="Pause the moving voting history facts">PAUSE <span aria-hidden="true">Ⅱ</span></button>
+  </div>
+ </div>
+ <div class="civic-ticker__marquee" id="civic-ticker-marquee" aria-label="Historical voting facts">
+  <div class="civic-ticker__track">
+   <div class="civic-ticker__group" role="list">
+    {facts.map(fact=><div class="civic-ticker__fact" role="listitem"><span class="civic-ticker__kind">{fact.kind}</span><strong>{fact.year}</strong><span>{fact.statement}</span><span class="civic-ticker__asterisk" aria-hidden="true">✳</span></div>)}
+   </div>
+   <div class="civic-ticker__group" aria-hidden="true">
+    {facts.map(fact=><div class="civic-ticker__fact"><span class="civic-ticker__kind">{fact.kind}</span><strong>{fact.year}</strong><span>{fact.statement}</span><span class="civic-ticker__asterisk">✳</span></div>)}
+   </div>
+  </div>
+ </div>
+ <div class="section-wrap civic-ticker__sources">
+  <span>VERIFIED HISTORY, NOT ELECTION ENDORSEMENTS</span>
+  <div aria-label="Sources for voting history facts">
+   <span>FACT SOURCES:</span>
+   <a href="https://ahc.alabama.gov/AlabamaStateCapitolHistoryFacts.aspx" target="_blank" rel="noopener noreferrer">Alabama Historical Commission ↗</a>
+   <a href="https://archives.alabama.gov/research/guidance/Fast-Facts.aspx" target="_blank" rel="noopener noreferrer">Alabama Archives ↗</a>
+   <a href="https://www.nps.gov/articles/selmatomontgomery.htm" target="_blank" rel="noopener noreferrer">National Park Service ↗</a>
+   <a href="https://www.archives.gov/news/topics/voting-rights" target="_blank" rel="noopener noreferrer">National Archives ↗</a>
+   <a href="https://www.archives.gov/founding-docs/amendments-11-27" target="_blank" rel="noopener noreferrer">Constitutional Amendments ↗</a>
+  </div>
+ </div>
+</section>
+<script is:inline>
+ const toggle=document.getElementById('civic-ticker-toggle');
+ const marquee=document.getElementById('civic-ticker-marquee');
+ toggle?.addEventListener('click',()=>{
+   const paused=toggle.getAttribute('aria-pressed')!=='true';
+   toggle.setAttribute('aria-pressed',String(paused));
+   toggle.setAttribute('aria-label',paused?'Resume moving voting history facts':'Pause the moving voting history facts');
+   toggle.innerHTML=paused?'PLAY <span aria-hidden="true">▶</span>':'PAUSE <span aria-hidden="true">Ⅱ</span>';
+   marquee?.classList.toggle('civic-ticker__marquee--paused',paused);
+ });
+</script>
+<style>
+.civic-ticker{background:#101010;color:#fff;border-block:2px solid #e2b756;overflow:hidden}
+.civic-ticker__header{background:#121212;border-bottom:1px solid rgba(246,214,124,.35)}
+.civic-ticker__header-wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-block:.75rem}
+.civic-ticker__header-title{display:flex;align-items:center;gap:.85rem;flex-wrap:wrap}
+.civic-ticker__spark{font-size:1.7rem;color:#ecc466}
+.civic-ticker h2{margin:0;font-family:"Barlow Condensed",Impact,sans-serif;font-size:1.75rem;font-weight:900;letter-spacing:.025em}
+.civic-ticker__header-caption{font-size:.67rem;font-weight:800;letter-spacing:.1em;color:#d3b96c}
+.civic-ticker__header button{min-height:44px;border:1px solid rgba(255,232,168,.5);background:transparent;color:#f4d992;font-size:.67rem;letter-spacing:.11em;font-weight:900;cursor:pointer;padding:.55rem .85rem;display:flex;gap:.6rem;align-items:center}
+.civic-ticker__header button:hover{background:#342b18}
+.civic-ticker__marquee{overflow:hidden;touch-action:pan-x;background:#efc45e;color:#111}
+.civic-ticker__track{display:flex;width:max-content;animation:civic-marquee 75s linear infinite}
+.civic-ticker__group{display:flex;align-items:center;flex-shrink:0}
+.civic-ticker__fact{display:flex;align-items:center;flex-shrink:0;gap:.7rem;min-height:81px;padding:0 1rem;font-weight:750;font-size:.95rem;white-space:nowrap}
+.civic-ticker__fact strong{font:900 2rem "Barlow Condensed",Impact,sans-serif;line-height:1}
+.civic-ticker__kind{font-size:.63rem;border:1.5px solid #151515;padding:.36rem .5rem;letter-spacing:.045em;font-weight:900}
+.civic-ticker__asterisk{color:#8f2632;font-size:1.35rem;padding-inline:.5rem}
+.civic-ticker__marquee:hover .civic-ticker__track,.civic-ticker__marquee:focus-within .civic-ticker__track,.civic-ticker__marquee--paused .civic-ticker__track{animation-play-state:paused}
+@keyframes civic-marquee{to{transform:translateX(-50%)}}
+.civic-ticker__sources{display:flex;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;align-items:center;padding-block:.8rem;font-size:.61rem;letter-spacing:.04em}
+.civic-ticker__sources>span{color:#e8c47c;font-weight:800}
+.civic-ticker__sources>div{display:flex;flex-wrap:wrap;gap:.35rem .8rem;align-items:center;color:#aba7a0}
+.civic-ticker__sources a{color:#e3d4af;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){.civic-ticker__header-caption{display:none}.civic-ticker__fact{font-size:.83rem;min-height:70px}.civic-ticker__sources{flex-direction:column;align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.civic-ticker__track{animation:none}.civic-ticker__marquee{overflow-x:auto;scrollbar-width:thin}.civic-ticker__marquee--paused .civic-ticker__track{animation:none}}
+@media(prefers-contrast:more){.civic-ticker__sources a{color:white}.civic-ticker__kind{background:#fff9e8}}
+</style>
