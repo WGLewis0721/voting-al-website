@@ -25,7 +25,7 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
     <div class="impact-county">
      <div class="impact-county-kicker"><span>YOUR COUNTY / YOUR BALLOT</span><span aria-hidden="true">↗</span></div>
      <h2>Find your part<br/>of Alabama.</h2>
-     <form action={base + 'counties'} method="get">
+     <form action={base + 'counties#county-finder'} method="get">
       <label for="impact-county-select">Choose your county</label>
       <select id="impact-county-select" name="county" required><option value="">Select from 67 counties</option>{counties.map(county => <option value={county}>{county} County</option>)}</select>
       <button type="submit">EXPLORE COUNTY BALLOT <span aria-hidden="true">→</span></button>
