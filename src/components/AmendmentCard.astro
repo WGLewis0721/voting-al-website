@@ -10,63 +10,168 @@ interface Props {
   costTaxImpact: string;
   sourceUrl: string;
 }
-
-const {
-  number,
-  title,
-  election,
-  officialSummary,
-  plainEnglish,
-  yesMeans,
-  noMeans,
-  costTaxImpact,
-  sourceUrl,
-} = Astro.props;
+const { number, title, plainEnglish, yesMeans, noMeans, officialSummary, costTaxImpact, sourceUrl } = Astro.props;
+const specifics: Record<number,{ points:string[]; detail:string; label:string }> = {
+  1: {
+    label: 'State government',
+    points: [
+      'Provides an election process for certain lieutenant governor vacancies.',
+      'Addresses how certain state legislative salaries are set.',
+      'Changes approval rules for travel paid with legislative funds.'
+    ],
+    detail: 'Not only a vacancy proposal: it also covers salaries and legislative travel approval.'
+  },
+  2: {
+    label: 'County schools',
+    points: [
+      'Creates a process for neighboring county school systems to combine.',
+      'Requires an impact study of the proposed consolidation.',
+      'Includes local voting and approval procedures before a merger.'
+    ],
+    detail: 'A YES vote would establish a process, not automatically merge any school systems.'
+  },
+  3: {
+    label: 'School policies',
+    points: [
+      'Addresses the daily Pledge of Allegiance in public K–12 schools.',
+      'Allows student-initiated, student-led prayer.',
+      'Student participation in prayer remains voluntary.'
+    ],
+    detail: 'The proposal concerns school-board policies, not mandatory participation in student-led prayer.'
+  },
+  4: {
+    label: 'School policies',
+    points: [
+      'Applies to public K–12 schools.',
+      'Requires a weekly broadcast or approved performance.',
+      'Concerns the first stanza of the national anthem.'
+    ],
+    detail: 'A broadcast or authorized performance fulfills the proposal; it does not require every student to sing.'
+  }
+};
+const info = specifics[number] ?? { points: [], detail: 'Review the official statement before voting.', label: 'Constitutional proposal' };
+const headingId = `amendment-${number}-title`;
 ---
 
-<article class="glass-panel overflow-hidden">
-  <div class="border-b border-white/10 px-5 py-4">
-    <p class="text-xs uppercase tracking-[0.14em] text-gold-soft">{election} · Amendment {number}</p>
-    <h3 class="mt-1.5 font-display text-3xl leading-tight">{title}</h3>
+<article class="amendment-card" aria-labelledby={headingId}>
+  <div class="amendment-card__top">
+    <div class="amendment-card__number" aria-hidden="true">
+      <span>Amendment</span>
+      <strong>{number}</strong>
+    </div>
+    <div class="amendment-card__heading">
+      <p class="amendment-card__category">{info.label}</p>
+      <h3 id={headingId}>{title}</h3>
+      <p class="amendment-card__summary">{plainEnglish}</p>
+    </div>
   </div>
 
-  <div class="p-5">
-    <div class="mb-4">
-      <p class="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45">Plain-English Summary</p>
-      <p class="text-sm text-white/85">{plainEnglish}</p>
-    </div>
-
-    <div class="mb-4 rounded-lg border border-white/10 bg-white/5 p-3">
-      <p class="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">At a glance · read the official text at source</p>
-      <p class="text-sm text-white/65">{officialSummary}</p>
-    </div>
-
-    <div class="mb-3 grid gap-2 sm:grid-cols-2">
-      <div class="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 text-sm">
-        <strong class="text-emerald-300">YES means:</strong>
-        <span class="ml-1 text-white/80">{yesMeans}</span>
+  <div class="amendment-card__body">
+    <div class="amendment-card__facts">
+      <div class="amendment-card__icon" aria-hidden="true">
+        {number === 1 && <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M5 47h46M10 41h36M13 22h30M9 18h38L28 8 9 18ZM16 23v17M24 23v17M32 23v17M40 23v17M7 49h42"/></svg>}
+        {number === 2 && <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M28 15c-6-5-12-6-22-4v30c9-2 16-1 22 4 6-5 13-6 22-4V11c-10-2-16-1-22 4ZM28 15v30M12 19c5-.6 9 .2 12 3M32 22c3-2.5 7-3.3 12-3M12 28c5-.6 9 .2 12 3M32 31c3-2.5 7-3.3 12-3"/></svg>}
+        {number === 3 && <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M7 31h42v7H7zM10 39h36v8H10zM17 30v-9c0-5 4-9 11-9s11 4 11 9v9M25 14v-6M31 14V8M21 7h14M8 49h40"/></svg>}
+        {number === 4 && <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 7v42M14 11c9-6 17 6 30 0v23c-12 6-20-6-30 0M18 17c8-3 13 5 23 2M18 25c8-3 13 5 23 2"/></svg>}
       </div>
-      <div class="rounded-lg border border-white/20 bg-white/5 p-3 text-sm">
-        <strong class="text-white/70">NO means:</strong>
-        <span class="ml-1 text-white/80">{noMeans}</span>
+      <ul>
+        {info.points.map(point => <li>{point}</li>)}
+      </ul>
+    </div>
+    <div class="amendment-card__choices" aria-label={`Voting options for amendment ${number}`}>
+      <div class="amendment-card__choice amendment-card__choice--yes">
+        <div class="amendment-card__choice-label"><span aria-hidden="true">✓</span> YES</div>
+        <p>{yesMeans}</p>
+      </div>
+      <div class="amendment-card__choice amendment-card__choice--no">
+        <div class="amendment-card__choice-label"><span aria-hidden="true">×</span> NO</div>
+        <p>{noMeans}</p>
       </div>
     </div>
-
-    <div class="mb-4 rounded-lg border border-gold/25 bg-gold/8 p-3 text-sm text-white/75">
-      <strong class="text-gold-soft">Fiscal impact:</strong>
-      <span class="ml-1">{costTaxImpact}</span>
-    </div>
-
-    <a
-      href={sourceUrl}
-      target="_blank"
-      rel="noopener"
-      class="inline-flex items-center gap-1 text-[11px] text-white/40 transition hover:text-gold-soft"
-    >
-      Source: Alabama Secretary of State — Statewide Ballot Measures
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-      </svg>
-    </a>
   </div>
+
+  <div class="amendment-card__key">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m3 12 9-9h9v9l-9 9-9-9Z"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+    <p><strong>Key detail:</strong> {info.detail}</p>
+  </div>
+
+  <details class="amendment-card__more">
+    <summary>More context <span aria-hidden="true">⌄</span></summary>
+    <div class="amendment-card__more-body">
+      <p>{officialSummary}</p>
+      <p class="amendment-card__fiscal">{costTaxImpact}</p>
+    </div>
+  </details>
+  <a class="amendment-card__source" href={sourceUrl} target="_blank" rel="noopener noreferrer" aria-label={`Read official ballot statement for Amendment ${number}`}>
+    Read official ballot statement <span aria-hidden="true">↗</span>
+  </a>
 </article>
+
+<style>
+  .amendment-card {
+    display:flex; flex-direction:column; min-width:0;
+    padding:1.15rem; border:1px solid rgba(221,179,88,.51); border-radius:1.1rem;
+    background:linear-gradient(138deg,rgba(255,255,255,.1),rgba(255,255,255,.035) 32%,rgba(9,9,10,.84));
+    box-shadow:inset 0 1px 0 rgba(255,236,194,.06),0 14px 45px rgba(0,0,0,.33);
+    color:#f4f1e9;
+  }
+  .amendment-card__top { display:grid; grid-template-columns:78px minmax(0,1fr); gap:1rem; align-items:start; }
+  .amendment-card__number {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:.48rem .3rem .7rem; min-height:108px;
+    border:1px solid #efcc72; border-radius:.55rem .55rem .9rem .9rem;
+    background:linear-gradient(135deg,#f5dda3 0%,#d8aa51 55%,#ac792c 100%);
+    color:#19130b; box-shadow:inset 0 0 0 2px rgba(255,251,216,.2),0 5px 15px rgba(0,0,0,.23);
+  }
+  .amendment-card__number span { font-size:.53rem; font-weight:900; text-transform:uppercase; letter-spacing:.035em; }
+  .amendment-card__number strong { font-family:var(--font-display); font-size:3.7rem; line-height:.95; font-weight:700; }
+  .amendment-card__category { margin:0 0 .3rem; text-transform:uppercase; letter-spacing:.14em; font-size:.62rem; color:#e6c57b; font-weight:800; }
+  .amendment-card__heading h3 { margin:0; font-family:var(--font-display); font-size:clamp(1.55rem,2.25vw,2.1rem); font-weight:700; line-height:1.02; text-wrap:balance; }
+  .amendment-card__summary { margin:.63rem 0 0; font-size:.86rem; line-height:1.5; color:rgba(255,255,255,.82); }
+  .amendment-card__body { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(0,1fr); align-items:stretch; gap:1rem; margin:1.1rem 0 1rem; }
+  .amendment-card__facts { display:grid; grid-template-columns:44px minmax(0,1fr); gap:.7rem; }
+  .amendment-card__icon { display:flex; justify-content:center; align-items:flex-start; color:#f0cb71; padding-top:.15rem; }
+  .amendment-card__icon svg { width:44px; height:44px; }
+  .amendment-card__facts ul { display:grid; align-content:start; gap:.48rem; margin:0; padding:0; list-style:none; }
+  .amendment-card__facts li { position:relative; padding-left:.9rem; font-size:.75rem; line-height:1.4; color:#e5e2dc; }
+  .amendment-card__facts li::before { content:''; position:absolute; left:0; top:.5em; width:.36rem; height:.36rem; border-radius:50%; background:#eccb78; }
+  .amendment-card__choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.45rem; }
+  .amendment-card__choice { display:flex; flex-direction:column; min-width:0; border-radius:.72rem; overflow:hidden; border:1px solid; background:rgba(0,0,0,.24); }
+  .amendment-card__choice--yes { border-color:rgba(105,167,237,.57); background:linear-gradient(#123a65,#122338); }
+  .amendment-card__choice--no { border-color:rgba(255,124,128,.55); background:linear-gradient(#632426,#331719); }
+  .amendment-card__choice-label { display:flex; align-items:center; justify-content:center; gap:.45rem; min-height:39px; border-bottom:1px solid rgba(255,255,255,.14); background:rgba(18,22,33,.2); font-size:.92rem; font-weight:850; letter-spacing:.035em; }
+  .amendment-card__choice-label span { display:inline-flex; width:1.15rem; height:1.15rem; border-radius:50%; justify-content:center; align-items:center; background:rgba(255,255,255,.88); color:#15243b; font-size:.91rem; font-weight:900; }
+  .amendment-card__choice--no .amendment-card__choice-label span { color:#702326; }
+  .amendment-card__choice p { margin:0; padding:.72rem .6rem; font-size:.72rem; line-height:1.42; color:#fff; }
+  .amendment-card__key { display:flex; align-items:flex-start; gap:.65rem; margin-top:auto; padding:.75rem .8rem; border:1px solid rgba(224,195,133,.34); border-radius:.72rem; background:linear-gradient(125deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); }
+  .amendment-card__key svg { flex:none; color:#f3d381; margin-top:.07rem; }
+  .amendment-card__key p { margin:0; color:#eae5d9; font-size:.74rem; line-height:1.5; }
+  .amendment-card__key strong { color:#edc96f; text-transform:uppercase; letter-spacing:.035em; }
+  .amendment-card__more { margin-top:.65rem; border-bottom:1px solid rgba(255,255,255,.1); }
+  .amendment-card__more summary { display:flex; justify-content:space-between; align-items:center; min-height:44px; gap:.5rem; cursor:pointer; font-weight:700; font-size:.75rem; color:rgba(255,255,255,.76); list-style:none; }
+  .amendment-card__more summary::-webkit-details-marker { display:none; }
+  .amendment-card__more[open] summary span { transform:rotate(180deg); }
+  .amendment-card__more-body { padding:.3rem 0 1rem; color:rgba(255,255,255,.77); font-size:.77rem; line-height:1.6; }
+  .amendment-card__more-body p { margin:0 0 .55rem; }
+  .amendment-card__fiscal { color:rgba(255,255,255,.6); }
+  .amendment-card__source { align-self:flex-start; display:inline-flex; gap:.45rem; align-items:center; min-height:44px; color:#f4d693; font-size:.77rem; font-weight:650; text-decoration:underline; text-underline-offset:4px; }
+  .amendment-card__source:hover { color:#fff2cb; }
+  @media(min-width:881px) and (max-width:1120px) { .amendment-card__body { grid-template-columns:1fr; } .amendment-card__facts { grid-template-columns:40px 1fr; } }
+  @media(max-width:480px) {
+    .amendment-card { padding:.9rem; }
+    .amendment-card__top { grid-template-columns:64px minmax(0,1fr); gap:.75rem; }
+    .amendment-card__number { min-height:92px; }
+    .amendment-card__number strong { font-size:3.2rem; }
+    .amendment-card__heading h3 { font-size:1.65rem; }
+    .amendment-card__body { grid-template-columns:1fr; gap:1rem; }
+    .amendment-card__facts { grid-template-columns:34px minmax(0,1fr); }
+    .amendment-card__icon svg { width:34px; height:34px; }
+    .amendment-card__choice p { font-size:.75rem; }
+  }
+  @media(prefers-contrast:more) {
+    .amendment-card { background:#161616; border-color:#efcc72; }
+    .amendment-card__heading h3,.amendment-card__summary,.amendment-card__facts li,.amendment-card__key p { color:white; }
+    .amendment-card__choice--yes { background:#113c6a; border-color:#b9dcff; }
+    .amendment-card__choice--no { background:#622222; border-color:#ffbcbc; }
+  }
+</style>
