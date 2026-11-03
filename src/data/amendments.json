@@ -1,26 +1,50 @@
 [
   {
-    "id": "a1",
     "number": 1,
-    "title": "Bail Denial Expansion",
-    "election": "May 19, 2026 Primary",
-    "officialSummary": "Proposing an amendment to the Constitution of Alabama of 2022, relating to bail, to allow courts to deny bail for a defendant charged with solicitation, attempt, or conspiracy to commit murder, or the offense of shooting or discharging a firearm, explosive, or other weapon into an occupied dwelling, building, vehicle, aircraft, railroad car, or watercraft.",
-    "plainEnglish": "This amendment would allow judges to deny bail for additional serious offenses. It adds solicitation, attempt, or conspiracy to commit murder, and shooting or discharging a firearm, explosive, or other weapon into an occupied dwelling, building, vehicle, aircraft, train car, or watercraft.",
-    "yesMeans": "Changes the Alabama Constitution.",
-    "noMeans": "Leaves the Alabama Constitution unchanged.",
-    "costTaxImpact": "No costs or taxes associated.",
-    "sourceUrl": "https://www.sos.alabama.gov/alabama-votes/statewide-ballot-measures"
+    "title": "Lieutenant Governor Vacancies & Legislative Pay",
+    "officialSummary": "Would require an election to fill a lieutenant governor vacancy occurring more than 60 days before the next general election and authorize the Legislature to set specified legislative and lieutenant governor salaries.",
+    "plainEnglish": "Changes how an early vacancy in the lieutenant governor's office is filled, and how pay is established for the lieutenant governor and state legislators.",
+    "yesMeans": "Adopts the proposed vacancy-election and salary-setting changes.",
+    "noMeans": "Keeps existing constitutional rules for vacancies and salaries.",
+    "id": "general-amendment-1",
+    "election": "November 3, 2026 General Election",
+    "costTaxImpact": "The financial effects are not quantified in this guide. Read the state's ballot statement for full context.",
+    "sourceUrl": "https://www.sos.alabama.gov/alabama-votes/voter/ballot-measures/statewide"
   },
   {
-    "id": "a2",
     "number": 2,
-    "title": "District Attorney Salary Protection",
-    "election": "May 19, 2026 Primary",
-    "officialSummary": "Proposing an amendment to the Constitution of Alabama of 2022, relating to the compensation of district attorneys, to provide that the salary of a district attorney may not be diminished during the term for which the district attorney was elected or appointed.",
-    "plainEnglish": "This amendment would prevent a district attorney's salary from being reduced during the term they were elected or appointed to serve.",
-    "yesMeans": "Changes the Alabama Constitution.",
-    "noMeans": "Leaves the Alabama Constitution unchanged.",
-    "costTaxImpact": "No costs or taxes associated.",
-    "sourceUrl": "https://www.sos.alabama.gov/alabama-votes/statewide-ballot-measures"
+    "title": "Consolidating County School Systems",
+    "officialSummary": "Would establish a constitutional process for two or more county school boards to combine into a single multi-county board of education.",
+    "plainEnglish": "Creates a path for multiple county school systems to consolidate under one school board.",
+    "yesMeans": "Allows the proposed multi-county school board consolidation process.",
+    "noMeans": "Does not add that consolidation process to the constitution.",
+    "id": "general-amendment-2",
+    "election": "November 3, 2026 General Election",
+    "costTaxImpact": "The financial effects are not quantified in this guide. Read the state's ballot statement for full context.",
+    "sourceUrl": "https://www.sos.alabama.gov/alabama-votes/voter/ballot-measures/statewide"
+  },
+  {
+    "number": 3,
+    "title": "Pledge of Allegiance & Student-Led Prayer",
+    "officialSummary": "Would place requirements concerning the daily Pledge of Allegiance and allowance for student-initiated, student-led prayer in Alabama's constitution.",
+    "plainEnglish": "Would require public schools to conduct the Pledge of Allegiance at the start of the school day and allow student-initiated, student-led prayer at that time.",
+    "yesMeans": "Adds the proposed requirements to the state constitution.",
+    "noMeans": "Does not constitutionalize these requirements; existing state law remains in place.",
+    "id": "general-amendment-3",
+    "election": "November 3, 2026 General Election",
+    "costTaxImpact": "The financial effects are not quantified in this guide. Read the state's ballot statement for full context.",
+    "sourceUrl": "https://www.sos.alabama.gov/alabama-votes/voter/ballot-measures/statewide"
+  },
+  {
+    "number": 4,
+    "title": "National Anthem in Public Schools",
+    "officialSummary": "Would require public schools to broadcast or arrange a performance of the first stanza of The Star-Spangled Banner at least weekly.",
+    "plainEnglish": "Would require public schools to play or arrange a performance of the first verse of the national anthem at least once per week.",
+    "yesMeans": "Adds the weekly anthem requirement to the state constitution.",
+    "noMeans": "Does not add the weekly anthem requirement to the constitution.",
+    "id": "general-amendment-4",
+    "election": "November 3, 2026 General Election",
+    "costTaxImpact": "The financial effects are not quantified in this guide. Read the state's ballot statement for full context.",
+    "sourceUrl": "https://www.sos.alabama.gov/alabama-votes/voter/ballot-measures/statewide"
   }
 ]
