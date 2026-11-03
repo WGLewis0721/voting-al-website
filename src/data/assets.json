@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "local": {
+    "alabamaShield": {
+      "path": "assets/brand/alabama-shield.svg",
+      "type": "image/svg+xml",
+      "description": "Original gold Alabama silhouette shield; red, white and blue register marks"
+    },
+    "favicon": {
+      "path": "assets/brand/favicon.svg",
+      "type": "image/svg+xml",
+      "description": "Browser tab icon, independent Alabama Votes brand"
+    }
+  },
+  "external": {
+    "alabamaCapitolHero": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_State_Capitol%2C_Montgomery%2C_West_view_20160713_1.jpg/1280px-Alabama_State_Capitol%2C_Montgomery%2C_West_view_20160713_1.jpg",
+      "credit": "DXR / Wikimedia Commons",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Alabama_State_Capitol,_Montgomery,_West_view_20160713_1.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "purpose": "Hero photograph, cropped and tinted in CSS",
+      "storage": "Remote. Listed here as the single URL source; not copied into the repository."
+    }
+  },
+  "fonts": {
+    "provider": "Google Fonts",
+    "stylesheetUrl": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600;700&display=swap",
+    "families": [
+      "Barlow Condensed",
+      "Cormorant Garamond",
+      "Outfit"
+    ],
+    "storage": "Remote font stylesheet and font files; do not redistribute font binaries."
+  }
+}

@@ -1,7 +1,8 @@
 ---
 import counties from '../data/counties.json';
+import assets from '../data/assets.json';
 const base=import.meta.env.BASE_URL;
-const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_State_Capitol%2C_Montgomery%2C_West_view_20160713_1.jpg/1280px-Alabama_State_Capitol%2C_Montgomery%2C_West_view_20160713_1.jpg';
+const photo=assets.external.alabamaCapitolHero.url;
 ---
 <section class="impact-hero" aria-labelledby="impact-title">
  <div class="impact-photo" aria-hidden="true"><img src={photo} alt="" width="1280" height="1024" fetchpriority="high" decoding="async"/></div>
@@ -12,7 +13,7 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
   <div class="impact-layout">
    <div class="impact-content">
     <div class="impact-identity" aria-label="Alabama Votes, an independent and nonpartisan voter guide">
-      <img class="impact-identity-symbol" src={base + 'alabama-capitol-mark.svg'} alt="" width="88" height="98" decoding="async"/>
+      <img class="impact-identity-symbol" src={base + assets.local.alabamaShield.path} alt="" width="88" height="98" decoding="async"/>
       <div class="impact-identity-copy">
        <span class="impact-identity-overline">INDEPENDENT / NONPARTISAN</span>
        <strong>ALABAMA VOTES</strong>
@@ -56,7 +57,7 @@ const photo='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Alabama_S
    </div>
   </div>
   <div class="impact-bottom"><span>THE VOTE, EXPLAINED. NO ENDORSEMENTS.</span><span>67 COUNTIES <i aria-hidden="true"></i> ONE STATE</span></div>
-  <p class="impact-credit">Capitol photograph: <a href="https://commons.wikimedia.org/wiki/File:Alabama_State_Capitol,_Montgomery,_West_view_20160713_1.jpg" target="_blank" rel="noopener noreferrer">DXR / Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Image cropped and tinted.</p>
+  <p class="impact-credit">Capitol photograph: <a href={assets.external.alabamaCapitolHero.creditUrl} target="_blank" rel="noopener noreferrer">{assets.external.alabamaCapitolHero.credit}</a>, <a href={assets.external.alabamaCapitolHero.licenseUrl} target="_blank" rel="noopener noreferrer">{assets.external.alabamaCapitolHero.license}</a>. Image cropped and tinted.</p>
  </div>
 </section>
 <style>

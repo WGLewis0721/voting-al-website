@@ -1,15 +1,18 @@
 # Alabama Votes — Editorial Civic Hero Art Direction
 
-**Revision:** November 3, 2026  
+**Revision:** November 3, 2026 (asset consolidation)  
 **Scope:** Hero identification, graphic ornamentation, and reused footer ticker accents.
 
 ## Design problem
 The original date-and-emoji sticker resembled an unpolished social graphic. It competed with the headline while providing no meaningful next action. The homepage serves users of different ages who need to find a polling place or a ballot quickly.
 
-## Decision: custom Capitol insignia, not a borrowed government seal
-The hero has a new original vector insignia in `public/alabama-capitol-mark.svg`, depicting the architecture of the Alabama State Capitol with gold engraving, black shield geometry, subtle halftone, and small red/blue register marks. The mark is presented with **ALABAMA VOTES** and **INDEPENDENT / NONPARTISAN**, so it creates place-specific identity without impersonating an official government resource.
+## Decision: custom Alabama silhouette, not an official government seal
 
-This is more coherent with the existing Capitol photograph than either a generic rosette or an imported state seal. All decorative calendar lettering and emoji asterisks were removed from the hero; live informational content (election context, polling hours, ballot lookup) is retained. The footer ticker's repeated emoji became simple print-register geometry, while historical years remain actual facts.
+The design uses an original **gold silhouette of the state of Alabama** in a black editorial shield, with converging **red / white / blue** accents for Republican / independent-or-moderate / Democratic perspectives. The source asset now lives at `public/assets/brand/alabama-shield.svg` and is registered as `local.alabamaShield` in `src/data/assets.json`. The original Capitol-inspired glyph was replaced because it did not read clearly at small sizes.
+
+The identity is paired with **ALABAMA VOTES** and **INDEPENDENT / NONPARTISAN**; it does **not** impersonate the Alabama government. The hero still uses a photograph of the actual Montgomery State Capitol; its licensed external URL, photographer and credit live in the same registry. See `docs/assets.md` for the canonical inventory.
+
+There is no emoji or decorative date sticker. Print-register ornaments are drawn with CSS/SVG, while historical dates and election details remain as content. All meaningful voter content remains readable in both appearances.
 
 ## Design foundations and references
 - **Adobe, [What makes a great layout?](https://www.adobe.com/learn/illustrator/web/layout-basics):** establish the focal point, contrast, alignment and repeated patterns. Application: headline first, brand insignia second, primary voting action third; accent marks repeat without becoming separate messages.
@@ -33,4 +36,4 @@ This is more coherent with the existing Capitol photograph than either a generic
 - [x] Existing polling place and county functionality preserved in source.
 - [ ] Check actual device widths of 390px, 820px and 1440px for clipping and visual balance.
 - [ ] Screen reader/keyboard pass and reduced-motion visual inspection.
-- [ ] Successful GitHub Pages build and deployment after final commit.
+- [ ] GitHub Pages build and deployment after any asset-path change (tracked in Actions).

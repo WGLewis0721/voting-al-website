@@ -91,3 +91,11 @@ the deployed URLs will resolve correctly for repository pages.
 ## Node runtime requirement
 
 Astro 6 requires Node `>=22.12.0` for local development and CI builds.
+
+## Keeping visual assets together
+
+- Place all new image/vector exports in `public/assets/` (use a meaningful subfolder such as `brand/`, `photography/` or `illustrations/`).
+- Add or update their entries in `src/data/assets.json`, which owns the canonical paths and source attribution.
+- Read `docs/assets.md` before renaming, replacing, or licensing media. The existing Capitol photograph and Google Fonts remain external and their URLs are registered there.
+- Run `npm run check:assets` and `npm run build` before merging. CI now runs the asset checker through the build script.
+- Do not directly link to the removed root-level `public/favicon.svg` or `public/alabama-capitol-mark.svg`. GitHub Pages requires `import.meta.env.BASE_URL` for local resource links.

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import assets from '../data/assets.json';
 
 interface Props {
   title?: string;
@@ -40,8 +41,8 @@ const {
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link href={assets.fonts.stylesheetUrl} rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}${assets.local.favicon.path}`} />
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:bg-gold focus:text-black focus:px-3 focus:py-2 focus:rounded-md focus:z-[200]">Skip to main content</a>

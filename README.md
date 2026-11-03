@@ -1,96 +1,60 @@
-# Alabama Votes 2026 (Astro V2)
+# Alabama Votes 2026
+A static, independent and nonpartisan Alabama voter-information site using Astro 6, Tailwind CSS 4 and JSON data. Deployed to GitHub Pages.
 
-Premium, nonpartisan Alabama voter education site built with Astro + Tailwind and deployable to GitHub Pages.
+**Live site:** https://wglewis0721.github.io/voting-al-website/
 
-## Stack
+## Where things live
 
-- Astro 6
-- Tailwind CSS via `@tailwindcss/vite`
-- Client-side vanilla JavaScript for interactions
-- JSON data sources for candidates, issues, amendments, dates, and counties
-
-## Project Structure
+| Purpose | Canonical location |
+| --- | --- |
+| All bundled visual assets (logos, icons, reusable media) | `public/assets/` |
+| Single registry for local paths, remote artwork and licensed fonts | `src/data/assets.json` |
+| Asset inventory, credits, conventions and replacement instructions | **`docs/assets.md`** |
+| Site-wide CSS and light/dark design tokens | `src/styles/global.css` |
+| Screens and reusable sections | `src/pages/`, `src/components/` |
+| Voting information, candidates, amendments and county data | `src/data/*.json` (except `assets.json`) |
+| Architecture, visual identity and operational guides | `docs/` |
+| Legacy single-file snapshot (not the shipped design) | `alabama-voter-guide.html` |
 
 ```text
-.
-├── astro.config.mjs
-├── package.json
-├── tsconfig.json
-├── docs/
-│   └── architecture.md
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   ├── AlignmentQuiz.astro
-│   │   ├── Amendments.astro
-│   │   ├── BallotSelector.astro
-│   │   ├── CandidateCard.astro
-│   │   ├── CandidateExplorer.astro
-│   │   ├── Hero.astro
-│   │   ├── JourneyCards.astro
-│   │   ├── KeyIssues.astro
-│   │   ├── SiteFooter.astro
-│   │   └── TrustBanner.astro
-│   ├── data/
-│   │   ├── amendments.json
-│   │   ├── candidates.json
-│   │   ├── counties.json
-│   │   ├── dates.json
-│   │   └── issues.json
-│   ├── layouts/
-│   │   └── Layout.astro
-│   ├── pages/
-│   │   └── index.astro
-│   └── styles/
-│       └── global.css
-└── alabama-voter-guide.html (legacy single-file version)
+public/
+  assets/
+    brand/
+      alabama-shield.svg
+      favicon.svg
+  map.html                 # Legacy standalone map
+  primary-2026/map.html    # Archived map
+src/
+  data/assets.json        # Single media registry
+  components/             # Inline UI icons are component code
+  layouts/Layout.astro
+  pages/
+  styles/global.css
+docs/
+  assets.md
+  architecture.md
+  hero-identity-design.md
+  setup-and-deploy.md
+scripts/
+  check-assets.mjs
 ```
 
-## Local Development
+The Capitol hero photograph and licensed Google Fonts are **external dependencies** managed by `src/data/assets.json`. They are inventoried and credited in `docs/assets.md`, not falsely described as bundled image/font binaries. New owned imagery should be placed under `public/assets/`.
+
+## Develop and check
+Node 22.12+ required.
 
 ```bash
-# Use Node 22.12+ (required by Astro 6)
-npm install
+npm ci
 npm run dev
-```
-
-## Production Build
-
-```bash
+npm run check:assets
 npm run build
 npm run preview
 ```
 
-## GitHub Pages Deployment
+`npm run build` runs the local asset check first. It fails on broken local paths, outdated root-level names or missing credit metadata.
 
-This project is configured for repository pages at:
+## Deploy
+`main` deploys to GitHub Pages using `.github/workflows/deploy.yml` (`npm ci` then `npm run build`). Config is in `astro.config.mjs`; base is `/voting-al-website/`.
 
-- `site`: `https://wglewis0721.github.io`
-- `base`: `/voting-al-website`
-
-Deployment options:
-
-1. **GitHub Actions** (recommended)
-   - Included workflow: `.github/workflows/deploy.yml`
-   - Uses Node 22, `npm ci`, and `npm run build`, then publishes `dist/`
-   - Configure repository **Settings → Pages → Source = GitHub Actions**
-2. **Manual**
-   - Run `npm run build`
-   - Deploy `dist/` contents to Pages source branch
-
-## Node Version Requirement
-
-Astro 6 requires Node `>=22.12.0`.
-
-If your local machine is on Node 20, switch before running build/dev:
-
-```bash
-nvm install 22
-nvm use 22
-```
-
-See:
-
-- `docs/architecture.md` for component/data architecture
-- `docs/setup-and-deploy.md` for exact migration and GitHub Pages deployment steps
+See [Asset catalog](docs/assets.md), [Architecture](docs/architecture.md), [Visual identity](docs/hero-identity-design.md) and [Setup](docs/setup-and-deploy.md).
