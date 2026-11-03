@@ -21,8 +21,8 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
 <section id="candidates" class="py-16 md:py-20">
   <div class="section-wrap">
     <p class="section-eyebrow">Who's Running</p>
-    <h2 class="section-title">2026 Primary Candidates.</h2>
-    <p class="section-deck">Filter by party or office. For the full race-by-race breakdown, visit the <a href={`${base}candidates`} class="text-gold-soft underline hover:text-gold">Candidates page</a>.</p>
+    <h2 class="section-title">2026 General Election Candidates.</h2>
+    <p class="section-deck">Explore confirmed statewide nominees by party or office. This is a statewide overview, not your full local ballot. For the full race-by-race breakdown, visit the <a href={`${base}candidates`} class="text-gold-soft underline hover:text-gold">Candidates page</a>.</p>
 
     <div class="z-40 mt-8 rounded-2xl border border-white/10 bg-black/70 p-4 backdrop-blur-lg md:sticky md:top-[67px]">
       <div class="grid gap-3 md:grid-cols-[1fr_1fr_1fr_auto]">
@@ -48,7 +48,7 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
       </div>
     </div>
 
-    <p id="filterPrompt" class="mt-6 text-center text-white/60">Use search or select a party/office filter to view candidate cards.</p>
+    <p id="filterPrompt" class="mt-6 text-center text-white/60">Showing statewide candidates. Use search or filters to narrow the list.</p>
 
     <div id="candidateGrid" class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       {allCandidates.map((candidate) => <CandidateCard candidate={candidate} />)}
@@ -87,10 +87,7 @@ const uniqueOffices = [...new Set(allCandidates.map((c) => c.office))].sort();
 
     let visible = 0;
     cards.forEach((card) => {
-      if (!hasActiveFilter) {
-        card.hidden = true;
-        return;
-      }
+      
 
       const cardText = card.textContent.toLowerCase();
       const cardParty = card.dataset.party;
